@@ -1,5 +1,5 @@
 %----------------------------------------------------------------------------------------
-%   CookBook Sample
+%   CookBook Sample with Print Bleed
 %   LaTeX Sample File
 %----------------------------------------------------------------------------------------
 %
@@ -19,8 +19,13 @@
 \documentclass[
 	letterpaper, % Paper size, use 'a4paper' for A4 or 'letterpaper' for US letter (you may want to adjust margins afterwards)
 	10pt, % Default font size, available sizes are: 8pt, 9pt, 10pt, 11pt, 12pt, 14pt, 17pt and 20pt
-	twoside
+	twoside,
+	bleed=debug
 ]{CookBook}
+
+\setbleedvalue{0.5in}
+\setguttermargin{0.5in}
+\setbleedimageratio{0.3}
 
 \begin{document}
 

@@ -97,6 +97,8 @@ Your PDF will be generated in the `dist/` directory.
 
 For comprehensive documentation including all commands, options, and advanced features, see [DOCUMENTATION.md](DOCUMENTATION.md).
 
+For a list of changes and version history, see [CHANGELOG.md](CHANGELOG.md).
+
 **Quick Links:**
 
 - [Document Class Options](DOCUMENTATION.md#document-class-options)

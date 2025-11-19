@@ -3,8 +3,8 @@
 %   LaTeX Class File
 %----------------------------------------------------------------------------------------
 %
-%   Version:     1.0.0
-%   Date:        November 18, 2025
+%   Version:     1.1.0
+%   Date:        November 19, 2025
 %   Author:      AshDevFr
 %   GitHub:      @AshDevFr
 %   License:     CC BY-NC-SA 4.0
@@ -21,7 +21,7 @@
 %----------------------------------------------------------------------------------------
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{CookBook}[2025/11/18 v1.0.0 CookBook Template]
+\ProvidesClass{CookBook}[2025/11/19 v1.1.0 CookBook Template]
 
 %----------------------------------------------------------------------------------------
 %	LANGUAGE OPTIONS
@@ -45,6 +45,34 @@
 \def\cookbook@ingredientitemsep{0.003\textheight}
 \def\cookbook@instructionitemsep{0.005\textheight}
 
+% Bleed configuration
+% Default bleed value (0.125in)
+% Using only length register - can be used directly in \dimexpr and with \the in TikZ
+\newlength{\cookbook@bleedlength}
+\setlength{\cookbook@bleedlength}{0.125in}
+\def\cookbook@guttermargin{0pt}
+\def\cookbook@bleedimageratio{0.5} % Ratio defining how much of images should be in the bleed
+% Temporary length registers for bleed calculations
+\newlength{\cookbook@tempwidth}
+\newlength{\cookbook@tempheight}
+\newlength{\cookbook@scaledbleed} % For calculating scaled bleed based on bleedimageratio
+\newlength{\cookbook@scaledbleedremainder} % For calculating the remainder of the bleed after the image ratio is applied
+
+% Margin configuration
+% Default margins for all sides
+\def\cookbook@margintop{1.5cm}
+\def\cookbook@marginbottom{1.5cm}
+\def\cookbook@marginleft{1.5cm}
+\def\cookbook@marginright{1.5cm}
+
+% Boolean flag to track if bleed is enabled
+\newif\ifcookbook@bleedenabled
+\cookbook@bleedenabledfalse
+
+% Boolean flag to track if bleed debug mode is enabled
+\newif\ifcookbook@bleeddebug
+\cookbook@bleeddebugfalse
+
 % Left page option (key-value format: left=even or left=odd)
 \DeclareOption{left=even}{\def\cookbook@leftpage{even}}
 \DeclareOption{left=odd}{\def\cookbook@leftpage{odd}}
@@ -52,6 +80,15 @@
 % Start page option (key-value format: startpage=1 or startpage=2)
 \DeclareOption{startpage=1}{\def\cookbook@startpage{1}}
 \DeclareOption{startpage=2}{\def\cookbook@startpage{2}}
+
+% Bleed option (boolean: enables/disables bleed margins for print production)
+% When enabled, uses \cookbook@bleedlength value (default: 0.125in)
+\DeclareOption{bleed}{\cookbook@bleedenabledtrue}
+% Bleed debug option: enables bleed and draws the bleed area boundaries
+\DeclareOption{bleed=debug}{%
+	\cookbook@bleedenabledtrue
+	\cookbook@bleeddebugtrue
+}
 
 \DeclareOption*{%
 	\PassOptionsToClass{\CurrentOption}{extbook}%
@@ -373,16 +410,194 @@
 \NewDocumentCommand{\setTextQuarts}{m}{\def\textQuarts{#1}}
 
 %----------------------------------------------------------------------------------------
-%	MARGINS
+%	MARGINS AND BLEED
 %----------------------------------------------------------------------------------------
 
-\usepackage[
-	top=1.5cm,
-	bottom=1.5cm,
-	left=1.5cm,
-	right=1.5cm,
-	%showframe % Enable to display margin boundaries for layout debugging
-]{geometry}
+% Commands to override margin values (call after \documentclass)
+% Usage: \setmargintop{2cm}, \setmarginbottom{2cm}, \setmarginleft{2cm}, \setmarginright{2cm}
+\NewDocumentCommand{\setmargintop}{m}{%
+	\def\cookbook@margintop{#1}%
+	\geometry{top=#1}%
+}
+\NewDocumentCommand{\setmarginbottom}{m}{%
+	\def\cookbook@marginbottom{#1}%
+	\geometry{bottom=#1}%
+}
+\NewDocumentCommand{\setmarginleft}{m}{%
+	\def\cookbook@marginleft{#1}%
+	\if@twoside
+		\geometry{inner=#1}%
+	\else
+		\geometry{left=#1}%
+	\fi
+}
+\NewDocumentCommand{\setmarginright}{m}{%
+	\def\cookbook@marginright{#1}%
+	\if@twoside
+		\geometry{outer=#1}%
+	\else
+		\geometry{right=#1}%
+	\fi
+}
+
+% Store original paper dimensions before bleed is applied
+\newlength{\cookbook@origpaperwidth}
+\newlength{\cookbook@origpaperheight}
+
+% Helper command to apply bleed geometry adjustments
+\NewDocumentCommand{\cookbook@applybleedgeometry}{}{%
+	% FIRST: Store original paper dimensions BEFORE any changes
+	\setlength{\cookbook@origpaperwidth}{\paperwidth}%
+	\setlength{\cookbook@origpaperheight}{\paperheight}%
+
+	% Calculate new paper dimensions
+	\setlength{\cookbook@tempwidth}{\dimexpr\paperwidth+2\cookbook@bleedlength\relax}%
+	\setlength{\cookbook@tempheight}{\dimexpr\paperheight+2\cookbook@bleedlength\relax}%
+	% Expand dimension values to strings
+	\edef\cookbook@paperwidthval{\the\cookbook@tempwidth}%
+	\edef\cookbook@paperheightval{\the\cookbook@tempheight}%
+	% Calculate new margins that include bleed
+	\edef\cookbook@leftwithbleed{\the\dimexpr\cookbook@marginleft+\cookbook@bleedlength\relax}%
+	\edef\cookbook@rightwithbleed{\the\dimexpr\cookbook@marginright+\cookbook@bleedlength\relax}%
+	\edef\cookbook@topwithbleed{\the\dimexpr\cookbook@margintop+\cookbook@bleedlength\relax}%
+	\edef\cookbook@bottomwithbleed{\the\dimexpr\cookbook@marginbottom+\cookbook@bleedlength\relax}%
+	\if@twoside
+		% For twoside documents, use inner/outer
+		\geometry{
+			paperwidth=\cookbook@paperwidthval,
+			paperheight=\cookbook@paperheightval,
+			inner=\cookbook@leftwithbleed,
+			outer=\cookbook@rightwithbleed,
+			top=\cookbook@topwithbleed,
+			bottom=\cookbook@bottomwithbleed,
+		}%
+	\else
+		% For oneside documents, use left/right
+		\geometry{
+			paperwidth=\cookbook@paperwidthval,
+			paperheight=\cookbook@paperheightval,
+			left=\cookbook@leftwithbleed,
+			right=\cookbook@rightwithbleed,
+			top=\cookbook@topwithbleed,
+			bottom=\cookbook@bottomwithbleed,
+		}%
+	\fi
+}
+
+% Helper command to calculate and set bleed extension
+% This centralizes the bleed extension calculation
+\NewDocumentCommand{\cookbook@updatebleedextension}{}{%
+	\ifcookbook@bleedenabled
+		% With bleed: extend by margin + bleed to reach the paper edge
+		\setlength{\cookbook@bleedextension}{\dimexpr-\cookbook@margintop-\cookbook@bleedlength\relax}%
+	\else
+		\setlength{\cookbook@bleedextension}{-\cookbook@margintop}%
+	\fi
+}
+
+% Helper macros to get effective paper dimensions for content positioning
+% When bleed is enabled, use original paper dimensions for positioning
+% When disabled, use current paper dimensions
+\NewDocumentCommand{\cookbook@contentpaperwidth}{}{%
+	\ifcookbook@bleedenabled
+		\cookbook@origpaperwidth
+	\else
+		\paperwidth
+	\fi
+}
+
+\NewDocumentCommand{\cookbook@contentpaperheight}{}{%
+	\ifcookbook@bleedenabled
+		\cookbook@origpaperheight
+	\else
+		\paperheight
+	\fi
+}
+
+% Command to override the bleed value (call after \documentclass)
+% Usage: \setbleedvalue{0.125in} or \setbleedvalue{3.175mm}
+% This sets the bleed amount that will be used when bleed is enabled
+\NewDocumentCommand{\setbleedvalue}{m}{%
+	% Update the length register
+	\setlength{\cookbook@bleedlength}{#1}%
+	% Update scaled bleed
+	\cookbook@updatescaledbleed
+	% If bleed is already enabled, recalculate geometry with new bleed value
+	\ifcookbook@bleedenabled
+		\cookbook@applybleedgeometry
+		\cookbook@updatebleedextension
+	\fi
+}
+
+% Command to enable bleed and optionally set a custom value
+% Usage: \enablebleed or \enablebleed{0.125in}
+\NewDocumentCommand{\enablebleed}{O{}}{%
+	\cookbook@bleedenabledtrue%
+	\ifx#1\@empty\else
+		% Update the length register
+		\setlength{\cookbook@bleedlength}{#1}%
+	\fi
+	% Update scaled bleed
+	\cookbook@updatescaledbleed
+	% Apply bleed to geometry
+	\cookbook@applybleedgeometry
+	\cookbook@updatebleedextension
+}
+
+% Calculate bleed extension for edge content (negative margin adjustment)
+\newlength{\cookbook@bleedextension}
+\setlength{\cookbook@bleedextension}{0pt}
+
+% Command to set gutter margin (for print binding)
+% Usage: \setguttermargin{0.5in} or \setguttermargin{1.25cm}
+% Adds the specified value to the inner margin for binding (left on right pages, right on left pages)
+% Note: Gutter is only for two-sided printing, so it always uses inner margin
+\NewDocumentCommand{\setguttermargin}{m}{%
+	\def\cookbook@guttermargin{#1}%
+	\geometry{inner=\dimexpr\cookbook@marginleft+\cookbook@guttermargin\relax}%
+}
+
+% Command to set bleed image ratio
+% Usage: \setbleedimageratio{1} or \setbleedimageratio{0.5}
+% Defines how much of the images should be in the bleed (1 = full bleed, 0.5 = half bleed, etc.)
+\NewDocumentCommand{\setbleedimageratio}{m}{%
+	\def\cookbook@bleedimageratio{#1}%
+	% Update scaled bleed
+	\cookbook@updatescaledbleed
+}
+
+% Set up geometry - load first, then adjust for bleed if needed
+% This approach allows us to reference \paperwidth and \paperheight after they're set
+% Use inner/outer for twoside documents, left/right for oneside documents
+\if@twoside
+	\usepackage[
+		top=\cookbook@margintop,
+		bottom=\cookbook@marginbottom,
+		inner=\cookbook@marginleft,
+		outer=\cookbook@marginright,
+		%showframe % Enable to display margin boundaries for layout debugging
+	]{geometry}
+\else
+	\usepackage[
+		top=\cookbook@margintop,
+		bottom=\cookbook@marginbottom,
+		left=\cookbook@marginleft,
+		right=\cookbook@marginright,
+		%showframe % Enable to display margin boundaries for layout debugging
+	]{geometry}
+\fi
+
+% Apply bleed adjustments if enabled
+% When bleed is enabled, we:
+% 1. Increase paper size by 2*bleed (bleed on each side)
+% 2. Shift content area by bleed amount (hoffset/voffset)
+% 3. Maintain text margins (these become safety margins from trim edge)
+\ifcookbook@bleedenabled
+	% Adjust geometry for bleed - now we can reference \paperwidth and \paperheight
+	\cookbook@applybleedgeometry
+\fi
+% Set bleed extension for edge content (works for both enabled and disabled states)
+\cookbook@updatebleedextension
 
 %----------------------------------------------------------------------------------------
 %	FONTS
@@ -410,6 +625,15 @@
 \usetikzlibrary{calc} % Coordinate calculations and transformations
 \usetikzlibrary{shadows} % Drop shadows and shadow effects for shapes
 \usetikzlibrary{backgrounds} % Background layers for layered graphics
+
+% Helper command to update scaled bleed whenever bleedlength or bleedimageratio changes
+\NewDocumentCommand{\cookbook@updatescaledbleed}{}{%
+    \pgfmathsetlength{\cookbook@scaledbleed}{\cookbook@bleedlength * (1 - \cookbook@bleedimageratio)}%
+	\pgfmathsetlength{\cookbook@scaledbleedremainder}{\cookbook@bleedlength - \cookbook@scaledbleed}%
+}
+
+% Initialize scaled bleed with default values
+\cookbook@updatescaledbleed
 
 \usepackage{tikzfill} % Fill shapes with images and patterns
 
@@ -485,20 +709,33 @@
 %	CUSTOM PAGE STYLES
 %----------------------------------------------------------------------------------------
 
+% Define length for page number box minimum height (defined once, used in \pagenumberbox)
+\newlength{\pagenumberbox@textheight}
+\newlength{\pagenumberbox@minimumheight}
+
 \NewDocumentCommand{\pagenumberbox}{m m}{%
 	\begin{tikzpicture}[remember picture, overlay]
 		\begin{pgfonlayer}{foreground}
-			\node[
-				text height=1.2cm,
-				text depth=0.2cm,
-				draw,
-				fill=black,
-				text=white,
-				rectangle,
-				minimum width=0.8cm,
-				minimum height=1.5cm,
-				anchor=#1
-			] at (#2) {\thepage};
+			\begin{scope}
+				\ifcookbook@bleedenabled
+					\setlength{\pagenumberbox@minimumheight}{\dimexpr1.5cm+\cookbook@bleedlength\relax}
+					\setlength{\pagenumberbox@textheight}{\dimexpr1.2cm+\cookbook@bleedlength\relax}
+				\else
+					\setlength{\pagenumberbox@minimumheight}{1.5cm}
+					\setlength{\pagenumberbox@textheight}{1.2cm}
+				\fi
+				\node[
+					text height=\pagenumberbox@textheight,
+					text depth=0.2cm,
+					draw,
+					fill=black,
+					text=white,
+					rectangle,
+					minimum width=0.8cm,
+					minimum height=\pagenumberbox@minimumheight,
+					anchor=#1
+				] at (#2) {\thepage};
+			\end{scope}
 		\end{pgfonlayer}
 	\end{tikzpicture}%
 }
@@ -556,14 +793,44 @@
 
 \AddToShipoutPictureFG{%
 	\ifnum\value{page}>0
+		% Draw bleed area boundaries if debug mode is enabled
+		\ifcookbook@bleeddebug
+			\begin{tikzpicture}[remember picture, overlay]
+				\ifcookbook@bleedenabled
+					% With margin-based bleed, current page = full PDF paper (including bleed)
+
+					% BLUE SOLID LINE = Bleed edge (actual PDF paper boundary)
+					\draw[blue, solid, line width=1pt]
+						(current page.south west) rectangle (current page.north east);
+
+					% RED DASHED LINE = Trim edge (where page will be cut, inset by bleed amount)
+					\draw[red, dashed, line width=1pt]
+						([xshift=\the\cookbook@bleedlength, yshift=\the\cookbook@bleedlength]current page.south west)
+						rectangle
+						([xshift=-\the\cookbook@bleedlength, yshift=-\the\cookbook@bleedlength]current page.north east);
+				\else
+					% When bleed is disabled, current page is the trim edge
+					\draw[red, dashed, line width=1pt]
+						(current page.south west) rectangle (current page.north east);
+				\fi
+			\end{tikzpicture}%
+		\fi
 		\ifnopagenumberstyle\else
 			\cookbook@checkpageparity
 			\ifcookbook@isrightpage
 				% Right page - number on the right
-				\pagenumberbox{north east}{[xshift=-1cm, yshift=0.5cm]current page.north east}%
+				\ifcookbook@bleedenabled
+					\pagenumberbox{north east}{[xshift=-1cm-\the\cookbook@bleedlength, yshift=0.5cm]current page.north east}%
+				\else
+					\pagenumberbox{north east}{[xshift=-1cm, yshift=0.5cm]current page.north east}%
+				\fi
 			\else
 				% Left page - number on the left
-				\pagenumberbox{north west}{[xshift=1cm, yshift=0.5cm]current page.north west}%
+				\ifcookbook@bleedenabled
+					\pagenumberbox{north west}{[xshift=1cm+\the\cookbook@bleedlength, yshift=0.5cm]current page.north west}%
+				\else
+					\pagenumberbox{north west}{[xshift=1cm, yshift=0.5cm]current page.north west}%
+				\fi
 			\fi
 		\fi
 	\fi
@@ -698,7 +965,7 @@
 	\begin{titlepage}
 		\thispagestyle{empty}
 		\noindent
-		\begin{adjustwidth}{-1.5cm}{-1.5cm}% Remove margins
+		\begin{adjustwidth}{\cookbook@bleedextension}{\cookbook@bleedextension}% Extend to page edges including bleed
 			\begin{tikzpicture}[remember picture, overlay]
 				% Background color
 				\ifx\cover@bgcolor\@empty\else
@@ -709,11 +976,20 @@
 				% Add cover image if provided
 				\ifx\cover@image\@empty\else
 					\begin{scope}
-						\clip (current page.north west) rectangle (current page.south east);
-						\path[fill overzoom image={\cover@image},fill image opacity={\cover@opacity}]
-						($(current page.south west)-(0,0.5cm)$)
-						rectangle
-						++(1.02\paperwidth,1.02\paperheight);
+						% Extend image into bleed area
+						\ifcookbook@bleedenabled
+							\clip ([xshift=\cookbook@scaledbleed,yshift=\cookbook@scaledbleed]current page.south west) rectangle ([xshift=-\cookbook@scaledbleed,yshift=-\cookbook@scaledbleed]current page.north east);
+							\path[fill overzoom image={\cover@image},fill image opacity={\cover@opacity}]
+								($(current page.south west)+(\the\cookbook@scaledbleed,\the\cookbook@scaledbleed)$)
+								rectangle
+								($(current page.north east)-(\the\cookbook@scaledbleed,\the\cookbook@scaledbleed)$);
+						\else
+							\clip (current page.south west) rectangle (current page.north east);
+							\path[fill overzoom image={\cover@image},fill image opacity={\cover@opacity}]
+								(current page.south west)
+								rectangle
+								(current page.north east);
+						\fi
 					\end{scope}
 				\fi
 
@@ -763,7 +1039,6 @@
 \define@key{preface}{textcolor}{\def\preface@textcolor{#1}}
 \define@key{preface}{image}{\def\preface@image{#1}}
 \define@key{preface}{imageheight}{\def\preface@imageheight{#1}}
-\define@key{preface}{imagemargin}{\def\preface@imagemargin{#1}}
 \define@key{preface}{opacity}{\def\preface@opacity{#1}}
 \define@key{preface}{bgcolor}{\def\preface@bgcolor{#1}}
 \define@key{preface}{layout}{\def\preface@layout{#1}}
@@ -778,7 +1053,6 @@
 	\def\preface@textcolor{darkgrey}
 	\def\preface@image{}
 	\def\preface@imageheight{0.5}
-	\def\preface@imagemargin{0cm}
 	\def\preface@opacity{1}
 	\def\preface@bgcolor{}
 	\def\preface@layout{single}
@@ -790,7 +1064,7 @@
 \NewDocumentCommand{\preface@singlelayout}{}{%
 	\thispagestyle{custompagestyle}
 	\noindent
-	\begin{adjustwidth}{-1.5cm}{-1.5cm}% Remove margins
+	\begin{adjustwidth}{\cookbook@bleedextension}{\cookbook@bleedextension}% Extend to page edges including bleed
 		\begin{tikzpicture}[remember picture, overlay]
 			% Background color
 			\ifx\preface@bgcolor\@empty\else
@@ -801,13 +1075,24 @@
 		% Add preface image if provided (at top of page)
 		\ifx\preface@image\@empty\else
 			\begin{scope}
-				\clip ([xshift=\preface@imagemargin,yshift=-\preface@imagemargin]current page.north west)
-				      rectangle
-				      ([xshift=-\preface@imagemargin,yshift=\preface@imagemargin]$(current page.north east) + (0,-\preface@imageheight\paperheight)$);
-				\path[fill overzoom image={\preface@image},fill image opacity={\preface@opacity}]
-				([xshift=\preface@imagemargin,yshift=\preface@imagemargin]$(current page.north west) + (0,-\preface@imageheight\paperheight)$)
-				rectangle
-				([xshift=-\preface@imagemargin,yshift=-\preface@imagemargin]current page.north east);
+				% Extend clip area into bleed if enabled
+				\ifcookbook@bleedenabled
+				    % \clip ([xshift=\cookbook@scaledbleed,yshift=-\cookbook@scaledbleed]current page.north west)
+					% 	  rectangle
+					% 	  ([xshift=-\cookbook@scaledbleed,yshift=-\cookbook@scaledbleed]$(current page.north east) + (0,-\preface@imageheight\cookbook@contentpaperheight)$);
+					\path[fill overzoom image={\preface@image},fill image opacity={\preface@opacity}]
+					([xshift=\cookbook@scaledbleed,yshift=-\cookbook@scaledbleed]current page.north west)
+					rectangle
+					([xshift=-\cookbook@scaledbleed,yshift=-\cookbook@scaledbleed]$(current page.north east) + (0,-\cookbook@scaledbleed-\preface@imageheight\cookbook@contentpaperheight)$);
+				\else
+					\clip (current page.north west)
+					      rectangle
+					      ($(current page.north east) + (0,-\preface@imageheight\cookbook@contentpaperheight)$);
+					\path[fill overzoom image={\preface@image},fill image opacity={\preface@opacity}]
+					($(current page.north west) + (0,-\preface@imageheight\cookbook@contentpaperheight)$)
+					rectangle
+					(current page.north east);
+				\fi
 			\end{scope}
 		\fi
 		\end{tikzpicture}
@@ -815,7 +1100,7 @@
 
 	% Add vertical space after image if present
 	\ifx\preface@image\@empty\else
-		\vspace*{\dimexpr\preface@imageheight\paperheight-1.5cm-\preface@imagemargin\relax}
+		\vspace*{\dimexpr\preface@imageheight\cookbook@contentpaperheight-\cookbook@margintop\relax}
 		\vspace*{0.01\textheight}
 	\fi
 
@@ -872,7 +1157,7 @@
 	% LEFT PAGE - Image
 	\thispagestyle{custompagestyle}
 	\noindent
-	\begin{adjustwidth}{-1.5cm}{-1.5cm}% Remove margins
+	\begin{adjustwidth}{\cookbook@bleedextension}{\cookbook@bleedextension}% Extend to page edges including bleed
 		\begin{tikzpicture}[remember picture, overlay]
 			% Background color
 			\ifx\preface@bgcolor\@empty\else
@@ -884,15 +1169,20 @@
 		% The clip and path coordinates use imagemargin to create a border effect
 		\ifx\preface@image\@empty\else
 			\begin{scope}
-				% Clip to page area minus margins (creates border)
-				\clip ([xshift=\preface@imagemargin,yshift=-\preface@imagemargin]current page.north west)
-				      rectangle
-				      ([xshift=-\preface@imagemargin,yshift=\preface@imagemargin]current page.south east);
-				% Fill clipped area with image, accounting for margins
-				\path[fill overzoom image={\preface@image},fill image opacity={\preface@opacity}]
-				([xshift=\preface@imagemargin,yshift=\preface@imagemargin]current page.south west)
-				rectangle
-				([xshift=-\preface@imagemargin,yshift=-\preface@imagemargin]current page.north east);
+				% Clip to page area minus margins (creates border), extend into bleed if enabled
+				\ifcookbook@bleedenabled
+					\clip ([xshift=\cookbook@scaledbleed,yshift=\cookbook@scaledbleed]current page.south west) rectangle ([xshift=-\cookbook@scaledbleed,yshift=-\cookbook@scaledbleed]current page.north east);
+					\path[fill overzoom image={\preface@image},fill image opacity={\preface@opacity}]
+						($(current page.south west)+(\the\cookbook@scaledbleed,\the\cookbook@scaledbleed)$)
+						rectangle
+						($(current page.north east)-(\the\cookbook@scaledbleed,\the\cookbook@scaledbleed)$);
+				\else
+					\clip (current page.south west) rectangle (current page.north east);
+					\path[fill overzoom image={\preface@image},fill image opacity={\preface@opacity}]
+						(current page.south west)
+						rectangle
+						(current page.north east);
+				\fi
 			\end{scope}
 		\fi
 		\end{tikzpicture}
@@ -902,7 +1192,7 @@
 	% RIGHT PAGE - Text content
 	\thispagestyle{custompagestyle}
 	\noindent
-	\begin{adjustwidth}{-1.5cm}{-1.5cm}% Remove margins
+	\begin{adjustwidth}{\cookbook@bleedextension}{\cookbook@bleedextension}% Extend to page edges including bleed
 		\begin{tikzpicture}[remember picture, overlay]
 			% Background color
 			\ifx\preface@bgcolor\@empty\else
@@ -1060,7 +1350,7 @@
 	\phantomsection
 	\addcontentsline{toc}{chapter}{\chapterpage@title}
 	\noindent
-	\begin{adjustwidth}{-1.5cm}{-1.5cm}% Remove margins
+	\begin{adjustwidth}{\cookbook@bleedextension}{\cookbook@bleedextension}% Extend to page edges including bleed
 		\begin{tikzpicture}[remember picture, overlay]
 			% Background color
 			\ifx\chapterpage@bgcolor\@empty\else
@@ -1072,23 +1362,31 @@
 
 			\cookbook@checkpageparity
 			\ifcookbook@isrightpage
-			% Right page
-			\def\@titleangle{-90}
-			\def\@titlealign{right}
-			\coordinate (titleat) at ($(current page.east) - (0.5cm,0cm)$);
-			\coordinate (clipstart) at (current page.north west);
-			\coordinate (clipend) at ($(current page.south west) + (0.7\paperwidth,0)$);
-			\coordinate (pathstart) at (current page.south west);
-			\coordinate (pathend) at (0.7\paperwidth,1.02\paperheight);
+				% Right page
+				\def\@titleangle{-90}
+				\def\@titlealign{right}
+				\ifcookbook@bleedenabled
+					\coordinate (titleat) at ([xshift=-\dimexpr\cookbook@bleedlength\relax]$(current page.east) - (0.5cm,0cm)$);
+					\coordinate (clipstart) at ([xshift=\cookbook@scaledbleed,yshift=-\cookbook@scaledbleed]current page.north west);
+					\coordinate (clipend) at ($([xshift=\cookbook@scaledbleed,yshift=\cookbook@scaledbleed]current page.south west) + (\cookbook@scaledbleedremainder+0.7\cookbook@contentpaperwidth,0)$);
+				\else
+					\coordinate (titleat) at ($(current page.east) - (0.5cm,0cm)$);
+					\coordinate (clipstart) at (current page.north west);
+					\coordinate (clipend) at ($(current page.south west) + (0.7\cookbook@contentpaperwidth,0)$);
+				\fi
 			\else
-			% Left page
-			\def\@titleangle{90}
-			\def\@titlealign{left}
-			\coordinate (titleat) at ($(current page.west) + (0.5cm,0cm)$);
-			\coordinate (clipstart) at ($(current page.north west) + (0.3\paperwidth,0)$);
-			\coordinate (clipend) at (current page.south east);
-			\coordinate (pathstart) at ($(current page.south east) - (0.7\paperwidth,0)$);
-			\coordinate (pathend) at (0.7\paperwidth,1.02\paperheight);
+				% Left page
+				\def\@titleangle{90}
+				\def\@titlealign{left}
+				\ifcookbook@bleedenabled
+					\coordinate (titleat) at ($([xshift=\dimexpr\cookbook@bleedlength\relax]current page.west) + (0.5cm,0cm)$);
+					\coordinate (clipstart) at ([xshift=-\cookbook@scaledbleed,yshift=-\cookbook@scaledbleed]current page.north east);
+					\coordinate (clipend) at ($([xshift=-\cookbook@scaledbleed,yshift=\cookbook@scaledbleed]current page.south east) - (\cookbook@scaledbleedremainder+0.7\cookbook@contentpaperwidth,0)$);
+				\else
+					\coordinate (titleat) at ($(current page.west) + (0.5cm,0cm)$);
+					\coordinate (clipstart) at (current page.north east);
+					\coordinate (clipend) at (current page.south east);
+				\fi
 			\fi
 
 			% Add chapter image if provided
@@ -1097,16 +1395,16 @@
 					\begin{scope}
 						\clip (clipstart) rectangle (clipend);
 						\path[fill overzoom image={\chapterpage@image},fill image opacity={\chapterpage@opacity}]
-						(pathstart)
+						(clipstart)
 						rectangle
-						++(pathend);
+						(clipend);
 					\end{scope}
 				\end{pgfonlayer}
 			\fi
 
 			% Add title and subtitle
 			\node[inner sep=5pt, rotate=\@titleangle, text=\chapterpage@textcolor, font=\sourcesanspro\bfseries,
-			align=\@titlealign, anchor=north, text width=\paperheight-3cm] at (titleat) {
+			align=\@titlealign, anchor=north, text width=\cookbook@contentpaperheight-3cm] at (titleat) {
 			\\[10pt]
 			{\fontsize{32pt}{36pt}\selectfont\bfseries\MakeUppercase{\chapterpage@title}}
 			\\[10pt]
@@ -1189,7 +1487,7 @@
 	% Process the key-value pairs
 	\setkeys{image}{#1}
 
-	\begin{adjustwidth}{-1.5cm}{-1.5cm}% Remove margins
+	\begin{adjustwidth}{\cookbook@bleedextension}{\cookbook@bleedextension}% Extend to page edges including bleed
 		\begin{tikzpicture}[remember picture, overlay]
 			% Background color
 			\ifx\image@bgcolor\@empty\else
@@ -1200,11 +1498,20 @@
 			% Add full-page image if provided
 			\ifx\image@image\@empty\else
 				\begin{scope}
-					\clip (current page.north west) rectangle (current page.south east);
-					\path[fill overzoom image={\image@image},fill image opacity={\image@opacity}]
-					($(current page.south west)-(0,0.5cm)$)
-					rectangle
-					++(1.02\paperwidth,1.02\paperheight);
+					% Extend image into bleed area
+					\ifcookbook@bleedenabled
+						\clip ([xshift=\cookbook@scaledbleed,yshift=\cookbook@scaledbleed]current page.south west) rectangle ([xshift=-\cookbook@scaledbleed,yshift=-\cookbook@scaledbleed]current page.north east);
+						\path[fill overzoom image={\image@image},fill image opacity={\image@opacity}]
+							($(current page.south west)+(\the\cookbook@scaledbleed,\the\cookbook@scaledbleed)$)
+							rectangle
+							($(current page.north east)-(\the\cookbook@scaledbleed,\the\cookbook@scaledbleed)$);
+					\else
+						\clip (current page.south west) rectangle (current page.north east);
+						\path[fill overzoom image={\image@image},fill image opacity={\image@opacity}]
+							(current page.south west)
+							rectangle
+							(current page.north east);
+					\fi
 				\end{scope}
 			\fi
 
@@ -1217,15 +1524,24 @@
 			% Left page
 			\def\@captionalign{right}
 			\fi
+
+			\ifcookbook@bleedenabled
+				\coordinate (captionpos) at ($(current page.south)+(0,\dimexpr0.5cm+\cookbook@bleedlength\relax)$);
+				\coordinate (captionshadowpos) at ($(current page.south)+(\image@shadowoffset,\dimexpr0.5cm+\cookbook@bleedlength-\image@shadowoffset\relax)$);
+			\else
+				\coordinate (captionpos) at ($(current page.south)+(0,0.5cm)$);
+				\coordinate (captionshadowpos) at ($(current page.south)+(\image@shadowoffset,0.5cm-\image@shadowoffset)$);
+			\fi
+
 			% Add caption with drop shadow for visibility
 			% First draw the shadow (offset behind the text)
 			\node[text=\image@shadowcolor, font=\sourcesanspro\bfseries,
-				align=\@captionalign, anchor=south, text width=\paperwidth-1cm] at ($(current page.south)+(\image@shadowoffset,0.5cm-\image@shadowoffset)$) {
+				align=\@captionalign, anchor=south, text width=\cookbook@contentpaperwidth-1cm] at (captionshadowpos) {
 				{\image@captionfontsize\selectfont\image@caption}
 			};
 			% Then draw the actual text on top
 			\node[text=\image@textcolor, font=\sourcesanspro\bfseries,
-				align=\@captionalign, anchor=south, text width=\paperwidth-1cm] at ($(current page.south)+(0,0.5cm)$) {
+				align=\@captionalign, anchor=south, text width=\cookbook@contentpaperwidth-1cm] at (captionpos) {
 				{\image@captionfontsize\selectfont\image@caption}
 			};
 			\fi
@@ -1272,8 +1588,8 @@
 	\def\recipe@layout{columns} % Default layout: 2 columns; available layouts: 'columns' and 'simple'
 	\def\recipe@image{}%
 	\def\recipe@imageopacity{1}%
-	\def\recipe@imageheight{0.3\paperheight}%
-	\def\recipe@imageoverlayspace{0.25\paperheight}%
+	\def\recipe@imageheight{0.3\cookbook@contentpaperheight}%
+	\def\recipe@imageoverlayspace{0.25\cookbook@contentpaperheight}%
 	\def\recipe@imageposition{top}% Default image position: top or bottom
 	\def\recipe@title{}%
 	\def\recipe@description{}%
@@ -1368,19 +1684,26 @@
 		\ifdefstring{\recipe@imageposition}{top}{%
 			\begin{tikzpicture}[remember picture, overlay]
 				\begin{scope}
-					% Clip to top portion of page (from top to imageheight from top)
-					\clip (current page.north west) rectangle ($(current page.north east) - (0,\recipe@imageheight)$);
-					% Fill clipped area with image, positioned slightly above page edge
-					% to prevent white gaps from coordinate rounding
-					\path[fill overzoom image={\recipe@image},fill image opacity={\recipe@imageopacity}]
-					($(current page.north west) - (0,\recipe@imageheight)$)
-					rectangle
-					++(1.02\paperwidth,\recipe@imageheight);
+					\ifcookbook@bleedenabled
+						\clip ([xshift=\cookbook@scaledbleed,yshift=-\cookbook@scaledbleed]current page.north west)
+						      rectangle
+							  ([xshift=-\cookbook@scaledbleed,yshift=-\cookbook@scaledbleed]$(current page.north east) - (0,\recipe@imageheight)$);
+						\path[fill overzoom image={\recipe@image},fill image opacity={\recipe@imageopacity}]
+						    ([xshift=\cookbook@scaledbleed,yshift=-\cookbook@scaledbleed]current page.north west)
+							rectangle
+							([xshift=-\cookbook@scaledbleed,yshift=-\cookbook@scaledbleed]$(current page.north east) - (0,\recipe@imageheight)$);
+					\else
+						\clip (current page.north west) rectangle ($(current page.north east) - (0,\recipe@imageheight)$);
+						\path[fill overzoom image={\recipe@image},fill image opacity={\recipe@imageopacity}]
+						($(current page.north west) - (0,\recipe@imageheight)$)
+						rectangle
+						++(1.02\cookbook@contentpaperwidth,\recipe@imageheight);
+					\fi
 				\end{scope}
 			\end{tikzpicture}
 
 			% Add vertical space after the image before content begins
-			\vspace*{\recipe@imageoverlayspace}
+			\vspace*{\dimexpr\recipe@imageoverlayspace - \cookbook@scaledbleedremainder\relax}
 		}{}%
 	\fi
 
@@ -1408,13 +1731,21 @@
 		\ifdefstring{\recipe@imageposition}{bottom}{%
 			\begin{tikzpicture}[remember picture, overlay]
 				\begin{scope}
-					% Clip to bottom portion of page (from bottom to imageheight above bottom)
-					\clip (current page.south west) rectangle ($(current page.south east) + (0,\recipe@imageheight)$);
-					% Fill clipped area with image, starting from page bottom
-					\path[fill overzoom image={\recipe@image},fill image opacity={\recipe@imageopacity}]
-					(current page.south west)
-					rectangle
-					++(1.02\paperwidth,\recipe@imageheight);
+					\ifcookbook@bleedenabled
+						\clip ([xshift=\cookbook@scaledbleed,yshift=\cookbook@scaledbleed]current page.south west)
+						      rectangle
+							  ([xshift=-\cookbook@scaledbleed,yshift=\cookbook@scaledbleed]$(current page.south east) + (0,\recipe@imageheight)$);
+						\path[fill overzoom image={\recipe@image},fill image opacity={\recipe@imageopacity}]
+						    ([xshift=\cookbook@scaledbleed,yshift=\cookbook@scaledbleed]current page.south west)
+							rectangle
+							([xshift=-\cookbook@scaledbleed,yshift=\cookbook@scaledbleed]$(current page.south east) + (0,\recipe@imageheight)$);
+					\else
+						\clip (current page.south west) rectangle ($(current page.south east) + (0,\recipe@imageheight)$);
+						\path[fill overzoom image={\recipe@image},fill image opacity={\recipe@imageopacity}]
+						(current page.south west)
+						rectangle
+						++(1.02\cookbook@contentpaperwidth,\recipe@imageheight);
+					\fi
 				\end{scope}
 			\end{tikzpicture}
 		}{}%
@@ -1976,7 +2307,7 @@
 	% Now we're on an even page, create the back cover
 	\thispagestyle{empty}
 	\noindent
-	\begin{adjustwidth}{-1.5cm}{-1.5cm}% Remove margins
+	\begin{adjustwidth}{\cookbook@bleedextension}{\cookbook@bleedextension}% Extend to page edges including bleed
 		\begin{tikzpicture}[remember picture, overlay]
 			% Background color
 			\ifx\backcover@bgcolor\@empty\else
@@ -2258,13 +2589,12 @@
 
 % Load hyperref as the last package to avoid conflicts
 \usepackage{hyperref}
+% Expand startpage value for hyperref
 \hypersetup{
 	colorlinks=true,
 	linkcolor=black,
 	linktoc=page, % Make only page numbers clickable
-	pdfstartpage=1, % Ensure hyperref starts page numbering from 1
-	draft=false % Set to false for final output
-
+	pdfstartpage=1 % Use the configured start page number
 }
 
 % Load bookmark package AFTER hyperref to fix TOC and bookmark issues

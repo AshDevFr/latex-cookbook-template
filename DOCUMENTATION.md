@@ -21,6 +21,7 @@ Complete documentation for the LaTeX Cookbook Template.
   - [Recipe Elements](#recipe-elements)
 - [Customization](#customization)
   - [Colors](#colors)
+  - [Margins](#margins)
   - [Spacing](#spacing)
   - [Fonts](#fonts)
 - [Complete Examples](#complete-examples)
@@ -41,6 +42,7 @@ The `CookBook` class extends `extbook` and accepts various options:
     english,      % Language: 'english' or 'french' (default: english)
     left=even,    % Left pages: 'even' or 'odd' (default: even)
     startpage=1,  % Starting page number: 1 or 2 (default: 1)
+    bleed,        % Enable bleed margins for print production (default: disabled)
 ]{CookBook}
 ```
 
@@ -67,6 +69,98 @@ Available sizes: `8pt`, `9pt`, `10pt`, `11pt`, `12pt`, `14pt`, `17pt`, `20pt`
 - `french` - French language
 
 All text labels (Serves, Prep, Cooking, etc.) are automatically translated based on the language setting.
+
+### Bleed Options
+
+Bleed margins are required for professional print production (e.g., Lulu, Blurb, etc.) to ensure images and backgrounds extend to the page edges after trimming.
+
+- `bleed` - Enable bleed margins (boolean option, default: disabled)
+  - When enabled, uses default bleed value of 0.125 inches (3.175 mm) on all sides (Lulu standard)
+- `bleed=debug` - Enable bleed margins and draw the bleed area boundaries for visualization
+  - Draws a red dashed line at the trim edge (where the page will be cut)
+  - Draws a blue solid line at the bleed edge (outer boundary of the bleed area)
+  - Useful for verifying that content extends into the bleed area correctly
+
+**Setting Custom Bleed Values:**
+
+You can override the default bleed value using the `\setbleedvalue` command:
+
+```latex
+\documentclass[letterpaper, 10pt, twoside, bleed]{CookBook}
+\setbleedvalue{0.125in}  % Override bleed value (default is already 0.125in)
+% or
+\setbleedvalue{3.175mm}  % Metric equivalent
+```
+
+**Enabling Bleed After Document Class:**
+
+You can also enable bleed after the document class declaration:
+
+```latex
+\documentclass[letterpaper, 10pt, twoside]{CookBook}
+\enablebleed          % Enable with default 0.125in bleed
+% or
+\enablebleed{0.125in} % Enable with custom bleed value
+```
+
+**Gutter Margins for Print Binding:**
+
+For print production, you may need to adjust inner margins (gutter) to prevent content from being lost in the binding. The gutter margin adds extra space to the inner (left) margin.
+
+```latex
+\documentclass[letterpaper, 10pt, twoside, bleed]{CookBook}
+\setguttermargin{0.5in}  % Add 0.5 inches to inner margin for binding
+% or
+\setguttermargin{1.25cm} % Metric equivalent
+```
+
+**Bleed Image Ratio:**
+
+Control how much of images should extend into the bleed area. This is useful for fine-tuning how images are positioned relative to the trim edge.
+
+```latex
+\documentclass[letterpaper, 10pt, twoside, bleed]{CookBook}
+\setbleedimageratio{0.5}  % Default: 50% of images in bleed area
+\setbleedimageratio{0.3}  % 30% of images in bleed area (more conservative)
+\setbleedimageratio{1.0}  % 100% of images in bleed area (full bleed)
+\setbleedimageratio{0.0}  % No images in bleed area
+```
+
+- **Default:** `0.5` (50% of images extend into bleed)
+- **Range:** `0.0` to `1.0`
+  - `0.0` = No image content in bleed area
+  - `0.5` = Half of image extends into bleed (default)
+  - `1.0` = Full image extends into bleed area
+
+**Complete Example:**
+
+```latex
+\documentclass[
+    letterpaper,
+    10pt,
+    twoside,
+    bleed,  % Enable bleed for print production
+]{CookBook}
+
+% Optionally override default bleed value
+\setbleedvalue{0.125in}
+
+% Set gutter margin for binding
+\setguttermargin{0.5in}
+
+% Control how much of images extend into bleed area
+\setbleedimageratio{0.3}
+
+\begin{document}
+% ... your content ...
+\end{document}
+```
+
+**Important Notes:**
+
+- When bleed is enabled, the PDF paper size is automatically increased by 2×bleed (bleed on each side)
+- All edge-extending content (cover images, full-page images, etc.) automatically extends into the bleed area
+- Text content maintains safety margins (0.5" minimum from trim edge) to prevent cutting
 
 ---
 
@@ -597,6 +691,56 @@ bgcolor={blue!50}  % 50% blue
 % Define custom colors
 \definecolor{myblue}{RGB}{0, 120, 200}
 \definecolor{warmgray}{HTML}{8B8680}
+```
+
+---
+
+### Margins
+
+#### Customizing Page Margins
+
+You can customize individual page margins after loading the document class:
+
+```latex
+\documentclass[letterpaper, 10pt, twoside]{CookBook}
+
+% Customize margins
+\setmargintop{2cm}
+\setmarginbottom{2cm}
+\setmarginleft{2cm}    % Uses 'inner' for twoside, 'left' for oneside
+\setmarginright{2cm}    % Uses 'outer' for twoside, 'right' for oneside
+```
+
+**Important Notes:**
+
+- For **two-sided documents** (`twoside` option):
+  - `\setmarginleft` sets the **inner** margin (left edge of left pages, right edge of right pages)
+  - `\setmarginright` sets the **outer** margin (right edge of left pages, left edge of right pages)
+- For **one-sided documents**:
+  - `\setmarginleft` sets the **left** margin
+  - `\setmarginright` sets the **right** margin
+
+**Default Margins:**
+
+- Top: `1.5cm`
+- Bottom: `1.5cm`
+- Left/Inner: `1.5cm`
+- Right/Outer: `1.5cm`
+
+**Example:**
+
+```latex
+\documentclass[letterpaper, 10pt, twoside]{CookBook}
+
+% Increase margins for better readability
+\setmargintop{2cm}
+\setmarginbottom{2cm}
+\setmarginleft{2.5cm}  % Larger inner margin for binding
+\setmarginright{1.5cm}
+
+\begin{document}
+% ... your content ...
+\end{document}
 ```
 
 ---
