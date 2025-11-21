@@ -3,7 +3,7 @@
 %   LaTeX Class File
 %----------------------------------------------------------------------------------------
 %
-%   Version:     1.1.0
+%   Version:     1.1.1
 %   Date:        November 19, 2025
 %   Author:      AshDevFr
 %   GitHub:      @AshDevFr
@@ -21,7 +21,7 @@
 %----------------------------------------------------------------------------------------
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{CookBook}[2025/11/19 v1.1.0 CookBook Template]
+\ProvidesClass{CookBook}[2025/11/19 v1.1.1 CookBook Template]
 
 %----------------------------------------------------------------------------------------
 %	LANGUAGE OPTIONS
@@ -1379,13 +1379,13 @@
 				\def\@titleangle{90}
 				\def\@titlealign{left}
 				\ifcookbook@bleedenabled
-					\coordinate (titleat) at ($([xshift=\dimexpr\cookbook@bleedlength\relax]current page.west) + (0.5cm,0cm)$);
+					\coordinate (titleat) at ([xshift=\dimexpr\cookbook@bleedlength\relax]$(current page.west) + (0.5cm,0cm)$);
 					\coordinate (clipstart) at ([xshift=-\cookbook@scaledbleed,yshift=-\cookbook@scaledbleed]current page.north east);
 					\coordinate (clipend) at ($([xshift=-\cookbook@scaledbleed,yshift=\cookbook@scaledbleed]current page.south east) - (\cookbook@scaledbleedremainder+0.7\cookbook@contentpaperwidth,0)$);
 				\else
 					\coordinate (titleat) at ($(current page.west) + (0.5cm,0cm)$);
 					\coordinate (clipstart) at (current page.north east);
-					\coordinate (clipend) at (current page.south east);
+					\coordinate (clipend) at ($(current page.south east) - (0.7\cookbook@contentpaperwidth,0)$);
 				\fi
 			\fi
 
