@@ -192,6 +192,7 @@ The following elements are automatically translated:
 | Origin              | Origin            | Origine              |
 | Spicy               | Spicy             | Épicé                |
 | Vegetarian          | Vegetarian        | Végétarien           |
+| Notes               | Notes             | Notes                |
 | Index               | Index             | Index                |
 | Conversion Table    | Conversion Table  | Table de Conversion  |
 | Volume              | Volume            | Volume               |
@@ -215,6 +216,7 @@ Override any translation after loading the class:
 \setTextOrigin{Provenance}
 \setTextSpicy{Piquant}
 \setTextVegetarian{Végétarien}
+\setTextNotes{Remarques}
 \setTextIndex{Index des Recettes}
 \setTextConversionTable{Tableau de Conversion}
 % ... and more
@@ -654,6 +656,58 @@ Use `!` for hierarchical entries:
 - `Recipes!Breakfast` → "Breakfast" under "Recipes"
 - `Cuisine!Italian` → "Italian" under "Cuisine"
 
+#### Recipe Notes
+
+Add contextual notes to ingredients and instructions using the `\note{...}` command. Notes are automatically numbered with superscript references and collected at the bottom of the recipe in a "Notes" section.
+
+**Adding Notes to Ingredients:**
+
+```latex
+\ingredient{2 cups flour\note{Use all-purpose flour for best results}}
+\ingredient{1/2 cup butter, softened\note{For the flakiest crust, make sure all ingredients are cold}}
+```
+
+**Adding Notes to Instructions:**
+
+```latex
+\instruction{Mix ingredients until just combined.\note{Be careful not to overmix, as this can make the dough tough.}}
+\instruction{Bake for 25-30 minutes.\note{The cake is done when a toothpick inserted in the center comes out clean.}}
+```
+
+**How It Works:**
+
+- Notes are automatically numbered sequentially (¹, ², ³, etc.) as they appear in the recipe
+- Each note appears as a superscript number inline where it's placed
+- All notes are collected and displayed at the bottom of the recipe in a numbered list
+- Note numbering resets for each new recipe
+- If a recipe has no notes, the Notes section is automatically hidden
+
+**Example Recipe with Notes:**
+
+```latex
+\recipe{
+    title={Banana Pancakes},
+    ingredients={
+        \ingredient{2 medium-to-large ripe bananas\note{The riper the bananas, the sweeter the pancakes will be.}}
+        \ingredient{1/2 cup whole wheat flour\note{For a gluten-free option, use buckwheat or oat flour.}}
+        \ingredient{Butter, for cooking\note{Ghee provides a rich, buttery flavor without burning easily.}}
+    },
+    instructions={
+        \instruction{Scoop ¼ cup batter onto the hot skillet.\note{Don't flip too early! Wait until bubbles form on the surface.}}
+        \instruction{Flip and cook until golden.\note{If pancakes are browning too quickly, reduce the heat slightly.}}
+    }
+}
+```
+
+**Customizing the Notes Label:**
+
+Override the "Notes" label for different languages or custom text:
+
+```latex
+\setTextNotes{Remarques}  % French: "Remarques"
+\setTextNotes{Tips}       % Custom: "Tips"
+```
+
 ---
 
 ## Customization
@@ -858,6 +912,37 @@ Modify the font definitions in the class file or override in your document:
 }
 
 \end{document}
+```
+
+---
+
+### Recipe with Notes
+
+```latex
+\recipe{
+    title={Banana Pancakes},
+    serves={4},
+    preptime={5 mins},
+    cookingtime={15 mins},
+    tags={Breakfast, Sweet},
+    vegetarian={yes},
+    ingredients={
+        \ingredient{2 medium-to-large ripe bananas\note{The riper the bananas, the sweeter the pancakes will be. Look for bananas with brown spots on the peel.}}
+        \ingredient{1/2 cup whole wheat flour or buckwheat flour\note{For a gluten-free option, use buckwheat or oat flour. The texture will be slightly different but equally delicious.}}
+        \ingredient{Butter, avocado oil or ghee, for cooking\note{Ghee provides a rich, buttery flavor without burning as easily as regular butter.}}
+        \ingredient{2 large eggs}
+        \ingredient{1/4 tsp baking powder}
+        \ingredient{Pinch of salt}
+    },
+    instructions={
+        \instruction{In a medium bowl, mash the bananas with a fork until mostly smooth.}
+        \instruction{Add eggs and whisk until well combined.}
+        \instruction{Add flour, baking powder, and salt. Stir until just combined.}
+        \instruction{Heat a large skillet or griddle over medium heat. Add butter or oil.}
+        \instruction{Scoop ¼ cup batter onto the hot skillet, leaving space around each pancake.\note{Don't flip too early! Wait until you see bubbles forming on the surface, which indicates the bottom is cooked.}}
+        \instruction{Flip the pancakes, then cook until lightly golden on both sides.\note{If pancakes are browning too quickly, reduce the heat slightly. The goal is a golden-brown exterior with a fully cooked interior.}}
+    }
+}
 ```
 
 ---

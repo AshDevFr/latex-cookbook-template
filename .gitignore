@@ -140,3 +140,4 @@ tmp/
 *.swo
 \#*\#
 
+update-images.sh

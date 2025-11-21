@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] - 2025-11-19
+
+### Added
+
+- Recipe notes system with `\note{...}` command for adding contextual notes to ingredients and instructions
+- Automatic note numbering and collection at the bottom of recipes
+- Customizable "Notes" label via `\setTextNotes{<text>}` command
+
+### Fixed
+
+- Fixed tag duplicate checking to prevent duplicate tags when explicitly added tags match auto-generated tags (e.g., `spicy={yes}` and `tags={Spicy}`)
+
 ## [1.1.1] - 2025-11-19
 
 ### Fixed
@@ -68,6 +80,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Build automation with included shell script
 - Comprehensive documentation with usage examples
 
+[1.2.0]: https://github.com/AshDevFr/latex-cookbook-template/compare/v1.1.1...v1.2.0
 [1.1.1]: https://github.com/AshDevFr/latex-cookbook-template/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/AshDevFr/latex-cookbook-template/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/AshDevFr/latex-cookbook-template/releases/tag/v1.0.0

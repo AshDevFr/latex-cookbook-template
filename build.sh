@@ -28,8 +28,7 @@ done
 
 # If force is true, remove the tmp and dist directories
 if [ "$FORCE" = true ]; then
-    echo "Force mode: removing tmp and dist directories"
-    rm -rf tmp
+    echo "Force mode: removing dist directory"
     rm -rf dist
 fi
 
@@ -74,6 +73,12 @@ BUILD_TOTAL=0
 
 # Compile each LaTeX document
 for TEX_FILE in "${TEX_FILES[@]}"; do
+    #If force is true, remove the tmp directory to prevent issues with previous builds
+    if [ "$FORCE" = true ]; then
+        echo "Force mode: removing tmp directory to prevent issues with previous builds"
+        rm -rf tmp
+    fi
+
     # Get the base name without extension
     BASENAME=$(basename "$TEX_FILE" .tex)
     BUILD_TOTAL=$((BUILD_TOTAL + 1))

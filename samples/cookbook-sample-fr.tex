@@ -3,7 +3,7 @@
 %   LaTeX Sample File
 %----------------------------------------------------------------------------------------
 %
-%   Version:     1.1.1
+%   Version:     1.2.0
 %   Date:        November 19, 2025
 %   Author:      AshDevFr
 %   GitHub:      @AshDevFr
@@ -103,21 +103,20 @@
 	cookingtime = {15 min},
 	difficulty = {Débutant},
 	origin = {États-Unis},
-	tags = {Végétarien},
-	extrainstructioninfo = {Utilisez des bananes très mûres pour cette recette. Idéalement, elles doivent avoir au moins quelques taches brunes. Les bananes trop mûres sont plus sucrées et apportent plus de saveur de banane.},
+	tags = {Petit-Déjeuner, Végétarien, Rapide, Sans Gluten},
 	ingredients = {
-			\ingredient{2 bananes moyennes à grandes bien mûres}
+			\ingredient{2 bananes moyennes à grandes bien mûres\note{Plus les bananes sont mûres, plus les pancakes seront sucrés. Recherchez des bananes avec des taches brunes sur la peau.}}
 			\ingredient{4 gros œufs}
-			\ingredient{1/2 tasse de farine de blé complet ou de sarrasin ou 2/3 tasse de farine d'avoine}
+			\ingredient{1/2 tasse de farine de blé complet ou de sarrasin ou 2/3 tasse de farine d'avoine\note{Pour une option sans gluten, utilisez de la farine de sarrasin ou d'avoine. La texture sera légèrement différente mais tout aussi délicieuse.}}
 			\ingredient{Exhausteurs de saveur/nutrition optionnels : ½ cuillère à café de cannelle moulue, jusqu'à 2 cuillères à soupe de graines de chanvre et/ou de graines de lin moulues, jusqu'à ¼ cuillère à café de sel}
-			\ingredient{Beurre, huile d'avocat ou ghee, pour la cuisson}
+			\ingredient{Beurre, huile d'avocat ou ghee, pour la cuisson\note{Le ghee apporte une saveur riche et beurrée sans brûler aussi facilement que le beurre ordinaire.}}
 		},
 	instructions ={
 			\instruction{Dans un bol moyen, écraser la banane avec une grande fourchette jusqu'à ce qu'elle soit brillante et presque lisse. Ajouter les œufs et fouetter jusqu'à ce que les œufs soient uniformément incorporés à la banane.}
 			\instruction{Ajouter la farine et les exhausteurs optionnels. Mélanger doucement jusqu'à ce que le tout soit combiné. Mettre de côté pendant que vous préchauffez la poêle (la pâte peut reposer jusqu'à 1 heure si nécessaire).}
 			\instruction{Chauffer une grande poêle (en acier inoxydable, fonte ou antiadhésive) à feu moyen-doux (si vous utilisez une plaque électrique, chauffez-la à 180°C). Vous êtes prêt à commencer la cuisson lorsqu'une goutte d'eau grésille au contact de la surface chaude. Si nécessaire, huiler légèrement la surface de cuisson avec une noisette de beurre ou d'huile, en essuyant soigneusement l'excédent avec du papier absorbant (les surfaces antiadhésives ne nécessitent probablement pas d'huile).}
-			\instruction{Verser 1/4 tasse de pâte sur la poêle chaude, en laissant quelques centimètres autour de chaque pancake pour l'expansion. Cuire jusqu'à ce que de petites bulles se forment à la surface des pancakes, 2 à 3 minutes.}
-			\instruction{Retourner les pancakes, puis cuire jusqu'à ce qu'ils soient légèrement dorés des deux côtés, 1 à 2 minutes de plus. Répéter le processus avec la pâte restante, en ajoutant plus de beurre et en réduisant la chaleur si les pancakes deviennent foncés à l'extérieur avant d'être cuits à l'intérieur.}
+			\instruction{Verser 1/4 tasse de pâte sur la poêle chaude, en laissant quelques centimètres autour de chaque pancake pour l'expansion. Cuire jusqu'à ce que de petites bulles se forment à la surface des pancakes, 2 à 3 minutes.\note{Ne retournez pas trop tôt ! Attendez de voir des bulles se former à la surface, ce qui indique que le fond est cuit.}}
+			\instruction{Retourner les pancakes, puis cuire jusqu'à ce qu'ils soient légèrement dorés des deux côtés, 1 à 2 minutes de plus. Répéter le processus avec la pâte restante, en ajoutant plus de beurre et en réduisant la chaleur si les pancakes deviennent foncés à l'extérieur avant d'être cuits à l'intérieur.\note{Si les pancakes brunissent trop rapidement, réduisez légèrement la chaleur. L'objectif est un extérieur doré avec un intérieur entièrement cuit.}}
 			\instruction{Servir immédiatement ou garder au chaud dans un four à 95°C. Les pancakes restants peuvent être conservés au réfrigérateur jusqu'à 3 jours ou congelés jusqu'à 3 mois. Pour réchauffer, empiler les pancakes restants et les envelopper dans du papier absorbant avant de les réchauffer délicatement au micro-ondes.}
 		}
 }
@@ -140,7 +139,6 @@
 	difficulty = {Débutant},
 	origin = {France/États-Unis},
 	tags = {Petit-Déjeuner, Sucré, Végétarien, Rapide},
-	extrainstructioninfo = {Le pain de la veille fonctionne mieux car il absorbe le mélange de crème sans se désagréger. Le pain brioché ou challah crée le pain perdu le plus luxueux, mais n'importe quel pain tranché épais fera l'affaire.},
 	ingredients = {
 			\ingredientsection{Mélange de Crème}
 			\ingredient{4 gros œufs}
@@ -152,7 +150,7 @@
 			\ingredient{Une pincée de sel}
 
 			\ingredientsection{Cuisson et Service}
-			\ingredient{8 tranches épaisses de pain (brioche, challah ou pain blanc)}
+			\ingredient{8 tranches épaisses de pain (brioche, challah ou pain blanc)\note{Le pain de la veille fonctionne mieux car il absorbe le mélange de crème sans se désagréger. Le pain brioché ou challah crée le pain perdu le plus luxueux, mais n'importe quel pain tranché épais fera l'affaire.}}
 			\ingredient{2-3 c. à soupe de beurre pour la cuisson}
 			\ingredient{Sirop d'érable, pour servir}
 			\ingredient{Baies fraîches, pour servir}
@@ -195,6 +193,9 @@
 
 \recipe{%
 	image={../images/book/appetizer.jpg},
+	columnratio={0.25, 0.75},
+	imageheight={0.24\paperheight},
+	imageoverlayspace={0.19\paperheight},
 	title = {Bruschetta Classique},
 	indexes = {Bruschetta Classique, Bruschetta, Recettes!Entrées, Tomates, Basilic, Ail, Recettes végétariennes, Cuisine italienne, Repas rapides},
 	description = {Une entrée italienne quintessentielle mettant en vedette du pain grillé garni de tomates fraîches, basilic, ail et huile d'olive. Simple mais absolument délicieux.},
@@ -203,11 +204,11 @@
 	cookingtime = {5 min},
 	difficulty = {Débutant},
 	origin = {Italie},
-	tags = {Italien, Rapide},
+	tags = {Italien, Rapide, Végétarien},
 	vegetarian = {oui},
 	ingredients = {
 			\ingredientsection{Garniture}
-			\ingredient{4 grosses tomates mûres, coupées en dés}
+			\ingredient{4 grosses tomates mûres, coupées en dés\note{Utilisez les tomates les plus mûres et les plus savoureuses que vous puissiez trouver. Les variétés anciennes ou mûries sur pied fonctionnent à merveille.}}
 			\ingredient{3 gousses d'ail, hachées}
 			\ingredient{1/4 tasse de feuilles de basilic frais, hachées}
 			\ingredient{2 c. à soupe d'huile d'olive extra vierge}
@@ -215,7 +216,7 @@
 			\ingredient{Sel et poivre noir au goût}
 
 			\ingredientsection{Pain}
-			\ingredient{1 baguette française, tranchée en diagonale}
+			\ingredient{1 baguette française, tranchée en diagonale\note{Une baguette de la veille fonctionne mieux pour la bruschetta car elle grille plus uniformément et a une meilleure texture.}}
 			\ingredient{2 c. à soupe d'huile d'olive}
 			\ingredient{1 gousse d'ail, coupée en deux}
 		},
@@ -260,8 +261,7 @@
 	cookingtime = {10 min},
 	difficulty = {Intermédiaire},
 	origin = {Mexique/États-Unis},
-	tags = {Salade, Classique},
-	extrainstructioninfo = {Pour la meilleure saveur, utilisez du parmesan fraîchement râpé. La vinaigrette peut être préparée jusqu'à 3 jours à l'avance et conservée au réfrigérateur.},
+	tags = {Salade, Classique, Italien, À Préparer à l'Avance},
 	ingredients = {
 			\ingredientsection{Vinaigrette}
 			\ingredient{2 gousses d'ail, hachées}
@@ -270,7 +270,7 @@
 			\ingredient{1 c. à café de moutarde de Dijon}
 			\ingredient{1 c. à café de sauce Worcestershire}
 			\ingredient{1 tasse de mayonnaise}
-			\ingredient{1/2 tasse de parmesan fraîchement râpé}
+			\ingredient{1/2 tasse de parmesan fraîchement râpé\note{Pour la meilleure saveur, utilisez du parmesan fraîchement râpé. La vinaigrette peut être préparée jusqu'à 3 jours à l'avance et conservée au réfrigérateur.}}
 			\ingredient{Sel et poivre noir}
 
 			\ingredientsection{Salade}
@@ -302,20 +302,19 @@
 \recipe{%
 image={../images/recipes/caprese-salad.jpg},
 imageposition={bottom},
-imageheight={0.4\paperheight},
+imageheight={0.35\paperheight},
 title = {Salade Caprese},
 indexes = {Salade Caprese, Salade, Recettes!Entrées, Recettes!Salades, Mozzarella, Tomates, Basilic, Recettes végétariennes, Cuisine italienne, Repas sans cuisson, Recettes sans gluten},
 description = {Une belle salade italienne rafraîchissante présentant les couleurs du drapeau italien. La qualité des ingrédients est essentielle à ce plat simple mais élégant.},
 serves = {4},
 preptime = {10 min},
 difficulty = {Débutant},
-origin = {Italie},
-tags = {Italien, Sans Cuisson, Sans Gluten},
-vegetarian = {oui},
-extrainstructioninfo = {Utilisez les meilleures tomates que vous pouvez trouver—les variétés anciennes ou mûries sur pied fonctionnent à merveille. La mozzarella di bufala fraîche est traditionnelle et fortement recommandée.},
-ingredients = {
-		\ingredient{4 grosses tomates mûres, tranchées de 6 mm d'épaisseur}
-		\ingredient{450g de fromage mozzarella frais, tranché de 6 mm d'épaisseur}
+	origin = {Italie},
+	tags = {Italien, Sans Cuisson, Sans Gluten, Végétarien},
+	vegetarian = {oui},
+	ingredients = {
+		\ingredient{4 grosses tomates mûres, tranchées de 6 mm d'épaisseur\note{Utilisez les meilleures tomates que vous pouvez trouver—les variétés anciennes ou mûries sur pied fonctionnent à merveille.}}
+		\ingredient{450g de fromage mozzarella frais, tranché de 6 mm d'épaisseur\note{La mozzarella di bufala fraîche est traditionnelle et fortement recommandée pour la saveur la plus authentique.}}
 		\ingredient{1 tasse de feuilles de basilic frais}
 		\ingredient{3 c. à soupe d'huile d'olive extra vierge}
 		\ingredient{2 c. à soupe de vinaigre balsamique ou glaçage}
@@ -352,12 +351,11 @@ instructions ={
 	cookingtime = {45 min},
 	difficulty = {Intermédiaire},
 	origin = {États-Unis},
-	tags = {Épicé, Poulet, Cuit au Four},
+	tags = {Épicé, Poulet, Cuit au Four, Entrée, Jour de Match},
 	spicy = {oui},
-	extrainstructioninfo = {Pour des ailes extra croustillantes, séchez-les complètement avant l'assaisonnement et assurez-vous qu'elles sont disposées en une seule couche sans se toucher. Servir avec des bâtonnets de céleri et une vinaigrette au fromage bleu ou ranch.},
 	ingredients = {
 			\ingredientsection{Ailes}
-			\ingredient{1,4 kg d'ailes de poulet, séparées aux articulations, bouts retirés}
+			\ingredient{1,4 kg d'ailes de poulet, séparées aux articulations, bouts retirés\note{Pour des ailes extra croustillantes, séchez-les complètement avant l'assaisonnement. Servir avec des bâtonnets de céleri et une vinaigrette au fromage bleu ou ranch.}}
 			\ingredient{1 c. à soupe de bicarbonate de soude}
 			\ingredient{1 c. à café de sel}
 			\ingredient{1 c. à café de poudre d'ail}
@@ -374,7 +372,7 @@ instructions ={
 			\instruction{Préchauffer le four à 120°C. Tapisser une grande plaque de cuisson de papier d'aluminium et placer une grille métallique dessus.}
 			\instruction{Sécher complètement les ailes de poulet avec du papier absorbant. Ceci est crucial pour une peau croustillante.}
 			\instruction{Dans un grand bol, combiner le bicarbonate de soude, le sel, la poudre d'ail et le poivre noir. Ajouter les ailes et mélanger jusqu'à ce qu'elles soient uniformément enrobées.}
-			\instruction{Disposer les ailes sur la grille métallique en une seule couche, en s'assurant qu'elles ne se touchent pas.}
+			\instruction{Disposer les ailes sur la grille métallique en une seule couche, en s'assurant qu'elles ne se touchent pas.\note{Un espacement approprié assure une cuisson uniforme et un croustillant maximal.}}
 			\instruction{Cuire au four à 120°C pendant 30 minutes. Augmenter la température à 220°C et cuire pendant 40-45 minutes supplémentaires, en retournant à mi-cuisson, jusqu'à ce qu'elles soient dorées et croustillantes.}
 			\instruction{Pendant que les ailes cuisent, préparer la sauce buffalo en fouettant ensemble la sauce piquante, le beurre fondu, le vinaigre, la sauce Worcestershire et le poivre de Cayenne dans un petit bol.}
 			\instruction{Transférer les ailes cuites dans un grand bol, verser la sauce buffalo dessus et mélanger pour bien enrober. Servir immédiatement.}
@@ -410,7 +408,7 @@ instructions ={
 	cookingtime = {40 min},
 	difficulty = {Débutant},
 	origin = {Italie},
-	tags = {Pâtes, Viande, Italien, Bolognaise},
+	tags = {Pâtes, Viande, Italien, Bolognaise, À Préparer à l'Avance},
 	extrainstructioninfo = {Vous pouvez congeler cette sauce bolognaise jusqu'à 2 mois. Laisser refroidir à température ambiante, puis placer des portions individuelles ou la quantité totale dans des contenants hermétiques ou des sacs de congélation et expulser l'air. Étiqueter, dater et congeler. Mettre au réfrigérateur toute la nuit pour décongeler.},
 	ingredients = {
 			\ingredientsection{Sauce}
@@ -453,7 +451,9 @@ instructions ={
 
 \recipe{%
 	image={../images/recipes/grilled-salmon.jpg},
-	columnratio={0.35, 0.65},
+	columnratio={0.4, 0.6},
+	imageheight={0.28\paperheight},
+	imageoverlayspace={0.24\paperheight},
 	title = {Saumon Grillé au Citron et aux Herbes},
 	indexes = {Saumon Grillé au Citron et aux Herbes, Saumon Grillé, Recettes!Plats principaux, Recettes!Fruits de mer, Saumon, Poisson, Citron, Herbes, Plats grillés, Recettes saines, Recettes sans gluten},
 	description = {Saumon parfaitement grillé avec une marinade au citron et aux herbes. Cette recette démontre un ratio de colonnes personnalisé pour la disposition des ingrédients et des instructions.},
@@ -463,7 +463,6 @@ instructions ={
 	difficulty = {Intermédiaire},
 	origin = {Contemporain},
 	tags = {Fruits de Mer, Grillé, Sain, Sans Gluten},
-	extrainstructioninfo = {Ne retournez pas le saumon trop tôt—attendez qu'il se détache naturellement des grilles du gril. Le poisson doit être opaque et se défaire facilement lorsqu'il est cuit.},
 	ingredients = {
 			\ingredientsection{Marinade}
 			\ingredient{1/4 tasse d'huile d'olive}
@@ -475,7 +474,7 @@ instructions ={
 			\ingredient{Sel et poivre}
 
 			\ingredientsection{Saumon}
-			\ingredient{4 filets de saumon (170g chacun)}
+			\ingredient{4 filets de saumon (170g chacun)\note{Pour de meilleurs résultats, utilisez des filets d'épaisseur uniforme afin qu'ils cuisent uniformément.}}
 			\ingredient{Quartiers de citron pour servir}
 			\ingredient{Herbes fraîches pour garnir}
 		},
@@ -484,8 +483,8 @@ instructions ={
 			\instruction{Placer les filets de saumon dans un plat peu profond et verser la marinade dessus. Tourner pour enrober. Couvrir et réfrigérer pendant 15-30 minutes.}
 			\instruction{Préchauffer le gril à feu moyen-élevé (environ 190-200°C). Nettoyer et huiler les grilles du gril.}
 			\instruction{Retirer le saumon de la marinade et sécher avec du papier absorbant. Jeter l'excès de marinade.}
-			\instruction{Placer le saumon côté peau vers le bas sur le gril. Fermer le couvercle et cuire pendant 6-8 minutes sans bouger.}
-			\instruction{Retourner soigneusement le saumon à l'aide d'une large spatule. Cuire encore 3-4 minutes jusqu'à ce que le poisson soit opaque et se défasse facilement.}
+			\instruction{Placer le saumon côté peau vers le bas sur le gril. Fermer le couvercle et cuire pendant 6-8 minutes sans bouger.\note{Ne retournez pas le saumon trop tôt—attendez qu'il se détache naturellement des grilles du gril.}}
+			\instruction{Retourner soigneusement le saumon à l'aide d'une large spatule. Cuire encore 3-4 minutes jusqu'à ce que le poisson soit opaque et se défasse facilement.\note{Le poisson doit être opaque et se défaire facilement lorsqu'il est cuit.}}
 			\instruction{Retirer du gril et laisser reposer 2 minutes. Servir avec des quartiers de citron et garnir d'herbes fraîches.}
 		}
 }
@@ -510,14 +509,13 @@ instructions ={
 	cookingtime = {25 min},
 	difficulty = {Intermédiaire},
 	origin = {Thaïlande},
-	tags = {Thaï, Épicé, Curry, Végétalien},
+	tags = {Thaï, Épicé, Curry, Végétalien, Végétarien},
 	vegetarian = {oui},
 	spicy = {oui},
-	extrainstructioninfo = {La pâte de curry rouge thaï varie en niveau de piquant selon les marques. Commencez avec moins et ajoutez-en au goût. Servir sur du riz jasmin ou des nouilles de riz.},
 	ingredients = {
 			\ingredientsection{Curry}
 			\ingredient{2 c. à soupe d'huile de coco}
-			\ingredient{3-4 c. à soupe de pâte de curry rouge thaï}
+			\ingredient{3-4 c. à soupe de pâte de curry rouge thaï\note{La pâte de curry rouge thaï varie en niveau de piquant selon les marques. Commencez avec moins et ajoutez-en au goût.}}
 			\ingredient{1 boîte (400 mL) de lait de coco}
 			\ingredient{1 tasse de bouillon de légumes}
 			\ingredient{2 c. à soupe de sauce soja ou tamari}
@@ -529,7 +527,7 @@ instructions ={
 			\ingredient{1 tasse de feuilles de basilic thaï}
 
 			\ingredientsection{Service}
-			\ingredient{Riz jasmin cuit}
+			\ingredient{Riz jasmin cuit\note{Servir sur du riz jasmin ou des nouilles de riz pour un repas complet.}}
 			\ingredient{Quartiers de lime frais}
 			\ingredient{Coriandre fraîche}
 			\ingredient{Piment rouge tranché (optionnel)}
@@ -584,8 +582,7 @@ instructions ={
 	cookingtime = {35 min},
 	difficulty = {Avancé},
 	origin = {États-Unis},
-	tags = {Dessert, Chocolat, Gâteau, Célébration},
-	extrainstructioninfo = {Pour de meilleurs résultats, amenez tous les ingrédients à température ambiante avant de commencer. Les couches de gâteau peuvent être préparées la veille, enveloppées dans du film plastique et conservées à température ambiante.},
+	tags = {Dessert, Chocolat, Gâteau, Célébration, À Préparer à l'Avance},
 	ingredients = {
 			\ingredientsection{Gâteau}
 			\ingredient{2 tasses de farine tout usage}
@@ -594,14 +591,14 @@ instructions ={
 			\ingredient{2 c. à café de bicarbonate de soude}
 			\ingredient{1 c. à café de levure chimique}
 			\ingredient{1 c. à café de sel}
-			\ingredient{2 gros œufs}
+			\ingredient{2 gros œufs\note{Pour de meilleurs résultats, amenez tous les ingrédients à température ambiante avant de commencer.}}
 			\ingredient{1 tasse de babeurre}
 			\ingredient{1 tasse de café noir fort, chaud}
 			\ingredient{1/2 tasse d'huile végétale}
 			\ingredient{2 c. à café d'extrait de vanille}
 
 			\ingredientsection{Glaçage}
-			\ingredient{1 tasse (2 bâtonnets) de beurre non salé, ramolli}
+			\ingredient{1 tasse (2 bâtonnets) de beurre non salé, ramolli\note{Les couches de gâteau peuvent être préparées la veille, enveloppées dans du film plastique et conservées à température ambiante.}}
 			\ingredient{3 1/2 tasses de sucre glace}
 			\ingredient{1/2 tasse de poudre de cacao non sucrée}
 			\ingredient{1/2 tasse de crème épaisse}
@@ -660,7 +657,7 @@ instructions ={
 			\ingredient{2 tasses de crème épaisse, froide}
 
 			\ingredientsection{Couche de Café}
-			\ingredient{2 tasses d'espresso fort ou de café, refroidi}
+			\ingredient{2 tasses d'espresso fort ou de café, refroidi\note{Utilisez un espresso ou un café fort de haute qualité pour la meilleure saveur.}}
 			\ingredient{3 c. à soupe de liqueur de café (optionnel)}
 			\ingredient{40-48 biscuits à la cuillère (savoiardi)}
 
@@ -675,7 +672,7 @@ instructions ={
 			\instruction{Combiner l'espresso refroidi avec la liqueur de café (si utilisée) dans un plat peu profond.}
 			\instruction{Tremper rapidement chaque biscuit à la cuillère dans le mélange de café (environ 2 secondes par côté) et disposer en une seule couche dans un plat de 23x33 cm.}
 			\instruction{Étaler la moitié de la crème de mascarpone sur les biscuits. Répéter avec une autre couche de biscuits trempés et le reste de la crème.}
-			\instruction{Couvrir de film plastique et réfrigérer pendant au moins 4 heures ou toute la nuit.}
+			\instruction{Couvrir de film plastique et réfrigérer pendant au moins 4 heures ou toute la nuit.\note{Une réfrigération toute la nuit est préférable car elle permet aux saveurs de se mélanger et aux biscuits de ramollir parfaitement.}}
 			\instruction{Avant de servir, saupoudrer généreusement de poudre de cacao et garnir de copeaux de chocolat si désiré.}
 		}
 }
@@ -697,14 +694,13 @@ instructions ={
 	cookingtime = {55 min},
 	difficulty = {Avancé},
 	origin = {États-Unis},
-	tags = {Dessert, Tarte, Américain, Automne, Cuit au Four},
-	extrainstructioninfo = {Pour une croûte ultra feuilletée, assurez-vous que tous les ingrédients sont froids et manipulez la pâte le moins possible. La tarte peut être préparée la veille et réchauffée avant de servir.},
+	tags = {Dessert, Tarte, Américain, Automne, Cuit au Four, À Préparer à l'Avance},
 	ingredients = {
 			\ingredientsection{Pâte à Tarte}
 			\ingredient{2 1/2 tasses de farine tout usage}
 			\ingredient{1 c. à café de sel}
 			\ingredient{1 c. à soupe de sucre blanc}
-			\ingredient{1 tasse (2 bâtonnets) de beurre non salé froid, coupé en cubes}
+			\ingredient{1 tasse (2 bâtonnets) de beurre non salé froid, coupé en cubes\note{Pour une croûte ultra feuilletée, assurez-vous que tous les ingrédients sont froids et manipulez la pâte le moins possible.}}
 			\ingredient{6-8 c. à soupe d'eau glacée}
 
 			\ingredientsection{Garniture aux Pommes}
@@ -735,7 +731,7 @@ instructions ={
 			\instruction{Verser la garniture aux pommes dans la croûte et parsemer de morceaux de beurre. Abaisser le deuxième disque de pâte et placer sur la garniture. Couper l'excédent et pincer les bords pour sceller.}
 			\instruction{Faire plusieurs incisions dans la croûte supérieure pour l'aération. Badigeonner de dorure et saupoudrer de sucre cristallisé.}
 			\instruction{Placer la tarte sur une plaque de cuisson. Cuire au four pendant 20 minutes, puis réduire la chaleur à 190°C et cuire pendant 35-40 minutes de plus jusqu'à ce que la croûte soit dorée et que la garniture bouillonne.}
-			\instruction{Laisser refroidir sur une grille pendant au moins 2 heures avant de trancher. Servir tiède ou à température ambiante avec de la crème glacée à la vanille.}
+			\instruction{Laisser refroidir sur une grille pendant au moins 2 heures avant de trancher. Servir tiède ou à température ambiante avec de la crème glacée à la vanille.\note{La tarte peut être préparée la veille et réchauffée avant de servir.}}
 		}
 }
 

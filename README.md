@@ -4,7 +4,7 @@
 
 <div align="center">
 
-![Cover Example](images/samples/cookbook-sample_6-7.png)
+![Example](images/samples/cookbook-sample_6-7.png)
 
 [Features](#features) • [Quick Start](#quick-start) • [Documentation](DOCUMENTATION.md) • [Examples](#examples)
 
@@ -17,7 +17,9 @@
 - 🎨 **Flexible Layouts** - Multiple recipe layouts (columns, simple) and customizable spacing
 - 🖼️ **Rich Media** - Full-page images, recipe photos, and chapter dividers
 - 🏷️ **Smart Organization** - Automatic recipe indexing, tagging system with emoji icons
+- 📝 **Recipe Notes** - Add contextual notes to ingredients and instructions with automatic numbering
 - 📏 **Conversion Tables** - Built-in measurement conversion pages
+- 🖨️ **Print Production** - Bleed margins and gutter settings for book printing
 - ⚙️ **Highly Customizable** - Control colors, fonts, spacing, margins, and more
 - 🔧 **Easy Compilation** - Included build script for hassle-free PDF generation
 
@@ -124,17 +126,60 @@ For a list of changes and version history, see [CHANGELOG.md](CHANGELOG.md).
 <details>
 <summary>View More Examples</summary>
 
+### Cover and Back Cover
+
+<table>
+  <tr>
+    <td><img src="images/samples/cookbook-sample_1.png" alt="Front Cover"/></td>
+    <td><img src="images/samples/cookbook-sample_34.png" alt="Back Cover"/></td>
+  </tr>
+</table>
+
+### Conversion Table and Index
+
+The template supports conversion tables and index pages.
+
+<table>
+  <tr>
+    <td><img src="images/samples/cookbook-sample_30-31.png" alt="Conversion Table"/></td>
+    <td><img src="images/samples/cookbook-sample_32.png" alt="Index"/></td>
+  </tr>
+</table>
+
 ### English Examples
 
-![Example 1](images/samples/cookbook-sample_8-9.png)
-![Example 2](images/samples/cookbook-sample_12-13.png)
-![Example 3](images/samples/cookbook-sample_26-27.png)
-![Example 4](images/samples/cookbook-sample_28-29.png)
+<table>
+  <tr>
+    <td><img src="images/samples/cookbook-sample_8-9.png" alt="Example 1"/></td>
+    <td><img src="images/samples/cookbook-sample_12-13.png" alt="Example 2"/></td>
+  </tr>
+  <tr>
+    <td><img src="images/samples/cookbook-sample_26-27.png" alt="Example 3"/></td>
+    <td><img src="images/samples/cookbook-sample_28-29.png" alt="Example 4"/></td>
+  </tr>
+</table>
 
 ### French Examples
 
-![French Example 1](images/samples/cookbook-sample-fr_2-3.png)
-![French Example 2](images/samples/cookbook-sample-fr_6-7.png)
+The template supports French language.
+
+<table>
+  <tr>
+    <td><img src="images/samples/cookbook-sample-fr_2-3.png" alt="French Example 1"/></td>
+    <td><img src="images/samples/cookbook-sample-fr_6-7.png" alt="French Example 2"/></td>
+  </tr>
+</table>
+
+### Print Version
+
+The template supports print production with bleed margins.
+
+<table>
+  <tr>
+    <td><img src="images/samples/cookbook-sample-print_2-3.png" alt="Print Example 1"/></td>
+    <td><img src="images/samples/cookbook-sample-print_6-7.png" alt="Print Example 2"/></td>
+  </tr>
+</table>
 
 </details>
 

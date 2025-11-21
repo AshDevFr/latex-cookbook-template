@@ -3,7 +3,7 @@
 %   LaTeX Class File
 %----------------------------------------------------------------------------------------
 %
-%   Version:     1.1.1
+%   Version:     1.2.0
 %   Date:        November 19, 2025
 %   Author:      AshDevFr
 %   GitHub:      @AshDevFr
@@ -899,6 +899,65 @@
 	{#2}%
 }
 
+%----------------------------------------------------------------------------------------
+%	RECIPE NOTES SYSTEM
+%----------------------------------------------------------------------------------------
+
+% Counter for recipe notes (resets per recipe)
+\newcounter{recipenote}
+% Token list to store all notes for the current recipe
+\newtoks\recipe@notestoks
+% Initialize empty token list
+\recipe@notestoks={}
+
+% Command to add a note within ingredient or instruction
+% Usage: \ingredient{2 cups flour\note{Use all-purpose flour for best results}}
+%        \instruction{Mix ingredients\note{Be careful not to overmix}}
+\NewDocumentCommand{\note}{m}{%
+	% Increment the note counter
+	\stepcounter{recipenote}%
+	% Store the note text (label will be added by enumerate environment)
+	% Append item and note text to token list
+	% Only protect the note text from expansion; \item and \par should be stored as tokens
+	\expandafter\global\expandafter\recipe@notestoks\expandafter{%
+		\the\recipe@notestoks
+		\item\space
+		\unexpanded{#1}%
+		\par
+	}%
+	% Output the superscript number
+	\textsuperscript{\tiny\arabic{recipenote}}%
+}
+
+% Command to reset notes for a new recipe
+\NewDocumentCommand{\recipe@resetnotes}{}{%
+	\setcounter{recipenote}{0}%
+	\global\recipe@notestoks={}%
+}
+
+% Command to output all notes at the bottom of the recipe
+\NewDocumentCommand{\recipe@outputnotes}{}{%
+	\ifnum\value{recipenote}>0
+		\vspace{0.02\textheight}%
+		\recipeSeparator[0.5pt][1pt][lightgrey]%
+		\vspace{0.01\textheight}%
+		{\sourcesanspro\bfseries\small\MakeUppercase{\textNotes}}\par
+		\vspace{0.005\textheight}%
+		\begin{enumerate}[
+			align=left,
+			leftmargin=15pt,
+			itemindent=0pt,
+			labelwidth=15pt,
+			labelsep=5pt,
+			labelindent=0pt,
+			label=\textsuperscript{\arabic*},
+			itemsep=0.003\textheight,
+		]%
+		\the\recipe@notestoks
+		\end{enumerate}%
+	\fi
+}
+
 % Recipe separator with customizable appearance
 % #1 = line width (default: 0.5pt)
 % #2 = dash pattern spacing (default: 1pt)
@@ -1613,10 +1672,37 @@
 	\def\recipe@instructionitemsep{\cookbook@instructionitemsep}% Default to global instruction item spacing
 }
 
+% Boolean flag for tag duplicate checking
+\newif\ifrecipe@tagfound
+
+% Helper macro to check if a tag exists in the tags list
+% Usage: \recipe@checktag{tag to check}{tags list}
+% Sets \ifrecipe@tagfound to true if tag exists, false otherwise
+% Uses \StrSubstitute to normalize spaces and \IfStrEq for string comparison
+\NewDocumentCommand{\recipe@checktag}{mm}{%
+	\recipe@tagfoundfalse
+	\ifx#2\@empty
+	\else
+		% Iterate through each tag in the list
+		\@for\temp@tag:=#2\do{%
+			% Normalize both tags by removing spaces for comparison
+			% This handles cases where tags have leading/trailing spaces
+			\StrSubstitute{\temp@tag}{ }{}[\temp@normalized]%
+			\StrSubstitute{#1}{ }{}[\temp@searchnormalized]%
+			\IfStrEq{\temp@normalized}{\temp@searchnormalized}{%
+				\recipe@tagfoundtrue
+			}{}%
+		}%
+	\fi
+}
+
 % Main recipe command: processes key-value options and renders complete recipe page
 \NewDocumentCommand{\recipe}{+m}{%
 	% Initialize recipe properties with defaults
 	\recipe@init
+
+	% Reset notes for this recipe
+	\recipe@resetnotes
 
 	% Process the key-value pairs
 	\setkeys{recipe}{#1}
@@ -1634,16 +1720,12 @@
 	% This section automatically adds "Spicy" and "Vegetarian" tags to the recipe
 	% if the corresponding flags are set, but only if they're not already present.
 	%
-	% The logic uses \in@ (from etoolbox) to check if a tag already exists in the list.
-	% This prevents duplicate tags when users explicitly add them AND set the flag.
-	%
-	% The \expandafter chain is necessary because \in@ needs the arguments fully expanded
-	% before it can perform the string search. \edef is used to expand the tag list when
-	% appending new tags, ensuring proper comma-separated list formatting.
+	% The logic iterates through the existing tags list and compares each tag individually
+	% to prevent duplicate tags when users explicitly add them AND set the flag.
 	\ifx\recipe@spicy\@empty\else
-		% Check if "Spicy" is already in tags using string search
-		\expandafter\in@\expandafter{\textSpicy}{\recipe@tags}%
-		\ifin@\else
+		% Check if "Spicy" is already in tags by iterating through the list
+		\recipe@checktag{\textSpicy}{\recipe@tags}%
+		\ifrecipe@tagfound\else
 			% Tag not found, add it to the list
 			\ifx\recipe@tags\@empty
 				% Empty list: just add the tag
@@ -1655,9 +1737,9 @@
 		\fi
 	\fi
 	\ifx\recipe@vegetarian\@empty\else
-		% Check if "Vegetarian" is already in tags using string search
-		\expandafter\in@\expandafter{\textVegetarian}{\recipe@tags}%
-		\ifin@\else
+		% Check if "Vegetarian" is already in tags by iterating through the list
+		\recipe@checktag{\textVegetarian}{\recipe@tags}%
+		\ifrecipe@tagfound\else
 			% Tag not found, add it to the list
 			\ifx\recipe@tags\@empty
 				% Empty list: just add the tag
@@ -1750,6 +1832,9 @@
 			\end{tikzpicture}
 		}{}%
 	\fi
+
+	% Output recipe notes at the bottom (if any)
+	\recipe@outputnotes
 
 	\clearpage
 }
