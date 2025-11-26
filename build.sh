@@ -33,7 +33,7 @@ if [ "$FORCE" = true ]; then
 fi
 
 # Clean up existing build files on the root directory
-rm -f *.aux *.fdb_latexmk *.fls *.log *.out *.toc *.synctex.gz
+rm -f *.{aux,fdb_latexmk,fls,idx,ilg,ind,pdf,toc,synctex.gz}
 
 # Create dist and tmp directories if they don't exist
 mkdir -p dist
@@ -76,7 +76,10 @@ for TEX_FILE in "${TEX_FILES[@]}"; do
     #If force is true, remove the tmp directory to prevent issues with previous builds
     if [ "$FORCE" = true ]; then
         echo "Force mode: removing tmp directory to prevent issues with previous builds"
-        rm -rf tmp/*
+        rm -rf tmp/luatex-cache
+        shopt -s nullglob
+        rm -f tmp/*.{aux,fdb_latexmk,fls,idx,ilg,ind,pdf,toc,synctex.gz}
+        shopt -u nullglob
     fi
 
     # Get the base name without extension
@@ -90,10 +93,19 @@ for TEX_FILE in "${TEX_FILES[@]}"; do
     cd samples
 
     # Compile the LaTeX document using latexmk
+    latexmk_exit_code=0
     if [ "$VERBOSE" = true ]; then
         latexmk $LATEXMK_OPTS -aux-directory=../tmp -output-directory=../tmp "$BASENAME.tex"
+        latexmk_exit_code=$?
     else
-        latexmk $LATEXMK_OPTS -aux-directory=../tmp -output-directory=../tmp "$BASENAME.tex" 2>&1 | grep -E "(Error|Warning|Fatal)" || true
+        latexmk $LATEXMK_OPTS -aux-directory=../tmp -output-directory=../tmp "$BASENAME.tex" 2>&1 | grep -E "([Ee]rror|[Ww]arning|[Ff]atal)" || true
+        latexmk_exit_code=$?
+    fi
+
+    # check the exit code of the latexmk command
+    if [ $latexmk_exit_code -ne 0 ]; then
+        echo "Found errors during compilation. Please check the log file for details."
+        exit 1
     fi
 
     # Return to root directory
@@ -106,6 +118,13 @@ for TEX_FILE in "${TEX_FILES[@]}"; do
         BUILD_SUCCESS=$((BUILD_SUCCESS + 1))
     else
         echo "✗ Error: $BASENAME.pdf was not generated"
+    fi
+
+    if [ "$FORCE" = true ]; then
+        rm -rf tmp/luatex-cache
+        shopt -s nullglob
+        rm -f tmp/*.{aux,fdb_latexmk,fls,idx,ilg,ind,pdf,toc,synctex.gz}
+        shopt -u nullglob
     fi
 done
 
