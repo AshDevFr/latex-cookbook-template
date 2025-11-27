@@ -3,7 +3,7 @@
 %   LaTeX Class File
 %----------------------------------------------------------------------------------------
 %
-%   Version:     1.4.0
+%   Version:     1.5.0
 %   Date:        November 26, 2025
 %   Author:      AshDevFr
 %   GitHub:      @AshDevFr
@@ -688,8 +688,9 @@
 
 \usepackage{tcolorbox} % Colored boxes with advanced styling options
 \usepackage{xstring} % String manipulation and trimming utilities
+\usepackage{trimspaces} % Provides space trimming utilities
 \tcbset{on line, boxsep=1pt,left=1.5pt,right=1.5pt,top=1.5pt,bottom=1.5pt,colframe=Grey,valign=center,halign=center} % Custom badge tcolorbox with centered alignment
-\NewDocumentCommand{\tbadge}{m}{\StrSubstitute{#1}{ }{}[\trimmedtext]\tcbox[grow to right by=-1pt,tcbox raise base]{\small\vphantom{Ag}\capitalisewords{\ignorespaces#1\unskip}}} % Custom command for smaller badges with fixed height and trimmed spaces
+\NewDocumentCommand{\tbadge}{m}{\tcbox[grow to right by=-1pt,tcbox raise base]{\small\vphantom{Ag}\capitalisewords{\ignorespaces#1\unskip}}} % Custom command for smaller badges with fixed height and trimmed spaces
 
 % Index entry processing with string normalization
 % This command processes index entries to ensure consistency:
@@ -888,13 +889,68 @@
 	{\bfseries{#1}}\par\vspace{0.005\textheight}%
 } % Format ingredient section headers with spacing
 
-\NewDocumentCommand{\ingredient}{m}{
+\NewDocumentCommand{\ingredient}{m O{} O{} O{}}{
 	\iffirstingredientsection%
 		\firstingredientsectionfalse%
 	\fi%
 	\item
-	{\textit{\small #1}}%
+	% Check if this is old format (only first argument) or new format
+	\ifblank{#2}{%
+		\ifblank{#3}{%
+			\ifblank{#4}{%
+				% Single argument mode (backward compatibility)
+				{\textit{\small #1}}%
+			}{%
+				% #4 provided, use new format
+				\ingredient@formatmulti{#1}{#2}{#3}{#4}%
+			}%
+		}{%
+			% #3 provided, use new format
+			\ingredient@formatmulti{#1}{#2}{#3}{#4}%
+		}%
+	}{%
+		% #2 provided, use new format
+		\ingredient@formatmulti{#1}{#2}{#3}{#4}%
+	}%
 } % Format individual recipe ingredient entries
+
+% Helper command to format multi-argument ingredients
+% Format: <quantity> <unit> <ingredient name>, <note>
+\NewDocumentCommand{\ingredient@formatmulti}{m m m m}{%
+	{\textit{\small
+		% Trim all values first
+		\def\ingredient@qty{#1}\trim@spaces@in\ingredient@qty%
+		\def\ingredient@unit{#2}\trim@spaces@in\ingredient@unit%
+		\def\ingredient@name{#3}\trim@spaces@in\ingredient@name%
+		\def\ingredient@note{#4}\trim@spaces@in\ingredient@note%
+		% Initialize accumulator
+		\def\ingredient@output{}%
+		% Build the main part (quantity + unit + name) with spaces
+		\ifdefempty{\ingredient@qty}{}{%
+			\edef\ingredient@output{\ingredient@qty}%
+		}%
+		\ifdefempty{\ingredient@unit}{}{%
+			\ifdefempty{\ingredient@output}{%
+				\edef\ingredient@output{\ingredient@unit}%
+			}{%
+				\edef\ingredient@output{\ingredient@output\space\ingredient@unit}%
+			}%
+		}%
+		\ifdefempty{\ingredient@name}{}{%
+			\ifdefempty{\ingredient@output}{%
+				\edef\ingredient@output{\ingredient@name}%
+			}{%
+				\edef\ingredient@output{\ingredient@output\space\ingredient@name}%
+			}%
+		}%
+		% Output the accumulated main part
+		\ingredient@output%
+		% Add note with comma separator if present
+		\ifdefempty{\ingredient@note}{}{%
+			, \ingredient@note%
+		}%
+	}}%
+}
 
 \newif\iffirstinstructionsection
 \NewDocumentCommand{\instructionsection}{m}{
