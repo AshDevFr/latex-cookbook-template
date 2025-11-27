@@ -3,8 +3,8 @@
 %   LaTeX Class File
 %----------------------------------------------------------------------------------------
 %
-%   Version:     1.5.0
-%   Date:        November 26, 2025
+%   Version:     2.0.0
+%   Date:        November 27, 2025
 %   Author:      AshDevFr
 %   GitHub:      @AshDevFr
 %   License:     CC BY-NC-SA 4.0
@@ -21,7 +21,7 @@
 %----------------------------------------------------------------------------------------
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{CookBook}[2025/11/19 v1.1.1 CookBook Template]
+\ProvidesClass{CookBook}[2025/11/27 v2.0.0 CookBook Template]
 
 %----------------------------------------------------------------------------------------
 %	LANGUAGE OPTIONS
@@ -915,13 +915,14 @@
 } % Format individual recipe ingredient entries
 
 % Helper command to format multi-argument ingredients
-% Format: <quantity> <unit> <ingredient name>, <note>
+% Format: <ingredient name>[quantity][unit][note]
+% Output: <quantity> <unit> <ingredient name>, <note>
 \NewDocumentCommand{\ingredient@formatmulti}{m m m m}{%
 	{\textit{\small
 		% Trim all values first
-		\def\ingredient@qty{#1}\trim@spaces@in\ingredient@qty%
-		\def\ingredient@unit{#2}\trim@spaces@in\ingredient@unit%
-		\def\ingredient@name{#3}\trim@spaces@in\ingredient@name%
+		\def\ingredient@name{#1}\trim@spaces@in\ingredient@name%
+		\def\ingredient@qty{#2}\trim@spaces@in\ingredient@qty%
+		\def\ingredient@unit{#3}\trim@spaces@in\ingredient@unit%
 		\def\ingredient@note{#4}\trim@spaces@in\ingredient@note%
 		% Initialize accumulator
 		\def\ingredient@output{}%
