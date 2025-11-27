@@ -5,6 +5,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.0] - 2025-11-27
+
+### ⚠️ BREAKING CHANGES
+
+- **`\ingredient` command syntax has been completely redesigned** for better semantic clarity:
+  - **Old syntax (v1.5.0)**: `\ingredient{quantity}[unit][name][note]`
+  - **New syntax (v2.0.0)**: `\ingredient{name}[quantity][unit][note]`
+  - **Rationale**: The ingredient name is now the primary (required) parameter, with quantity, unit, and note as optional parameters. This aligns better with semantic structure where the ingredient name is the most important piece of information.
+  - **Migration required**: All existing `\ingredient` commands must be updated to use the new syntax.
+  - **Example migration**:
+    ```latex
+    % Old (v1.5.0)
+    \ingredient{2}[cups][all-purpose flour]
+
+    % New (v2.0.0)
+    \ingredient{all-purpose flour}[2][cups]
+    ```
+
+### Changed
+
+- Updated sample files ([cookbook-sample.tex](samples/cookbook-sample.tex), [cookbook-sample-fr.tex](samples/cookbook-sample-fr.tex), [cookbook-sample-print.tex](samples/cookbook-sample-print.tex)) to use new ingredient syntax
+
 ## [1.5.0] - 2025-11-26
 
 ### Changed
@@ -113,6 +135,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Build automation with included shell script
 - Comprehensive documentation with usage examples
 
+[2.0.0]: https://github.com/AshDevFr/latex-cookbook-template/compare/v1.5.0...v2.0.0
 [1.5.0]: https://github.com/AshDevFr/latex-cookbook-template/compare/v1.4.0...v1.5.0
 [1.4.0]: https://github.com/AshDevFr/latex-cookbook-template/compare/v1.3.0...v1.4.0
 [1.3.0]: https://github.com/AshDevFr/latex-cookbook-template/compare/v1.2.0...v1.3.0
