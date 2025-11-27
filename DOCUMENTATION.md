@@ -637,13 +637,67 @@ The `clearpageafter` option controls whether a page break is forced after the re
 
 #### Ingredients
 
-Basic ingredient entry:
+The `\ingredient` command supports two syntax formats:
+
+**Basic Format (Backward Compatible):**
+
+Simple single-argument format for quick ingredient entry:
 
 ```latex
 \ingredient{200g flour}
 \ingredient{2 eggs}
 \ingredient{1 cup milk}
 ```
+
+**Structured Format (Recommended):**
+
+Enhanced syntax with separate quantity, unit, name, and note parameters:
+
+```latex
+\ingredient{quantity}[unit][name][note]
+```
+
+**Parameters:**
+
+- `quantity` (required): The amount or quantity (e.g., `2`, `1/2`, `1 1/4`)
+- `unit` (optional): The unit of measurement (e.g., `cup`, `tbsp`, `tsp`, `g`, `kg`)
+- `name` (optional): The ingredient name and any additional description
+- `note` (optional): Additional notes or preparation instructions
+
+**Examples:**
+
+```latex
+% With quantity, unit, and name
+\ingredient{2}[][bananas][medium-to-large ripe]
+\ingredient{1/2}[cup][whole wheat flour]
+\ingredient{4}[][large eggs]
+
+% With quantity and unit only
+\ingredient{1}[cup][whole milk]
+
+% With quantity and name (no unit)
+\ingredient{2}[][onions][finely chopped]
+
+% With all parameters including note
+\ingredient{2}[][bananas][medium-to-large ripe\note{The riper the bananas, the sweeter the pancakes will be.}]
+
+% Name only (no quantity or unit)
+\ingredient{}[][Butter, avocado oil or ghee, for cooking]
+\ingredient{}[][Salt and pepper][to taste]
+
+% Empty brackets skip optional fields
+\ingredient{2}[][eggs]  % quantity=2, no unit, name=eggs
+\ingredient{1}[cup][]  % quantity=1, unit=cup, no name (not recommended)
+```
+
+**Formatting Output:**
+
+The structured format automatically formats ingredients as: `<quantity> <unit> <ingredient name>, <note>`
+
+- Empty parameters are automatically skipped
+- Spaces are automatically inserted between quantity, unit, and name
+- Notes are separated with a comma when present
+- The command maintains backward compatibility with the single-argument format
 
 #### Ingredient Sections
 
