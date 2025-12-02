@@ -6,7 +6,7 @@
 
 ![Example](images/samples/cookbook-sample_6-7.png)
 
-[Features](#features) • [Quick Start](#quick-start) • [Documentation](DOCUMENTATION.md) • [Examples](#examples)
+[Features](#features) • [Quick Start](#quick-start) • [Documentation](docs/) • [Examples](#examples)
 
 </div>
 
@@ -117,18 +117,36 @@ The Docker setup uses the same dependencies as the CI environment, ensuring cons
 
 ## 📚 Documentation
 
-For comprehensive documentation including all commands, options, and advanced features, see [DOCUMENTATION.md](DOCUMENTATION.md).
+Comprehensive documentation is organized by topic in the [`docs/`](docs/) directory.
 
-For a list of changes and version history, see [CHANGELOG.md](CHANGELOG.md).
+### Documentation Index
 
-**Quick Links:**
+**Getting Started:**
+- [Document Class Options](docs/document-class-options.md) - Paper size, fonts, layout, bleed settings
+- [Build System](docs/build-system.md) - Compilation and build instructions
 
-- [Document Class Options](DOCUMENTATION.md#document-class-options)
-- [Recipe Commands](DOCUMENTATION.md#recipe-command)
-- [Layout Options](DOCUMENTATION.md#layout-options)
-- [Language Support](DOCUMENTATION.md#language-support)
-- [Customization Guide](DOCUMENTATION.md#customization)
-- [Complete Examples](DOCUMENTATION.md#complete-examples)
+**Page Components:**
+- [Cover and Preface](docs/cover-and-preface.md) - Front matter pages
+- [Chapters and Navigation](docs/chapters-and-navigation.md) - Chapter pages and table of contents
+- [Full-Page Images](docs/full-page-images.md) - Dramatic recipe images
+- [Conversion Tables](docs/conversion-tables.md) - Measurement conversion pages
+- [Back Cover and Index](docs/back-cover-and-index.md) - Back matter pages
+
+**Recipe System:**
+- [Recipe Command](docs/recipe-command.md) - Main recipe command and parameters
+- [Recipe Layouts](docs/recipe-layouts.md) - Layout options and configurations
+- [Recipe Elements](docs/recipe-elements.md) - Ingredients, instructions, notes
+
+**Customization:**
+- [Colors](docs/colors.md) - Color definitions and usage
+- [Margins and Spacing](docs/margins-and-spacing.md) - Page layout and spacing controls
+- [Fonts](docs/fonts.md) - Font configuration
+- [Translation and Language Support](docs/translation.md) - Multi-language support and text customization
+
+**Additional Resources:**
+- [Complete Examples](docs/examples.md) - Full cookbook examples
+- [Troubleshooting](docs/troubleshooting.md) - Common issues and solutions
+- [CHANGELOG.md](CHANGELOG.md) - Version history and changes
 
 ## 🖼️ Examples
 
@@ -216,7 +234,13 @@ latex-cookbook-template/
 ├── Dockerfile                # Docker configuration for controlled builds
 ├── docker-compose.yml        # Docker Compose configuration
 ├── README.md                 # This file
-├── DOCUMENTATION.md          # Comprehensive documentation
+├── CHANGELOG.md              # Version history
+├── docs/                     # Comprehensive documentation (organized by topic)
+│   ├── README.md            # Documentation index
+│   ├── document-class-options.md
+│   ├── recipe-command.md
+│   ├── translation.md
+│   └── ... (and more)
 ├── samples/                  # Example cookbook files
 │   ├── cookbook-sample.tex
 │   └── cookbook-sample-fr.tex

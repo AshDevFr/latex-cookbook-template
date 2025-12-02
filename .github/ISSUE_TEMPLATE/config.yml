@@ -1,5 +1,5 @@
 blank_issues_enabled: false
 contact_links:
   - name: 📚 Documentation
-    url: https://github.com/AshDevFr/latex-cookbook-template/blob/main/DOCUMENTATION.md
+    url: https://github.com/AshDevFr/latex-cookbook-template/blob/main/docs/
     about: Check the documentation for usage instructions and examples
