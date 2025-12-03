@@ -2143,160 +2143,157 @@
 	\end{center}
 
 	% Render conversion tables with proper spacing and formatting
-	\begin{adjustwidth}{0.5cm}{0.5cm}
-		\color{\conversion@textcolor}
+	\color{\conversion@textcolor}
 
-		% Volume Conversions
-		\needspace{5\baselineskip}
-		{\fontsize{18pt}{22pt}\sourcesanspro\bfseries\selectfont\textVolume}\par
-		\vspace{0.01\textheight}
-		\begin{tabularx}{\textwidth}{X X X}
-			\toprule
-			\textbf{\textUSImperial} & \textbf{\textMetric} & \textbf{\textNotes} \\
-			\midrule
-			1 \textTeaspoon (tsp) & 5 ml & \\
-			1 \textTablespoon (tbsp) & 15 ml & 3 \textTeaspoons \\
-			1 fluid ounce (fl oz) & 30 ml & 2 \textTablespoons \\
-			$\frac{1}{8}$ cup & 30 ml & 2 \textTablespoons \\
-			$\frac{1}{4}$ cup & 60 ml & 4 \textTablespoons \\
-			$\frac{1}{3}$ cup & 80 ml & 5 \textTablespoons + 1 \textTeaspoon \\
-			$\frac{1}{2}$ cup & 120 ml & 8 \textTablespoons \\
-			$\frac{2}{3}$ cup & 160 ml & 10 \textTablespoons + 2 \textTeaspoons \\
-			$\frac{3}{4}$ cup & 180 ml & 12 \textTablespoons \\
-			1 cup & 240 ml & 16 \textTablespoons \\
-			1 pint (pt) & 480 ml & 2 \textCups \\
-			1 quart (qt) & 960 ml & 4 \textCups \\
-			1 gallon (gal) & 3.8 L & 4 \textQuarts \\
-			\bottomrule
-		\end{tabularx}
+	% Volume Conversions
+	\needspace{5\baselineskip}
+	{\fontsize{18pt}{22pt}\sourcesanspro\bfseries\selectfont\textVolume}\par
+	\vspace{0.01\textheight}
+	\begin{tabularx}{\linewidth}{X X X}
+		\toprule
+		\textbf{\textUSImperial} & \textbf{\textMetric} & \textbf{\textNotes} \\
+		\midrule
+		1 \textTeaspoon (tsp) & 5 ml & \\
+		1 \textTablespoon (tbsp) & 15 ml & 3 \textTeaspoons \\
+		1 fluid ounce (fl oz) & 30 ml & 2 \textTablespoons \\
+		$\frac{1}{8}$ cup & 30 ml & 2 \textTablespoons \\
+		$\frac{1}{4}$ cup & 60 ml & 4 \textTablespoons \\
+		$\frac{1}{3}$ cup & 80 ml & 5 \textTablespoons + 1 \textTeaspoon \\
+		$\frac{1}{2}$ cup & 120 ml & 8 \textTablespoons \\
+		$\frac{2}{3}$ cup & 160 ml & 10 \textTablespoons + 2 \textTeaspoons \\
+		$\frac{3}{4}$ cup & 180 ml & 12 \textTablespoons \\
+		1 cup & 240 ml & 16 \textTablespoons \\
+		1 pint (pt) & 480 ml & 2 \textCups \\
+		1 quart (qt) & 960 ml & 4 \textCups \\
+		1 gallon (gal) & 3.8 L & 4 \textQuarts \\
+		\bottomrule
+	\end{tabularx}
 
-		\vspace{0.03\textheight}
+	\vspace{0.03\textheight}
 
-		% Weight Conversions
-		\needspace{5\baselineskip}
-		{\fontsize{18pt}{22pt}\sourcesanspro\bfseries\selectfont\textWeight}\par
-		\vspace{0.01\textheight}
-		\begin{tabularx}{\textwidth}{X X X}
-			\toprule
-			\textbf{\textUSImperial} & \textbf{\textMetric} & \textbf{\textNotes} \\
-			\midrule
-			1 ounce (oz) & 28 g & \\
-			2 ounces & 57 g & \\
-			3 ounces & 85 g & \\
-			4 ounces & 113 g & $\frac{1}{4}$ pound \\
-			6 ounces & 170 g & \\
-			8 ounces & 227 g & $\frac{1}{2}$ pound \\
-			12 ounces & 340 g & $\frac{3}{4}$ pound \\
-			16 ounces & 454 g & 1 pound (lb) \\
-			1 pound (lb) & 454 g & 16 ounces \\
-			2 pounds & 907 g & 0.9 kg \\
-			1 kilogram (kg) & 2.2 pounds & 1000 g \\
-			\bottomrule
-		\end{tabularx}
+	% Weight Conversions
+	\needspace{5\baselineskip}
+	{\fontsize{18pt}{22pt}\sourcesanspro\bfseries\selectfont\textWeight}\par
+	\vspace{0.01\textheight}
+	\begin{tabularx}{\linewidth}{X X X}
+		\toprule
+		\textbf{\textUSImperial} & \textbf{\textMetric} & \textbf{\textNotes} \\
+		\midrule
+		1 ounce (oz) & 28 g & \\
+		2 ounces & 57 g & \\
+		3 ounces & 85 g & \\
+		4 ounces & 113 g & $\frac{1}{4}$ pound \\
+		6 ounces & 170 g & \\
+		8 ounces & 227 g & $\frac{1}{2}$ pound \\
+		12 ounces & 340 g & $\frac{3}{4}$ pound \\
+		16 ounces & 454 g & 1 pound (lb) \\
+		1 pound (lb) & 454 g & 16 ounces \\
+		2 pounds & 907 g & 0.9 kg \\
+		1 kilogram (kg) & 2.2 pounds & 1000 g \\
+		\bottomrule
+	\end{tabularx}
 
-		\vspace{0.03\textheight}
+	\vspace{0.03\textheight}
 
-		% Temperature Conversions
-		\needspace{5\baselineskip}
-		{\fontsize{18pt}{22pt}\sourcesanspro\bfseries\selectfont\textTemperature}\par
-		\vspace{0.01\textheight}
-		\begin{tabularx}{\textwidth}{X X X}
-			\toprule
-			\textbf{\textFahrenheit} & \textbf{\textCelsius} & \textbf{\textNotes} \\
-			\midrule
-			32°F & 0°C & \textFreezingPoint \\
-			68°F & 20°C & \textRoomTemperature \\
-			100°F & 38°C & \textBodyTemperature \\
-			212°F & 100°C & \textBoilingPoint \\
-			\midrule
-			325°F & 165°C & \textCommonBakingTemp \\
-			375°F & 190°C & \textCommonBakingTemp \\
-			425°F & 220°C & \textCommonBakingTemp \\
-			450°F & 230°C & \textCommonBakingTemp \\
-			\midrule
-			\textbf{\textFormula} & \textbf{°C = (°F - 32) × 5/9} & \\
-			\textbf{\textFormula} & \textbf{°F = (°C × 9/5) + 32} & \\
-			\bottomrule
-		\end{tabularx}
+	% Temperature Conversions
+	\needspace{5\baselineskip}
+	{\fontsize{18pt}{22pt}\sourcesanspro\bfseries\selectfont\textTemperature}\par
+	\vspace{0.01\textheight}
+	\begin{tabularx}{\linewidth}{X X X}
+		\toprule
+		\textbf{\textFahrenheit} & \textbf{\textCelsius} & \textbf{\textNotes} \\
+		\midrule
+		32°F & 0°C & \textFreezingPoint \\
+		68°F & 20°C & \textRoomTemperature \\
+		100°F & 38°C & \textBodyTemperature \\
+		212°F & 100°C & \textBoilingPoint \\
+		\midrule
+		325°F & 165°C & \textCommonBakingTemp \\
+		375°F & 190°C & \textCommonBakingTemp \\
+		425°F & 220°C & \textCommonBakingTemp \\
+		450°F & 230°C & \textCommonBakingTemp \\
+		\midrule
+		\textbf{\textFormula} & \textbf{°C = (°F - 32) × 5/9} & \\
+		\textbf{\textFormula} & \textbf{°F = (°C × 9/5) + 32} & \\
+		\bottomrule
+	\end{tabularx}
 
-		\vspace{0.03\textheight}
+	\vspace{0.03\textheight}
 
-		% Oven Temperature Guide
-		\needspace{5\baselineskip}
-		{\fontsize{18pt}{22pt}\sourcesanspro\bfseries\selectfont\textOvenTemperatures}\par
-		\vspace{0.01\textheight}
-		\begin{tabularx}{\textwidth}{X X X}
-			\toprule
-			\textbf{\textUseCase} & \textbf{°F} & \textbf{°C} \\
-			\midrule
-			\textSlowRoasting & 200-250°F & 95-120°C \\
-			\textSlowCooking & 250-300°F & 120-150°C \\
-			\textDelicateCakes & 325°F & 165°C \\
-			\textCakesCookies & 350°F & 175°C \\
-			\textQuickBreads & 375°F & 190°C \\
-			\textRoastingVegetables & 400-425°F & 200-220°C \\
-			\textPizzaBread & 450-475°F & 230-245°C \\
-			\textHighHeatRoasting & 500°F & 260°C \\
-			\bottomrule
-		\end{tabularx}
-		\vspace{0.5\baselineskip}
-		{\footnotesize\itshape\textDefaultOvenTemp}\par
+	% Oven Temperature Guide
+	\needspace{5\baselineskip}
+	{\fontsize{18pt}{22pt}\sourcesanspro\bfseries\selectfont\textOvenTemperatures}\par
+	\vspace{0.01\textheight}
+	\begin{tabularx}{\linewidth}{X X X}
+		\toprule
+		\textbf{\textUseCase} & \textbf{°F} & \textbf{°C} \\
+		\midrule
+		\textSlowRoasting & 200-250°F & 95-120°C \\
+		\textSlowCooking & 250-300°F & 120-150°C \\
+		\textDelicateCakes & 325°F & 165°C \\
+		\textCakesCookies & 350°F & 175°C \\
+		\textQuickBreads & 375°F & 190°C \\
+		\textRoastingVegetables & 400-425°F & 200-220°C \\
+		\textPizzaBread & 450-475°F & 230-245°C \\
+		\textHighHeatRoasting & 500°F & 260°C \\
+		\bottomrule
+	\end{tabularx}
+	\vspace{0.5\baselineskip}
+	{\footnotesize\itshape\textDefaultOvenTemp}\par
 
-		\vspace{0.03\textheight}
+	\vspace{0.03\textheight}
 
-		% Length Conversions (useful for pan sizes)
-		\needspace{5\baselineskip}
-		{\fontsize{18pt}{22pt}\sourcesanspro\bfseries\selectfont\textLength}\par
-		\vspace{0.01\textheight}
-		\begin{tabularx}{\textwidth}{X X X}
-			\toprule
-			\textbf{\textInches} & \textbf{\textCentimeters} & \textbf{\textCommonUse} \\
-			\midrule
-			1 inch & 2.5 cm & \\
-			4 inches & 10 cm & \textSmallTartPan \\
-			6 inches & 15 cm & \textSmallCakePan \\
-			8 inches & 20 cm & \textStandardCakePan \\
-			9 inches & 23 cm & \textStandardPiePan \\
-			10 inches & 25 cm & \textLargeCakePan \\
-			12 inches & 30 cm & \textLargeSkillet \\
-			13 × 9 inches & 33 × 23 cm & \textStandardBakingDish \\
-			\bottomrule
-		\end{tabularx}
+	% Length Conversions (useful for pan sizes)
+	\needspace{5\baselineskip}
+	{\fontsize{18pt}{22pt}\sourcesanspro\bfseries\selectfont\textLength}\par
+	\vspace{0.01\textheight}
+	\begin{tabularx}{\linewidth}{X X X}
+		\toprule
+		\textbf{\textInches} & \textbf{\textCentimeters} & \textbf{\textCommonUse} \\
+		\midrule
+		1 inch & 2.5 cm & \\
+		4 inches & 10 cm & \textSmallTartPan \\
+		6 inches & 15 cm & \textSmallCakePan \\
+		8 inches & 20 cm & \textStandardCakePan \\
+		9 inches & 23 cm & \textStandardPiePan \\
+		10 inches & 25 cm & \textLargeCakePan \\
+		12 inches & 30 cm & \textLargeSkillet \\
+		13 × 9 inches & 33 × 23 cm & \textStandardBakingDish \\
+		\bottomrule
+	\end{tabularx}
 
-		\vspace{0.02\textheight}
+	\vspace{0.02\textheight}
 
-		% Additional helpful conversions
-		\needspace{5\baselineskip}
-		{\fontsize{14pt}{18pt}\sourcesanspro\bfseries\selectfont\textAdditionalConversions}\par
-		\vspace{0.01\textheight}
-		\begin{tabularx}{\textwidth}{X X}
-			\toprule
-			\textbf{\textMeasurement} & \textbf{\textConversion} \\
-			\midrule
-			\textStickButter & 8 \textTablespoons = $\frac{1}{2}$ \textCup = 113 g \\
-			\textCupButter & 227 g = 2 \textSticksUS \\
-			\textAllPurposeFlour & 120 g \\
-			\textGranulatedSugar & 200 g \\
-			\textBrownSugar & 220 g \\
-			\textPowderedSugar & 120 g \\
-			\textChocolateChips & 170 g \\
-			\textCupMilk & 240 ml = 240 g \\
-			\textCupWater & 240 ml = 240 g \\
-			\textCupHoney & 340 g \\
-			\textVegetableOil & 220 g \\
-			\textLargeEgg & 50 g / 3 \textTablespoons \\
-			\textActiveDryYeast & 2$\frac{1}{4}$ \textTeaspoons = 7 g \\
-			\bottomrule
-		\end{tabularx}
+	% Additional helpful conversions
+	\needspace{5\baselineskip}
+	{\fontsize{14pt}{18pt}\sourcesanspro\bfseries\selectfont\textAdditionalConversions}\par
+	\vspace{0.01\textheight}
+	\begin{tabularx}{\linewidth}{X X}
+		\toprule
+		\textbf{\textMeasurement} & \textbf{\textConversion} \\
+		\midrule
+		\textStickButter & 8 \textTablespoons = $\frac{1}{2}$ \textCup = 113 g \\
+		\textCupButter & 227 g = 2 \textSticksUS \\
+		\textAllPurposeFlour & 120 g \\
+		\textGranulatedSugar & 200 g \\
+		\textBrownSugar & 220 g \\
+		\textPowderedSugar & 120 g \\
+		\textChocolateChips & 170 g \\
+		\textCupMilk & 240 ml = 240 g \\
+		\textCupWater & 240 ml = 240 g \\
+		\textCupHoney & 340 g \\
+		\textVegetableOil & 220 g \\
+		\textLargeEgg & 50 g / 3 \textTablespoons \\
+		\textActiveDryYeast & 2$\frac{1}{4}$ \textTeaspoons = 7 g \\
+		\bottomrule
+	\end{tabularx}
 
-		\vspace{0.02\textheight}
+	\vspace{0.02\textheight}
 
-		% Note about weighing ingredients
-		\begin{center}
-			{\itshape\small\textConversionNote}
-		\end{center}
-
-	\end{adjustwidth}
+	% Note about weighing ingredients
+	\begin{center}
+		{\itshape\small\textConversionNote}
+	\end{center}
 
 	% Reset conversion page flag and clear background color after rendering
 	\clearpage
