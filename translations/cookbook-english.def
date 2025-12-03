@@ -1,0 +1,80 @@
+% English translations for cookbook class
+% This file is part of the LaTeX Cookbook Template
+%
+% To use this translation, specify 'english' option when loading the class:
+% \documentclass[english]{cookbook}
+
+\addto\captionsenglish{%
+	\def\textRecipes{Recipes}%
+	\def\textServes{Serves}%
+	\def\textPrep{Prep}%
+	\def\textCooking{Cooking}%
+	\def\textDifficulty{Difficulty}%
+	\def\textOrigin{Origin}%
+	\def\textSpicy{Spicy}%
+	\def\textVegetarian{Vegetarian}%
+	\def\textIndex{Index}%
+	\def\textConversionTable{Conversion Table}%
+	\def\textVolume{Volume}%
+	\def\textWeight{Weight}%
+	\def\textTemperature{Temperature}%
+	\def\textLength{Length}%
+	\def\textOvenTemperatures{Oven Temperatures}%
+	\def\textConversionNote{For best accuracy, weighing ingredients is recommended over volume measurements for baking.}%
+	\def\textUSImperial{US/Imperial}%
+	\def\textMetric{Metric}%
+	\def\textNotes{Notes}%
+	\def\textFahrenheit{Fahrenheit (°F)}%
+	\def\textCelsius{Celsius (°C)}%
+	\def\textUseCase{Use Case}%
+	\def\textInches{Inches}%
+	\def\textCentimeters{Centimeters}%
+	\def\textCommonUse{Common Use}%
+	\def\textAdditionalConversions{Additional Conversions}%
+	\def\textMeasurement{Measurement}%
+	\def\textConversion{Conversion}%
+	\def\textFreezingPoint{Freezing point of water}%
+	\def\textRoomTemperature{Room temperature}%
+	\def\textBodyTemperature{Body temperature}%
+	\def\textBoilingPoint{Boiling point of water}%
+	\def\textCommonBakingTemp{Common baking temperature}%
+	\def\textFormula{Formula:}%
+	\def\textSlowRoasting{Slow roasting, dehydrating}%
+	\def\textSlowCooking{Slow cooking, warming}%
+	\def\textDelicateCakes{Delicate cakes, cheesecakes}%
+	\def\textCakesCookies{Cakes, cookies, casseroles}%
+	\def\textQuickBreads{Quick breads, cookies, roasted chicken}%
+	\def\textRoastingVegetables{Roasting vegetables, chicken, fish}%
+	\def\textPizzaBread{Pizza, crusty bread, searing meat}%
+	\def\textHighHeatRoasting{High-heat roasting, charring}%
+	\def\textDefaultOvenTemp{Most recipes default to 350°F unless otherwise specified.}%
+	\def\textSmallTartPan{Small tart pan}%
+	\def\textSmallCakePan{Small cake pan}%
+	\def\textStandardCakePan{Standard cake pan}%
+	\def\textStandardPiePan{Standard pie pan}%
+	\def\textLargeCakePan{Large cake pan}%
+	\def\textLargeSkillet{Large skillet}%
+	\def\textStandardBakingDish{Standard baking dish}%
+	\def\textStickButter{1 stick butter}%
+	\def\textCupButter{1 cup butter}%
+	\def\textAllPurposeFlour{1 cup all-purpose flour}%
+	\def\textGranulatedSugar{1 cup granulated sugar}%
+	\def\textBrownSugar{1 cup brown sugar (packed)}%
+	\def\textPowderedSugar{1 cup powdered sugar}%
+	\def\textChocolateChips{1 cup chocolate chips}%
+	\def\textCupMilk{1 cup milk}%
+	\def\textCupWater{1 cup water}%
+	\def\textCupHoney{1 cup honey}%
+	\def\textVegetableOil{1 cup vegetable oil}%
+	\def\textLargeEgg{1 large egg}%
+	\def\textActiveDryYeast{1 packet active dry yeast}%
+	\def\textTablespoon{tablespoon}%
+	\def\textTablespoons{tablespoons}%
+	\def\textTeaspoon{teaspoon}%
+	\def\textTeaspoons{teaspoons}%
+	\def\textSticksUS{sticks (US)}%
+	\def\textCup{cup}%
+	\def\textCups{cups}%
+	\def\textQuart{quart}%
+	\def\textQuarts{quarts}%
+}
