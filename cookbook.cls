@@ -3,8 +3,8 @@
 %   LaTeX Class File
 %----------------------------------------------------------------------------------------
 %
-%   Version:     2.0.0
-%   Date:        November 27, 2025
+%   Version:     2.1.0
+%   Date:        December 3, 2025
 %   Author:      AshDevFr
 %   GitHub:      @AshDevFr
 %   License:     CC BY-NC-SA 4.0
@@ -21,7 +21,7 @@
 %----------------------------------------------------------------------------------------
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{CookBook}[2025/11/27 v2.0.0 CookBook Template]
+\ProvidesClass{CookBook}[2025/12/03 v2.1.0 CookBook Template]
 
 %----------------------------------------------------------------------------------------
 %	LANGUAGE OPTIONS
@@ -184,157 +184,13 @@
 %	LANGUAGE STRINGS (using babel)
 %----------------------------------------------------------------------------------------
 
-% Define custom translations for English
-\addto\captionsenglish{%
-	\def\textRecipes{Recipes}%
-	\def\textServes{Serves}%
-	\def\textPrep{Prep}%
-	\def\textCooking{Cooking}%
-	\def\textDifficulty{Difficulty}%
-	\def\textOrigin{Origin}%
-	\def\textSpicy{Spicy}%
-	\def\textVegetarian{Vegetarian}%
-	\def\textIndex{Index}%
-	\def\textConversionTable{Conversion Table}%
-	\def\textVolume{Volume}%
-	\def\textWeight{Weight}%
-	\def\textTemperature{Temperature}%
-	\def\textLength{Length}%
-	\def\textOvenTemperatures{Oven Temperatures}%
-	\def\textConversionNote{For best accuracy, weighing ingredients is recommended over volume measurements for baking.}%
-	\def\textUSImperial{US/Imperial}%
-	\def\textMetric{Metric}%
-	\def\textNotes{Notes}%
-	\def\textFahrenheit{Fahrenheit (°F)}%
-	\def\textCelsius{Celsius (°C)}%
-	\def\textUseCase{Use Case}%
-	\def\textInches{Inches}%
-	\def\textCentimeters{Centimeters}%
-	\def\textCommonUse{Common Use}%
-	\def\textAdditionalConversions{Additional Conversions}%
-	\def\textMeasurement{Measurement}%
-	\def\textConversion{Conversion}%
-	\def\textFreezingPoint{Freezing point of water}%
-	\def\textRoomTemperature{Room temperature}%
-	\def\textBodyTemperature{Body temperature}%
-	\def\textBoilingPoint{Boiling point of water}%
-	\def\textCommonBakingTemp{Common baking temperature}%
-	\def\textFormula{Formula:}%
-	\def\textSlowRoasting{Slow roasting, dehydrating}%
-	\def\textSlowCooking{Slow cooking, warming}%
-	\def\textDelicateCakes{Delicate cakes, cheesecakes}%
-	\def\textCakesCookies{Cakes, cookies, casseroles}%
-	\def\textQuickBreads{Quick breads, cookies, roasted chicken}%
-	\def\textRoastingVegetables{Roasting vegetables, chicken, fish}%
-	\def\textPizzaBread{Pizza, crusty bread, searing meat}%
-	\def\textHighHeatRoasting{High-heat roasting, charring}%
-	\def\textDefaultOvenTemp{Most recipes default to 350°F unless otherwise specified.}%
-	\def\textSmallTartPan{Small tart pan}%
-	\def\textSmallCakePan{Small cake pan}%
-	\def\textStandardCakePan{Standard cake pan}%
-	\def\textStandardPiePan{Standard pie pan}%
-	\def\textLargeCakePan{Large cake pan}%
-	\def\textLargeSkillet{Large skillet}%
-	\def\textStandardBakingDish{Standard baking dish}%
-	\def\textStickButter{1 stick butter}%
-	\def\textCupButter{1 cup butter}%
-	\def\textAllPurposeFlour{1 cup all-purpose flour}%
-	\def\textGranulatedSugar{1 cup granulated sugar}%
-	\def\textBrownSugar{1 cup brown sugar (packed)}%
-	\def\textPowderedSugar{1 cup powdered sugar}%
-	\def\textChocolateChips{1 cup chocolate chips}%
-	\def\textCupMilk{1 cup milk}%
-	\def\textCupWater{1 cup water}%
-	\def\textCupHoney{1 cup honey}%
-	\def\textVegetableOil{1 cup vegetable oil}%
-	\def\textLargeEgg{1 large egg}%
-	\def\textActiveDryYeast{1 packet active dry yeast}%
-	\def\textTablespoon{tablespoon}%
-	\def\textTablespoons{tablespoons}%
-	\def\textTeaspoon{teaspoon}%
-	\def\textTeaspoons{teaspoons}%
-	\def\textSticksUS{sticks (US)}%
-	\def\textCup{cup}%
-	\def\textCups{cups}%
-	\def\textQuart{quart}%
-	\def\textQuarts{quarts}%
-}
-
-% Define custom translations for French
-\addto\captionsfrench{%
-	\def\textRecipes{Recettes}%
-	\def\textServes{Portions}%
-	\def\textPrep{Préparation}%
-	\def\textCooking{Cuisson}%
-	\def\textDifficulty{Difficulté}%
-	\def\textOrigin{Origine}%
-	\def\textSpicy{Épicé}%
-	\def\textVegetarian{Végétarien}%
-	\def\textIndex{Index}%
-	\def\textConversionTable{Table de Conversion}%
-	\def\textVolume{Volume}%
-	\def\textWeight{Poids}%
-	\def\textTemperature{Température}%
-	\def\textLength{Longueur}%
-	\def\textOvenTemperatures{Températures du Four}%
-	\def\textConversionNote{Pour une meilleure précision, il est recommandé de peser les ingrédients plutôt que d'utiliser des mesures de volume pour la pâtisserie.}%
-	\def\textUSImperial{US/Impérial}%
-	\def\textMetric{Métrique}%
-	\def\textNotes{Notes}%
-	\def\textFahrenheit{Fahrenheit (°F)}%
-	\def\textCelsius{Celsius (°C)}%
-	\def\textUseCase{Utilisation}%
-	\def\textInches{Pouces}%
-	\def\textCentimeters{Centimètres}%
-	\def\textCommonUse{Usage Courant}%
-	\def\textAdditionalConversions{Conversions Supplémentaires}%
-	\def\textMeasurement{Mesure}%
-	\def\textConversion{Conversion}%
-	\def\textFreezingPoint{Point de congélation de l'eau}%
-	\def\textRoomTemperature{Température ambiante}%
-	\def\textBodyTemperature{Température corporelle}%
-	\def\textBoilingPoint{Point d'ébullition de l'eau}%
-	\def\textCommonBakingTemp{Température de cuisson courante}%
-	\def\textFormula{Formule :}%
-	\def\textSlowRoasting{Rôtissage lent, déshydratation}%
-	\def\textSlowCooking{Cuisson lente, réchauffage}%
-	\def\textDelicateCakes{Gâteaux délicats, cheesecakes}%
-	\def\textCakesCookies{Gâteaux, biscuits, plats en cocotte}%
-	\def\textQuickBreads{Pains rapides, biscuits, poulet rôti}%
-	\def\textRoastingVegetables{Rôtissage de légumes, poulet, poisson}%
-	\def\textPizzaBread{Pizza, pain croustillant, saisie de viande}%
-	\def\textHighHeatRoasting{Rôtissage à haute température, carbonisation}%
-	\def\textDefaultOvenTemp{La plupart des recettes utilisent 350°F par défaut sauf indication contraire.}%
-	\def\textSmallTartPan{Petit moule à tarte}%
-	\def\textSmallCakePan{Petit moule à gâteau}%
-	\def\textStandardCakePan{Moule à gâteau standard}%
-	\def\textStandardPiePan{Moule à tarte standard}%
-	\def\textLargeCakePan{Grand moule à gâteau}%
-	\def\textLargeSkillet{Grande poêle}%
-	\def\textStandardBakingDish{Plat de cuisson standard}%
-	\def\textStickButter{1 bâton de beurre}%
-	\def\textCupButter{1 cup de beurre}%
-	\def\textAllPurposeFlour{1 cup de farine tout usage}%
-	\def\textGranulatedSugar{1 cup de sucre granulé}%
-	\def\textBrownSugar{1 cup de sucre brun (tassé)}%
-	\def\textPowderedSugar{1 cup de sucre en poudre}%
-	\def\textChocolateChips{1 cup de pépites de chocolat}%
-	\def\textCupMilk{1 cup de lait}%
-	\def\textCupWater{1 cup d'eau}%
-	\def\textCupHoney{1 cup de miel}%
-	\def\textVegetableOil{1 cup d'huile végétale}%
-	\def\textLargeEgg{1 gros œuf}%
-	\def\textActiveDryYeast{1 sachet de levure sèche active}%
-	\def\textTablespoon{cuillère à soupe}%
-	\def\textTablespoons{cuillères à soupe}%
-	\def\textTeaspoon{cuillère à café}%
-	\def\textTeaspoons{cuillères à café}%
-	\def\textSticksUS{bâtons (US)}%
-	\def\textCup{cup}%
-	\def\textCups{cups}%
-	\def\textQuart{quart}%
-	\def\textQuarts{quarts}%
-}
+% Load translation file based on selected language
+% Translation files are located in the translations/ directory
+% To add a new language:
+%   1. Create a new file: translations/cookbook-<language>.def
+%   2. Add a \DeclareOption{<language>} section in the LANGUAGE OPTIONS section above
+%   3. The translation file will be automatically loaded
+\input{translations/cookbook-\cookbook@language.def}
 
 % Allow users to override any translation
 \NewDocumentCommand{\setTextRecipes}{m}{\def\textRecipes{#1}}

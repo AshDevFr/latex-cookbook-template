@@ -4,7 +4,7 @@ The template uses the `babel` package for comprehensive multi-language support, 
 
 ## Available Languages
 
-Set the language using document class options:
+The template currently supports English (default) and French. Set the language using document class options:
 
 ```latex
 % English (default)
@@ -14,28 +14,13 @@ Set the language using document class options:
 \documentclass[french]{CookBook}
 ```
 
-## Translated Elements
+## Translation Architecture
 
-The following elements are automatically translated based on the language setting:
+As of version 2.0.0, translations are organized in separate files located in the `translations/` directory that are automatically loaded based on your language selection.
 
-| Element             | English           | French               |
-| ------------------- | ----------------- | -------------------- |
-| Recipes (TOC title) | Recipes           | Recettes             |
-| Serves              | Serves            | Portions             |
-| Prep                | Prep              | Préparation          |
-| Cooking             | Cooking           | Cuisson              |
-| Difficulty          | Difficulty        | Difficulté           |
-| Origin              | Origin            | Origine              |
-| Spicy               | Spicy             | Épicé                |
-| Vegetarian          | Vegetarian        | Végétarien           |
-| Notes               | Notes             | Notes                |
-| Index               | Index             | Index                |
-| Conversion Table    | Conversion Table  | Table de Conversion  |
-| Volume              | Volume            | Volume               |
-| Weight              | Weight            | Poids                |
-| Temperature         | Temperature       | Température          |
-| Length              | Length            | Longueur             |
-| Oven Temperatures   | Oven Temperatures | Températures du Four |
+**For contributors:** If you want to add a new language or understand the translation file structure, see [translations/README.md](../translations/README.md).
+
+**For users:** To customize existing translations in your cookbook document without creating a new language file, see the "Custom Text Override Commands" section below.
 
 ## Custom Text Override Commands
 
@@ -354,7 +339,9 @@ Use any valid emoji name from the `emoji` package.
 \end{document}
 ```
 
-### Custom Language (e.g., Spanish)
+### Custom Language Using Override Commands
+
+While it's recommended to create a proper translation file (see "Translation Architecture" section above), you can also use override commands for quick customization or languages that don't have a full translation file yet:
 
 ```latex
 \documentclass[english]{CookBook}  % Use english as base
@@ -376,23 +363,34 @@ Use any valid emoji name from the `emoji` package.
 \setTextTemperature{Temperatura}
 \setTextLength{Longitud}
 \setTextOvenTemperatures{Temperaturas del Horno}
+% ... (71 total translation commands available)
 
 \begin{document}
 % Your Spanish cookbook content
 \end{document}
 ```
 
+**Note:** For a complete language translation, it's better to create a dedicated translation file (e.g., `translations/cookbook-spanish.def`) following the instructions in the "Adding a New Language" section above. This approach is cleaner and makes the translation reusable.
+
 ## Tips for Translation
 
-1. **Set Language First**: Always set the language option in the document class declaration before any custom overrides.
+1. **Use Translation Files for New Languages**: If you're adding a complete language translation, create a new translation file in `translations/` rather than using override commands in your document. This makes the translation:
+   - Reusable across multiple cookbooks
+   - Easier to maintain and update
+   - Shareable with the community
+   - Cleaner in your main document
 
-2. **Consistent Terminology**: Keep your terminology consistent throughout the cookbook. Use the same translation for each label across all recipes.
+2. **Set Language First**: Always set the language option in the document class declaration before any custom overrides.
 
-3. **Test Output**: After setting custom translations, compile your document to ensure all labels appear correctly.
+3. **Consistent Terminology**: Keep your terminology consistent throughout the cookbook. Use the same translation for each label across all recipes.
 
-4. **Typography Rules**: The `babel` package automatically handles language-specific typography rules (hyphenation, spacing, etc.) for English and French. For other languages, you may need to load additional babel language modules.
+4. **Test Output**: After setting custom translations, compile your document to ensure all labels appear correctly.
 
-5. **Character Encoding**: The template uses `fontspec` with LuaLaTeX, which fully supports Unicode. You can use any characters from any language directly in your source file.
+5. **Typography Rules**: The `babel` package automatically handles language-specific typography rules (hyphenation, spacing, etc.) for English and French. For other languages, you may need to load additional babel language modules.
+
+6. **Character Encoding**: The template uses `fontspec` with LuaLaTeX, which fully supports Unicode. You can use any characters from any language directly in your source file.
+
+7. **Contribute Your Translations**: If you create a translation file for a new language, consider contributing it back to the project by submitting a pull request to the [GitHub repository](https://github.com/AshDevFr/latex-cookbook-template).
 
 ---
 

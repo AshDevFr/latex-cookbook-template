@@ -241,6 +241,10 @@ latex-cookbook-template/
 │   ├── recipe-command.md
 │   ├── translation.md
 │   └── ... (and more)
+├── translations/             # Language translation files
+│   ├── README.md            # Translation guide
+│   ├── cookbook-english.def
+│   └── cookbook-french.def
 ├── samples/                  # Example cookbook files
 │   ├── cookbook-sample.tex
 │   └── cookbook-sample-fr.tex
@@ -253,13 +257,19 @@ latex-cookbook-template/
 
 ## 🤝 Contributing
 
-Contributions are welcome! Whether it's bug reports, feature requests, or code contributions:
+Contributions are welcome! Whether it's bug reports, feature requests, code contributions, or translations:
+
+### Code Contributions
 
 1. Fork the repository
 2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
 3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
+
+### Translation Contributions
+
+We especially welcome translations for new languages! See [translations/README.md](translations/README.md) for detailed instructions on adding a new language translation.
 
 ## 📄 License
 

@@ -1,0 +1,80 @@
+% French translations for cookbook class
+% This file is part of the LaTeX Cookbook Template
+%
+% To use this translation, specify 'french' option when loading the class:
+% \documentclass[french]{cookbook}
+
+\addto\captionsfrench{%
+	\def\textRecipes{Recettes}%
+	\def\textServes{Portions}%
+	\def\textPrep{Préparation}%
+	\def\textCooking{Cuisson}%
+	\def\textDifficulty{Difficulté}%
+	\def\textOrigin{Origine}%
+	\def\textSpicy{Épicé}%
+	\def\textVegetarian{Végétarien}%
+	\def\textIndex{Index}%
+	\def\textConversionTable{Table de Conversion}%
+	\def\textVolume{Volume}%
+	\def\textWeight{Poids}%
+	\def\textTemperature{Température}%
+	\def\textLength{Longueur}%
+	\def\textOvenTemperatures{Températures du Four}%
+	\def\textConversionNote{Pour une meilleure précision, il est recommandé de peser les ingrédients plutôt que d'utiliser des mesures de volume pour la pâtisserie.}%
+	\def\textUSImperial{US/Impérial}%
+	\def\textMetric{Métrique}%
+	\def\textNotes{Notes}%
+	\def\textFahrenheit{Fahrenheit (°F)}%
+	\def\textCelsius{Celsius (°C)}%
+	\def\textUseCase{Utilisation}%
+	\def\textInches{Pouces}%
+	\def\textCentimeters{Centimètres}%
+	\def\textCommonUse{Usage Courant}%
+	\def\textAdditionalConversions{Conversions Supplémentaires}%
+	\def\textMeasurement{Mesure}%
+	\def\textConversion{Conversion}%
+	\def\textFreezingPoint{Point de congélation de l'eau}%
+	\def\textRoomTemperature{Température ambiante}%
+	\def\textBodyTemperature{Température corporelle}%
+	\def\textBoilingPoint{Point d'ébullition de l'eau}%
+	\def\textCommonBakingTemp{Température de cuisson courante}%
+	\def\textFormula{Formule :}%
+	\def\textSlowRoasting{Rôtissage lent, déshydratation}%
+	\def\textSlowCooking{Cuisson lente, réchauffage}%
+	\def\textDelicateCakes{Gâteaux délicats, cheesecakes}%
+	\def\textCakesCookies{Gâteaux, biscuits, plats en cocotte}%
+	\def\textQuickBreads{Pains rapides, biscuits, poulet rôti}%
+	\def\textRoastingVegetables{Rôtissage de légumes, poulet, poisson}%
+	\def\textPizzaBread{Pizza, pain croustillant, saisie de viande}%
+	\def\textHighHeatRoasting{Rôtissage à haute température, carbonisation}%
+	\def\textDefaultOvenTemp{La plupart des recettes utilisent 350°F par défaut sauf indication contraire.}%
+	\def\textSmallTartPan{Petit moule à tarte}%
+	\def\textSmallCakePan{Petit moule à gâteau}%
+	\def\textStandardCakePan{Moule à gâteau standard}%
+	\def\textStandardPiePan{Moule à tarte standard}%
+	\def\textLargeCakePan{Grand moule à gâteau}%
+	\def\textLargeSkillet{Grande poêle}%
+	\def\textStandardBakingDish{Plat de cuisson standard}%
+	\def\textStickButter{1 bâton de beurre}%
+	\def\textCupButter{1 cup de beurre}%
+	\def\textAllPurposeFlour{1 cup de farine tout usage}%
+	\def\textGranulatedSugar{1 cup de sucre granulé}%
+	\def\textBrownSugar{1 cup de sucre brun (tassé)}%
+	\def\textPowderedSugar{1 cup de sucre en poudre}%
+	\def\textChocolateChips{1 cup de pépites de chocolat}%
+	\def\textCupMilk{1 cup de lait}%
+	\def\textCupWater{1 cup d'eau}%
+	\def\textCupHoney{1 cup de miel}%
+	\def\textVegetableOil{1 cup d'huile végétale}%
+	\def\textLargeEgg{1 gros œuf}%
+	\def\textActiveDryYeast{1 sachet de levure sèche active}%
+	\def\textTablespoon{cuillère à soupe}%
+	\def\textTablespoons{cuillères à soupe}%
+	\def\textTeaspoon{cuillère à café}%
+	\def\textTeaspoons{cuillères à café}%
+	\def\textSticksUS{bâtons (US)}%
+	\def\textCup{cup}%
+	\def\textCups{cups}%
+	\def\textQuart{quart}%
+	\def\textQuarts{quarts}%
+}
