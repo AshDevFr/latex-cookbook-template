@@ -120,35 +120,35 @@
 
 % Configure list spacing for compact layouts
 \setlist{
-    nosep,           % Remove all vertical spacing
-    leftmargin=*,    % Auto-calculate left margin
-    before=\vspace{\cookbook@listbefore}  % Adjust spacing before lists (default: -0.5\baselineskip)
+	nosep,           % Remove all vertical spacing
+	leftmargin=*,    % Auto-calculate left margin
+	before=\vspace{\cookbook@listbefore}  % Adjust spacing before lists (default: -0.5\baselineskip)
 }
 
 % Command to override list spacing before value
 % Usage: \setlistbefore{-1\baselineskip} or \setlistbefore{0pt}
 \NewDocumentCommand{\setlistbefore}{m}{%
-    \def\cookbook@listbefore{#1}%
-    \setlist{before=\vspace{\cookbook@listbefore}}%
+	\def\cookbook@listbefore{#1}%
+	\setlist{before=\vspace{\cookbook@listbefore}}%
 }
 
 % Command to override column spacing globally
 % Usage: \setcolumnsep{0.1\textwidth} or \setcolumnsep{10pt}
 \NewDocumentCommand{\setcolumnsep}{m}{%
-    \def\cookbook@columnsep{#1}%
-    \setlength\columnsep{\cookbook@columnsep}%
+	\def\cookbook@columnsep{#1}%
+	\setlength\columnsep{\cookbook@columnsep}%
 }
 
 % Command to override ingredient item spacing globally
 % Usage: \setingredientitemsep{0.01\textheight} or \setingredientitemsep{2pt}
 \NewDocumentCommand{\setingredientitemsep}{m}{%
-    \def\cookbook@ingredientitemsep{#1}%
+	\def\cookbook@ingredientitemsep{#1}%
 }
 
 % Command to override instruction item spacing globally
 % Usage: \setinstructionitemsep{0.5\baselineskip} or \setinstructionitemsep{4pt}
 \NewDocumentCommand{\setinstructionitemsep}{m}{%
-    \def\cookbook@instructionitemsep{#1}%
+	\def\cookbook@instructionitemsep{#1}%
 }
 
 \setlength{\parindent}{0pt}
@@ -472,18 +472,18 @@
 % Automated mapping using a list-based approach
 \ExplSyntaxOn
 \cs_new_protected:Npn \cb_define_fraction:nnn #1#2#3
-  {
+{
 	\AtBeginDocument{\newunicodechar{#1}{\sfrac{#2}{#3}}}
-  }
+}
 \clist_map_inline:nn
-  {
-    {½}{1}{2},
-    {⅓}{1}{3}, {⅔}{2}{3},
-    {¼}{1}{4}, {¾}{3}{4},
-    {⅛}{1}{8}, {⅜}{3}{8}, {⅝}{5}{8}, {⅞}{7}{8},
-    {⅙}{1}{6}
-  }
-  { \cb_define_fraction:nnn #1 }
+{
+	{½}{1}{2},
+	{⅓}{1}{3}, {⅔}{2}{3},
+	{¼}{1}{4}, {¾}{3}{4},
+	{⅛}{1}{8}, {⅜}{3}{8}, {⅝}{5}{8}, {⅞}{7}{8},
+	{⅙}{1}{6}
+}
+{ \cb_define_fraction:nnn #1 }
 \ExplSyntaxOff
 
 % Source Sans Pro font command (using system sans-serif as fallback)
@@ -505,7 +505,7 @@
 
 % Helper command to update scaled bleed whenever bleedlength or bleedimageratio changes
 \NewDocumentCommand{\cookbook@updatescaledbleed}{}{%
-    \pgfmathsetlength{\cookbook@scaledbleed}{\cookbook@bleedlength * (1 - \cookbook@bleedimageratio)}%
+	\pgfmathsetlength{\cookbook@scaledbleed}{\cookbook@bleedlength * (1 - \cookbook@bleedimageratio)}%
 	\pgfmathsetlength{\cookbook@scaledbleedremainder}{\cookbook@bleedlength - \cookbook@scaledbleed}%
 }
 
@@ -558,11 +558,11 @@
 % This is critical because index entries may contain inconsistent spacing from user input,
 % and LaTeX's index sorting requires consistent formatting.
 \NewDocumentCommand{\indexentry}{m}{%
-    \begingroup
-    \edef\temptext{\zap@space#1 \@empty}% Remove extra spaces
-    \edef\temptext{\expandafter\MakeUppercase\temptext}% Capitalize (if using standard LaTeX)
-    \expandafter\index\expandafter{\temptext}%
-    \endgroup
+	\begingroup
+	\edef\temptext{\zap@space#1 \@empty}% Remove extra spaces
+	\edef\temptext{\expandafter\MakeUppercase\temptext}% Capitalize (if using standard LaTeX)
+	\expandafter\index\expandafter{\temptext}%
+	\endgroup
 }
 
 % Configurable emoji values for recipe indicators
@@ -679,17 +679,17 @@
 
 					% BLUE SOLID LINE = Bleed edge (actual PDF paper boundary)
 					\draw[blue, solid, line width=1pt]
-						(current page.south west) rectangle (current page.north east);
+					(current page.south west) rectangle (current page.north east);
 
 					% RED DASHED LINE = Trim edge (where page will be cut, inset by bleed amount)
 					\draw[red, dashed, line width=1pt]
-						([xshift=\the\cookbook@bleedlength, yshift=\the\cookbook@bleedlength]current page.south west)
-						rectangle
-						([xshift=-\the\cookbook@bleedlength, yshift=-\the\cookbook@bleedlength]current page.north east);
+					([xshift=\the\cookbook@bleedlength, yshift=\the\cookbook@bleedlength]current page.south west)
+					rectangle
+					([xshift=-\the\cookbook@bleedlength, yshift=-\the\cookbook@bleedlength]current page.north east);
 				\else
 					% When bleed is disabled, current page is the trim edge
 					\draw[red, dashed, line width=1pt]
-						(current page.south west) rectangle (current page.north east);
+					(current page.south west) rectangle (current page.north east);
 				\fi
 			\end{tikzpicture}%
 		\fi
@@ -736,13 +736,13 @@
 % Flag to track first ingredient section for spacing control
 \newif\iffirstingredientsection
 \NewDocumentCommand{\ingredientsection}{m}{%
-	\item[]
-	\iffirstingredientsection%
-		\firstingredientsectionfalse%
-	\else%
-		\vspace{0.01\textheight}%
-	\fi%
-	{\bfseries{#1}}\par\vspace{0.005\textheight}%
+\item[]
+\iffirstingredientsection%
+	\firstingredientsectionfalse%
+\else%
+	\vspace{0.01\textheight}%
+\fi%
+{\bfseries{#1}}\par\vspace{0.005\textheight}%
 } % Format ingredient section headers with spacing
 
 \NewDocumentCommand{\ingredient}{m O{} O{} O{}}{
@@ -775,38 +775,38 @@
 % Output: <quantity> <unit> <ingredient name>, <note>
 \NewDocumentCommand{\ingredient@formatmulti}{m m m m}{%
 	{\textit{\small
-		% Trim all values first
-		\def\ingredient@name{#1}\trim@spaces@in\ingredient@name%
-		\def\ingredient@qty{#2}\trim@spaces@in\ingredient@qty%
-		\def\ingredient@unit{#3}\trim@spaces@in\ingredient@unit%
-		\def\ingredient@note{#4}\trim@spaces@in\ingredient@note%
-		% Initialize accumulator
-		\def\ingredient@output{}%
-		% Build the main part (quantity + unit + name) with spaces
-		\ifdefempty{\ingredient@qty}{}{%
-			\edef\ingredient@output{\ingredient@qty}%
-		}%
-		\ifdefempty{\ingredient@unit}{}{%
-			\ifdefempty{\ingredient@output}{%
-				\edef\ingredient@output{\ingredient@unit}%
-			}{%
-				\edef\ingredient@output{\ingredient@output\space\ingredient@unit}%
-			}%
-		}%
-		\ifdefempty{\ingredient@name}{}{%
-			\ifdefempty{\ingredient@output}{%
-				\edef\ingredient@output{\ingredient@name}%
-			}{%
-				\edef\ingredient@output{\ingredient@output\space\ingredient@name}%
-			}%
-		}%
-		% Output the accumulated main part
-		\ingredient@output%
-		% Add note with comma separator if present
-		\ifdefempty{\ingredient@note}{}{%
-			, \ingredient@note%
-		}%
-	}}%
+				% Trim all values first
+				\def\ingredient@name{#1}\trim@spaces@in\ingredient@name%
+				\def\ingredient@qty{#2}\trim@spaces@in\ingredient@qty%
+				\def\ingredient@unit{#3}\trim@spaces@in\ingredient@unit%
+				\def\ingredient@note{#4}\trim@spaces@in\ingredient@note%
+				% Initialize accumulator
+				\def\ingredient@output{}%
+				% Build the main part (quantity + unit + name) with spaces
+				\ifdefempty{\ingredient@qty}{}{%
+					\edef\ingredient@output{\ingredient@qty}%
+				}%
+				\ifdefempty{\ingredient@unit}{}{%
+					\ifdefempty{\ingredient@output}{%
+						\edef\ingredient@output{\ingredient@unit}%
+					}{%
+						\edef\ingredient@output{\ingredient@output\space\ingredient@unit}%
+					}%
+				}%
+				\ifdefempty{\ingredient@name}{}{%
+					\ifdefempty{\ingredient@output}{%
+						\edef\ingredient@output{\ingredient@name}%
+					}{%
+						\edef\ingredient@output{\ingredient@output\space\ingredient@name}%
+					}%
+				}%
+				% Output the accumulated main part
+				\ingredient@output%
+				% Add note with comma separator if present
+				\ifdefempty{\ingredient@note}{}{%
+					, \ingredient@note%
+				}%
+			}}%
 }
 
 \newif\iffirstinstructionsection
@@ -867,8 +867,8 @@
 
 % Command to reset notes for a new recipe
 \NewDocumentCommand{\recipe@resetnotes}{}{%
-	\setcounter{recipenote}{0}%
-	\global\recipe@notestoks={}%
+\setcounter{recipenote}{0}%
+\global\recipe@notestoks={}%
 }
 
 % Command to output all notes at the bottom of the recipe
@@ -880,16 +880,16 @@
 		{\sourcesanspro\bfseries\small\MakeUppercase{\textNotes}}\par
 		\vspace{0.005\textheight}%
 		\begin{enumerate}[
-			align=left,
-			leftmargin=15pt,
-			itemindent=0pt,
-			labelwidth=15pt,
-			labelsep=5pt,
-			labelindent=0pt,
-			label=\textsuperscript{\arabic*},
-			itemsep=0.003\textheight,
-		]%
-		\the\recipe@notestoks
+				align=left,
+				leftmargin=15pt,
+				itemindent=0pt,
+				labelwidth=15pt,
+				labelsep=5pt,
+				labelindent=0pt,
+				label=\textsuperscript{\arabic*},
+				itemsep=0.003\textheight,
+			]%
+			\the\recipe@notestoks
 		\end{enumerate}%
 	\fi
 }
@@ -899,12 +899,12 @@
 % #2 = dash pattern spacing (default: 1pt)
 % #3 = color (default: lightgrey)
 \NewDocumentCommand{\recipeSeparator}{O{0.5pt} O{1pt} O{lightgrey}}{%
-    \par\vspace{0.3\baselineskip}%
-    \begin{tikzpicture}[baseline={(current bounding box.center)}]
-        \draw[#3, dash pattern=on #2 off #2, line width=#1]
-            (0,0) -- (\textwidth,0);
-    \end{tikzpicture}%
-    \par\vspace{0.3\baselineskip}%
+	\par\vspace{0.3\baselineskip}%
+	\begin{tikzpicture}[baseline={(current bounding box.center)}]
+		\draw[#3, dash pattern=on #2 off #2, line width=#1]
+		(0,0) -- (\textwidth,0);
+	\end{tikzpicture}%
+	\par\vspace{0.3\baselineskip}%
 }
 
 %----------------------------------------------------------------------------------------
@@ -975,48 +975,48 @@
 						\ifcookbook@bleedenabled
 							\clip ([xshift=\cookbook@scaledbleed,yshift=\cookbook@scaledbleed]current page.south west) rectangle ([xshift=-\cookbook@scaledbleed,yshift=-\cookbook@scaledbleed]current page.north east);
 							\path[fill overzoom image={\cover@image},fill image opacity={\cover@opacity}]
-								($(current page.south west)+(\the\cookbook@scaledbleed,\the\cookbook@scaledbleed)$)
-								rectangle
-								($(current page.north east)-(\the\cookbook@scaledbleed,\the\cookbook@scaledbleed)$);
+							($(current page.south west)+(\the\cookbook@scaledbleed,\the\cookbook@scaledbleed)$)
+							rectangle
+							($(current page.north east)-(\the\cookbook@scaledbleed,\the\cookbook@scaledbleed)$);
 						\else
 							\clip (current page.south west) rectangle (current page.north east);
 							\path[fill overzoom image={\cover@image},fill image opacity={\cover@opacity}]
-								(current page.south west)
-								rectangle
-								(current page.north east);
+							(current page.south west)
+							rectangle
+							(current page.north east);
 						\fi
 					\end{scope}
 				\fi
 
-			% Add title and subtitle with drop shadow for visibility
-			% First draw the shadow (offset behind the text)
-			\node[text=\cover@shadowcolor, font=\sourcesanspro\bfseries,
-				align=center] at ($(current page.center)+(\cover@shadowoffset,-\cover@shadowoffset)$) {
-				{\cover@titlefontsize\selectfont\MakeUppercase{\cover@title}}
-				\\[20pt]
-				\ifx\cover@subtitle\@empty
-				\\[10pt]
-				\else
-				{\cover@subtitlefontsize\selectfont\cover@subtitle}
-				\\[20pt]
-				\fi
-				{\cover@authorfontsize\selectfont\cover@author}
-			};
-			% Then draw the actual text on top
-			\node[text=\cover@textcolor, font=\sourcesanspro\bfseries,
-				align=center] at (current page.center) {
-				{\cover@titlefontsize\selectfont\MakeUppercase{\cover@title}}
-				\\[20pt]
-				\ifx\cover@subtitle\@empty
-				\\[10pt]
-				\else
-				{\cover@subtitlefontsize\selectfont\cover@subtitle}
-				\\[20pt]
-				\fi
-				{\cover@authorfontsize\selectfont\cover@author}
-			};
-		\end{tikzpicture}
-	\end{adjustwidth}
+				% Add title and subtitle with drop shadow for visibility
+				% First draw the shadow (offset behind the text)
+				\node[text=\cover@shadowcolor, font=\sourcesanspro\bfseries,
+					align=center] at ($(current page.center)+(\cover@shadowoffset,-\cover@shadowoffset)$) {
+					{\cover@titlefontsize\selectfont\MakeUppercase{\cover@title}}
+					\\[20pt]
+					\ifx\cover@subtitle\@empty
+					\\[10pt]
+					\else
+					{\cover@subtitlefontsize\selectfont\cover@subtitle}
+					\\[20pt]
+					\fi
+					{\cover@authorfontsize\selectfont\cover@author}
+				};
+				% Then draw the actual text on top
+				\node[text=\cover@textcolor, font=\sourcesanspro\bfseries,
+					align=center] at (current page.center) {
+					{\cover@titlefontsize\selectfont\MakeUppercase{\cover@title}}
+					\\[20pt]
+					\ifx\cover@subtitle\@empty
+					\\[10pt]
+					\else
+					{\cover@subtitlefontsize\selectfont\cover@subtitle}
+					\\[20pt]
+					\fi
+					{\cover@authorfontsize\selectfont\cover@author}
+				};
+			\end{tikzpicture}
+		\end{adjustwidth}
 	\end{titlepage}
 	\clearpage
 	\nopagenumberstylefalse % Clear flag after cover page
@@ -1067,29 +1067,29 @@
 				(current page.south west) rectangle (current page.north east);
 			\fi
 
-		% Add preface image if provided (at top of page)
-		\ifx\preface@image\@empty\else
-			\begin{scope}
-				% Extend clip area into bleed if enabled
-				\ifcookbook@bleedenabled
-				    % \clip ([xshift=\cookbook@scaledbleed,yshift=-\cookbook@scaledbleed]current page.north west)
-					% 	  rectangle
-					% 	  ([xshift=-\cookbook@scaledbleed,yshift=-\cookbook@scaledbleed]$(current page.north east) + (0,-\preface@imageheight\cookbook@contentpaperheight)$);
-					\path[fill overzoom image={\preface@image},fill image opacity={\preface@opacity}]
-					([xshift=\cookbook@scaledbleed,yshift=-\cookbook@scaledbleed]current page.north west)
-					rectangle
-					([xshift=-\cookbook@scaledbleed,yshift=-\cookbook@scaledbleed]$(current page.north east) + (0,-\cookbook@scaledbleed-\preface@imageheight\cookbook@contentpaperheight)$);
-				\else
-					\clip (current page.north west)
-					      rectangle
-					      ($(current page.north east) + (0,-\preface@imageheight\cookbook@contentpaperheight)$);
-					\path[fill overzoom image={\preface@image},fill image opacity={\preface@opacity}]
-					($(current page.north west) + (0,-\preface@imageheight\cookbook@contentpaperheight)$)
-					rectangle
-					(current page.north east);
-				\fi
-			\end{scope}
-		\fi
+			% Add preface image if provided (at top of page)
+			\ifx\preface@image\@empty\else
+				\begin{scope}
+					% Extend clip area into bleed if enabled
+					\ifcookbook@bleedenabled
+						\clip ([xshift=\cookbook@scaledbleed,yshift=-\cookbook@scaledbleed]current page.north west)
+						rectangle
+						([xshift=-\cookbook@scaledbleed,yshift=-\cookbook@scaledbleed]$(current page.north east) + (0,-\cookbook@scaledbleed-\preface@imageheight\cookbook@contentpaperheight)$);
+						\path[fill overzoom image={\preface@image},fill image opacity={\preface@opacity}]
+						([xshift=\cookbook@scaledbleed,yshift=-\cookbook@scaledbleed]current page.north west)
+						rectangle
+						([xshift=-\cookbook@scaledbleed,yshift=-\cookbook@scaledbleed]$(current page.north east) + (0,-\cookbook@scaledbleed-\preface@imageheight\cookbook@contentpaperheight)$);
+					\else
+						\clip (current page.north west)
+						rectangle
+						($(current page.north east) + (0,-\preface@imageheight\cookbook@contentpaperheight)$);
+						\path[fill overzoom image={\preface@image},fill image opacity={\preface@opacity}]
+						($(current page.north west) + (0,-\preface@imageheight\cookbook@contentpaperheight)$)
+						rectangle
+						(current page.north east);
+					\fi
+				\end{scope}
+			\fi
 		\end{tikzpicture}
 	\end{adjustwidth}
 
@@ -1160,26 +1160,26 @@
 				(current page.south west) rectangle (current page.north east);
 			\fi
 
-		% Add preface image (full page with margins)
-		% The clip and path coordinates use imagemargin to create a border effect
-		\ifx\preface@image\@empty\else
-			\begin{scope}
-				% Clip to page area minus margins (creates border), extend into bleed if enabled
-				\ifcookbook@bleedenabled
-					\clip ([xshift=\cookbook@scaledbleed,yshift=\cookbook@scaledbleed]current page.south west) rectangle ([xshift=-\cookbook@scaledbleed,yshift=-\cookbook@scaledbleed]current page.north east);
-					\path[fill overzoom image={\preface@image},fill image opacity={\preface@opacity}]
+			% Add preface image (full page with margins)
+			% The clip and path coordinates use imagemargin to create a border effect
+			\ifx\preface@image\@empty\else
+				\begin{scope}
+					% Clip to page area minus margins (creates border), extend into bleed if enabled
+					\ifcookbook@bleedenabled
+						\clip ([xshift=\cookbook@scaledbleed,yshift=\cookbook@scaledbleed]current page.south west) rectangle ([xshift=-\cookbook@scaledbleed,yshift=-\cookbook@scaledbleed]current page.north east);
+						\path[fill overzoom image={\preface@image},fill image opacity={\preface@opacity}]
 						($(current page.south west)+(\the\cookbook@scaledbleed,\the\cookbook@scaledbleed)$)
 						rectangle
 						($(current page.north east)-(\the\cookbook@scaledbleed,\the\cookbook@scaledbleed)$);
-				\else
-					\clip (current page.south west) rectangle (current page.north east);
-					\path[fill overzoom image={\preface@image},fill image opacity={\preface@opacity}]
+					\else
+						\clip (current page.south west) rectangle (current page.north east);
+						\path[fill overzoom image={\preface@image},fill image opacity={\preface@opacity}]
 						(current page.south west)
 						rectangle
 						(current page.north east);
-				\fi
-			\end{scope}
-		\fi
+					\fi
+				\end{scope}
+			\fi
 		\end{tikzpicture}
 	\end{adjustwidth}
 	\clearpage
@@ -1310,35 +1310,35 @@
 				\newpage
 			\fi
 		\else\ifx\chapterpage@layout\layoutleft
-			% Force to left page
-			\clearpage
-			\cookbook@checkpageparity
-			\ifcookbook@isleftpage\else
-				% Current page is right, add blank page to get to left
-				\thispagestyle{empty}
-				\mbox{}
-				\newpage
-			\fi
-		\else\ifx\chapterpage@layout\layoutdouble
-			% Force to double page spread (start on left, end on right)
-			\clearpage
-			\cookbook@checkpageparity
-			\ifcookbook@isleftpage\else
-				% We're on a right page, add blank page to get to left
-				\thispagestyle{empty}
-				\mbox{}
-				\newpage
-		\fi
-		% Add the left page content here (custom content for double-page spread)
-		\clearpage
-		\thispagestyle{empty}
-		\ifx\chapterpage@pagecontent\@empty
-			\mbox{} % Empty left page if no custom content
-		\else
-			\chapterpage@pagecontent % Render custom left page content
-		\fi
-		\newpage
-	\fi\fi\fi
+				% Force to left page
+				\clearpage
+				\cookbook@checkpageparity
+				\ifcookbook@isleftpage\else
+					% Current page is right, add blank page to get to left
+					\thispagestyle{empty}
+					\mbox{}
+					\newpage
+				\fi
+			\else\ifx\chapterpage@layout\layoutdouble
+					% Force to double page spread (start on left, end on right)
+					\clearpage
+					\cookbook@checkpageparity
+					\ifcookbook@isleftpage\else
+						% We're on a right page, add blank page to get to left
+						\thispagestyle{empty}
+						\mbox{}
+						\newpage
+					\fi
+					% Add the left page content here (custom content for double-page spread)
+					\clearpage
+					\thispagestyle{empty}
+					\ifx\chapterpage@pagecontent\@empty
+						\mbox{} % Empty left page if no custom content
+					\else
+						\chapterpage@pagecontent % Render custom left page content
+					\fi
+					\newpage
+				\fi\fi\fi
 	\fi
 
 	\thispagestyle{custompagestyle}
@@ -1497,48 +1497,48 @@
 					\ifcookbook@bleedenabled
 						\clip ([xshift=\cookbook@scaledbleed,yshift=\cookbook@scaledbleed]current page.south west) rectangle ([xshift=-\cookbook@scaledbleed,yshift=-\cookbook@scaledbleed]current page.north east);
 						\path[fill overzoom image={\image@image},fill image opacity={\image@opacity}]
-							($(current page.south west)+(\the\cookbook@scaledbleed,\the\cookbook@scaledbleed)$)
-							rectangle
-							($(current page.north east)-(\the\cookbook@scaledbleed,\the\cookbook@scaledbleed)$);
+						($(current page.south west)+(\the\cookbook@scaledbleed,\the\cookbook@scaledbleed)$)
+						rectangle
+						($(current page.north east)-(\the\cookbook@scaledbleed,\the\cookbook@scaledbleed)$);
 					\else
 						\clip (current page.south west) rectangle (current page.north east);
 						\path[fill overzoom image={\image@image},fill image opacity={\image@opacity}]
-							(current page.south west)
-							rectangle
-							(current page.north east);
+						(current page.south west)
+						rectangle
+						(current page.north east);
 					\fi
 				\end{scope}
 			\fi
 
 			\ifx\image@image\@empty\else
-			\cookbook@checkpageparity
-			\ifcookbook@isrightpage
-			% Right page
-			\def\@captionalign{left}
-			\else
-			% Left page
-			\def\@captionalign{right}
-			\fi
+				\cookbook@checkpageparity
+				\ifcookbook@isrightpage
+					% Right page
+					\def\@captionalign{left}
+				\else
+					% Left page
+					\def\@captionalign{right}
+				\fi
 
-			\ifcookbook@bleedenabled
-				\coordinate (captionpos) at ($(current page.south)+(0,\dimexpr0.5cm+\cookbook@bleedlength\relax)$);
-				\coordinate (captionshadowpos) at ($(current page.south)+(\image@shadowoffset,\dimexpr0.5cm+\cookbook@bleedlength-\image@shadowoffset\relax)$);
-			\else
-				\coordinate (captionpos) at ($(current page.south)+(0,0.5cm)$);
-				\coordinate (captionshadowpos) at ($(current page.south)+(\image@shadowoffset,0.5cm-\image@shadowoffset)$);
-			\fi
+				\ifcookbook@bleedenabled
+					\coordinate (captionpos) at ($(current page.south)+(0,\dimexpr0.5cm+\cookbook@bleedlength\relax)$);
+					\coordinate (captionshadowpos) at ($(current page.south)+(\image@shadowoffset,\dimexpr0.5cm+\cookbook@bleedlength-\image@shadowoffset\relax)$);
+				\else
+					\coordinate (captionpos) at ($(current page.south)+(0,0.5cm)$);
+					\coordinate (captionshadowpos) at ($(current page.south)+(\image@shadowoffset,0.5cm-\image@shadowoffset)$);
+				\fi
 
-			% Add caption with drop shadow for visibility
-			% First draw the shadow (offset behind the text)
-			\node[text=\image@shadowcolor, font=\sourcesanspro\bfseries,
-				align=\@captionalign, anchor=south, text width=\cookbook@contentpaperwidth-1cm] at (captionshadowpos) {
-				{\image@captionfontsize\selectfont\image@caption}
-			};
-			% Then draw the actual text on top
-			\node[text=\image@textcolor, font=\sourcesanspro\bfseries,
-				align=\@captionalign, anchor=south, text width=\cookbook@contentpaperwidth-1cm] at (captionpos) {
-				{\image@captionfontsize\selectfont\image@caption}
-			};
+				% Add caption with drop shadow for visibility
+				% First draw the shadow (offset behind the text)
+				\node[text=\image@shadowcolor, font=\sourcesanspro\bfseries,
+					align=\@captionalign, anchor=south, text width=\cookbook@contentpaperwidth-1cm] at (captionshadowpos) {
+					{\image@captionfontsize\selectfont\image@caption}
+				};
+				% Then draw the actual text on top
+				\node[text=\image@textcolor, font=\sourcesanspro\bfseries,
+					align=\@captionalign, anchor=south, text width=\cookbook@contentpaperwidth-1cm] at (captionpos) {
+					{\image@captionfontsize\selectfont\image@caption}
+				};
 			\fi
 		\end{tikzpicture}
 	\end{adjustwidth}
@@ -1731,30 +1731,30 @@
 	% Only show images if fullpage is enabled
 	\ifrecipe@fullpage
 		\ifx\recipe@image\@empty\else
-		\ifdefstring{\recipe@imageposition}{top}{%
-			\begin{tikzpicture}[remember picture, overlay]
-				\begin{scope}
-					\ifcookbook@bleedenabled
-						\clip ([xshift=\cookbook@scaledbleed,yshift=-\cookbook@scaledbleed]current page.north west)
-						      rectangle
-							  ([xshift=-\cookbook@scaledbleed,yshift=-\cookbook@scaledbleed]$(current page.north east) - (0,\recipe@imageheight)$);
-						\path[fill overzoom image={\recipe@image},fill image opacity={\recipe@imageopacity}]
-						    ([xshift=\cookbook@scaledbleed,yshift=-\cookbook@scaledbleed]current page.north west)
+			\ifdefstring{\recipe@imageposition}{top}{%
+				\begin{tikzpicture}[remember picture, overlay]
+					\begin{scope}
+						\ifcookbook@bleedenabled
+							\clip ([xshift=\cookbook@scaledbleed,yshift=-\cookbook@scaledbleed]current page.north west)
 							rectangle
 							([xshift=-\cookbook@scaledbleed,yshift=-\cookbook@scaledbleed]$(current page.north east) - (0,\recipe@imageheight)$);
-					\else
-						\clip (current page.north west) rectangle ($(current page.north east) - (0,\recipe@imageheight)$);
-						\path[fill overzoom image={\recipe@image},fill image opacity={\recipe@imageopacity}]
-						($(current page.north west) - (0,\recipe@imageheight)$)
-						rectangle
-						++(1.02\cookbook@contentpaperwidth,\recipe@imageheight);
-					\fi
-				\end{scope}
-			\end{tikzpicture}
+							\path[fill overzoom image={\recipe@image},fill image opacity={\recipe@imageopacity}]
+							([xshift=\cookbook@scaledbleed,yshift=-\cookbook@scaledbleed]current page.north west)
+							rectangle
+							([xshift=-\cookbook@scaledbleed,yshift=-\cookbook@scaledbleed]$(current page.north east) - (0,\recipe@imageheight)$);
+						\else
+							\clip (current page.north west) rectangle ($(current page.north east) - (0,\recipe@imageheight)$);
+							\path[fill overzoom image={\recipe@image},fill image opacity={\recipe@imageopacity}]
+							($(current page.north west) - (0,\recipe@imageheight)$)
+							rectangle
+							++(1.02\cookbook@contentpaperwidth,\recipe@imageheight);
+						\fi
+					\end{scope}
+				\end{tikzpicture}
 
-			% Add vertical space after the image before content begins
-			\vspace*{\dimexpr\recipe@imageoverlayspace - \cookbook@scaledbleedremainder\relax}
-		}{}%
+				% Add vertical space after the image before content begins
+				\vspace*{\dimexpr\recipe@imageoverlayspace - \cookbook@scaledbleedremainder\relax}
+			}{}%
 		\fi
 	\fi
 
@@ -1781,27 +1781,27 @@
 	% Only show images if fullpage is enabled
 	\ifrecipe@fullpage
 		\ifx\recipe@image\@empty\else
-		\ifdefstring{\recipe@imageposition}{bottom}{%
-			\begin{tikzpicture}[remember picture, overlay]
-				\begin{scope}
-					\ifcookbook@bleedenabled
-						\clip ([xshift=\cookbook@scaledbleed,yshift=\cookbook@scaledbleed]current page.south west)
-						      rectangle
-							  ([xshift=-\cookbook@scaledbleed,yshift=\cookbook@scaledbleed]$(current page.south east) + (0,\recipe@imageheight)$);
-						\path[fill overzoom image={\recipe@image},fill image opacity={\recipe@imageopacity}]
-						    ([xshift=\cookbook@scaledbleed,yshift=\cookbook@scaledbleed]current page.south west)
+			\ifdefstring{\recipe@imageposition}{bottom}{%
+				\begin{tikzpicture}[remember picture, overlay]
+					\begin{scope}
+						\ifcookbook@bleedenabled
+							\clip ([xshift=\cookbook@scaledbleed,yshift=\cookbook@scaledbleed]current page.south west)
 							rectangle
 							([xshift=-\cookbook@scaledbleed,yshift=\cookbook@scaledbleed]$(current page.south east) + (0,\recipe@imageheight)$);
-					\else
-						\clip (current page.south west) rectangle ($(current page.south east) + (0,\recipe@imageheight)$);
-						\path[fill overzoom image={\recipe@image},fill image opacity={\recipe@imageopacity}]
-						(current page.south west)
-						rectangle
-						++(1.02\cookbook@contentpaperwidth,\recipe@imageheight);
-					\fi
-				\end{scope}
-			\end{tikzpicture}
-		}{}%
+							\path[fill overzoom image={\recipe@image},fill image opacity={\recipe@imageopacity}]
+							([xshift=\cookbook@scaledbleed,yshift=\cookbook@scaledbleed]current page.south west)
+							rectangle
+							([xshift=-\cookbook@scaledbleed,yshift=\cookbook@scaledbleed]$(current page.south east) + (0,\recipe@imageheight)$);
+						\else
+							\clip (current page.south west) rectangle ($(current page.south east) + (0,\recipe@imageheight)$);
+							\path[fill overzoom image={\recipe@image},fill image opacity={\recipe@imageopacity}]
+							(current page.south west)
+							rectangle
+							++(1.02\cookbook@contentpaperwidth,\recipe@imageheight);
+						\fi
+					\end{scope}
+				\end{tikzpicture}
+			}{}%
 		\fi
 	\fi
 
@@ -1915,39 +1915,39 @@
 %----------------------------------------------------------------------------------------
 
 \NewDocumentCommand{\outputrecipetitle}{}{
-	\phantomsection
-	\addcontentsline{toc}{section}{\recipe@title}
+\phantomsection
+\addcontentsline{toc}{section}{\recipe@title}
 
-	\ifx\recipe@description\@empty\else
-		\textit{\color{Grey}\recipe@description}
+\ifx\recipe@description\@empty\else
+	\textit{\color{Grey}\recipe@description}
 
-		\vspace*{0.01\textheight}
-	\fi
+	\vspace*{0.01\textheight}
+\fi
 
-	{\raggedright\sourcesanspro{\fontsize{32pt}{36pt}\selectfont\bfseries\MakeUppercase{\recipe@title}\par}}
+{\raggedright\sourcesanspro{\fontsize{32pt}{36pt}\selectfont\bfseries\MakeUppercase{\recipe@title}\par}}
 
 
-	\ifx\recipe@origin\@empty
-		\vspace*{0.025\textheight}
-	\else
-		\vspace*{0.01\textheight}
-		\begin{minipage}[t]{0.7\textwidth}
-			{\raggedright\sourcesanspro{\fontsize{18pt}{20pt}\selectfont\bfseries\MakeUppercase{\textOrigin: \recipe@origin}}}
-		\end{minipage}%
-		\hfill%
-		\begin{minipage}[t]{0.25\textwidth}
-			\raggedleft
-			\raisebox{-0.1\baselineskip}{%
-				\ifx\recipe@spicy\@empty\else\spicyicon\hspace{0.4em}\fi
-				\ifx\recipe@vegetarian\@empty\else\vegetarianicon\fi
-			}
-		\end{minipage}
-		\par
-		\vspace*{0.005\textheight}
-	\fi
+\ifx\recipe@origin\@empty
+	\vspace*{0.025\textheight}
+\else
+	\vspace*{0.01\textheight}
+	\begin{minipage}[t]{0.7\textwidth}
+		{\raggedright\sourcesanspro{\fontsize{18pt}{20pt}\selectfont\bfseries\MakeUppercase{\textOrigin: \recipe@origin}}}
+	\end{minipage}%
+	\hfill%
+	\begin{minipage}[t]{0.25\textwidth}
+		\raggedleft
+		\raisebox{-0.1\baselineskip}{%
+			\ifx\recipe@spicy\@empty\else\spicyicon\hspace{0.4em}\fi
+			\ifx\recipe@vegetarian\@empty\else\vegetarianicon\fi
+		}
+	\end{minipage}
+	\par
+	\vspace*{0.005\textheight}
+\fi
 
-	\recipeSeparator
-	\vspace*{0.0055\textheight}
+\recipeSeparator
+\vspace*{0.0055\textheight}
 }
 
 % Boolean flag to efficiently check if any recipe metadata is provided
@@ -2036,16 +2036,16 @@
 	\begin{sloppypar}%
 		\raggedright
 		\begin{enumerate}[
-			align=left,
-			leftmargin=10pt,
-			itemindent=0pt,
-			labelwidth=10pt,
-			labelsep=2pt,
-			labelindent=0pt,
-			label=\protect\textbullet,
-			itemsep=\recipe@ingredientitemsep,
-		]%
-		}{%
+				align=left,
+				leftmargin=10pt,
+				itemindent=0pt,
+				labelwidth=10pt,
+				labelsep=2pt,
+				labelindent=0pt,
+				label=\protect\textbullet,
+				itemsep=\recipe@ingredientitemsep,
+			]%
+			}{%
 		\end{enumerate}%
 	\end{sloppypar}%
 }
@@ -2058,16 +2058,16 @@
 	\firstinstructionsectiontrue
 	\begin{sloppypar}%
 		\begin{enumerate}[
-			align=left,
-			leftmargin=20pt,
-			itemindent=0pt,
-			labelwidth=15pt,
-			labelsep=5pt,
-			labelindent=0pt,
-			label=\protect\circledinstruction{\arabic{*}},
-			itemsep=\recipe@instructionitemsep,
-		]%
-		}{%
+				align=left,
+				leftmargin=20pt,
+				itemindent=0pt,
+				labelwidth=15pt,
+				labelsep=5pt,
+				labelindent=0pt,
+				label=\protect\circledinstruction{\arabic{*}},
+				itemsep=\recipe@instructionitemsep,
+			]%
+			}{%
 		\end{enumerate}%
 		\ifdefempty{\recipe@extrainstructioninfo}{}{%
 			\bigskip
@@ -2151,21 +2151,21 @@
 	\vspace{0.01\textheight}
 	\begin{tabularx}{\linewidth}{X X X}
 		\toprule
-		\textbf{\textUSImperial} & \textbf{\textMetric} & \textbf{\textNotes} \\
+		\textbf{\textUSImperial} & \textbf{\textMetric} & \textbf{\textNotes}                    \\
 		\midrule
-		1 \textTeaspoon (tsp) & 5 ml & \\
-		1 \textTablespoon (tbsp) & 15 ml & 3 \textTeaspoons \\
-		1 fluid ounce (fl oz) & 30 ml & 2 \textTablespoons \\
-		$\frac{1}{8}$ cup & 30 ml & 2 \textTablespoons \\
-		$\frac{1}{4}$ cup & 60 ml & 4 \textTablespoons \\
-		$\frac{1}{3}$ cup & 80 ml & 5 \textTablespoons + 1 \textTeaspoon \\
-		$\frac{1}{2}$ cup & 120 ml & 8 \textTablespoons \\
-		$\frac{2}{3}$ cup & 160 ml & 10 \textTablespoons + 2 \textTeaspoons \\
-		$\frac{3}{4}$ cup & 180 ml & 12 \textTablespoons \\
-		1 cup & 240 ml & 16 \textTablespoons \\
-		1 pint (pt) & 480 ml & 2 \textCups \\
-		1 quart (qt) & 960 ml & 4 \textCups \\
-		1 gallon (gal) & 3.8 L & 4 \textQuarts \\
+		1 \textTeaspoon (tsp)    & 5 ml                 &                                        \\
+		1 \textTablespoon (tbsp) & 15 ml                & 3 \textTeaspoons                       \\
+		1 fluid ounce (fl oz)    & 30 ml                & 2 \textTablespoons                     \\
+		$\frac{1}{8}$ cup        & 30 ml                & 2 \textTablespoons                     \\
+		$\frac{1}{4}$ cup        & 60 ml                & 4 \textTablespoons                     \\
+		$\frac{1}{3}$ cup        & 80 ml                & 5 \textTablespoons + 1 \textTeaspoon   \\
+		$\frac{1}{2}$ cup        & 120 ml               & 8 \textTablespoons                     \\
+		$\frac{2}{3}$ cup        & 160 ml               & 10 \textTablespoons + 2 \textTeaspoons \\
+		$\frac{3}{4}$ cup        & 180 ml               & 12 \textTablespoons                    \\
+		1 cup                    & 240 ml               & 16 \textTablespoons                    \\
+		1 pint (pt)              & 480 ml               & 2 \textCups                            \\
+		1 quart (qt)             & 960 ml               & 4 \textCups                            \\
+		1 gallon (gal)           & 3.8 L                & 4 \textQuarts                          \\
 		\bottomrule
 	\end{tabularx}
 
@@ -2179,17 +2179,17 @@
 		\toprule
 		\textbf{\textUSImperial} & \textbf{\textMetric} & \textbf{\textNotes} \\
 		\midrule
-		1 ounce (oz) & 28 g & \\
-		2 ounces & 57 g & \\
-		3 ounces & 85 g & \\
-		4 ounces & 113 g & $\frac{1}{4}$ pound \\
-		6 ounces & 170 g & \\
-		8 ounces & 227 g & $\frac{1}{2}$ pound \\
-		12 ounces & 340 g & $\frac{3}{4}$ pound \\
-		16 ounces & 454 g & 1 pound (lb) \\
-		1 pound (lb) & 454 g & 16 ounces \\
-		2 pounds & 907 g & 0.9 kg \\
-		1 kilogram (kg) & 2.2 pounds & 1000 g \\
+		1 ounce (oz)             & 28 g                 &                     \\
+		2 ounces                 & 57 g                 &                     \\
+		3 ounces                 & 85 g                 &                     \\
+		4 ounces                 & 113 g                & $\frac{1}{4}$ pound \\
+		6 ounces                 & 170 g                &                     \\
+		8 ounces                 & 227 g                & $\frac{1}{2}$ pound \\
+		12 ounces                & 340 g                & $\frac{3}{4}$ pound \\
+		16 ounces                & 454 g                & 1 pound (lb)        \\
+		1 pound (lb)             & 454 g                & 16 ounces           \\
+		2 pounds                 & 907 g                & 0.9 kg              \\
+		1 kilogram (kg)          & 2.2 pounds           & 1000 g              \\
 		\bottomrule
 	\end{tabularx}
 
@@ -2201,20 +2201,20 @@
 	\vspace{0.01\textheight}
 	\begin{tabularx}{\linewidth}{X X X}
 		\toprule
-		\textbf{\textFahrenheit} & \textbf{\textCelsius} & \textbf{\textNotes} \\
+		\textbf{\textFahrenheit} & \textbf{\textCelsius}         & \textbf{\textNotes}   \\
 		\midrule
-		32°F & 0°C & \textFreezingPoint \\
-		68°F & 20°C & \textRoomTemperature \\
-		100°F & 38°C & \textBodyTemperature \\
-		212°F & 100°C & \textBoilingPoint \\
+		32°F                     & 0°C                           & \textFreezingPoint    \\
+		68°F                     & 20°C                          & \textRoomTemperature  \\
+		100°F                    & 38°C                          & \textBodyTemperature  \\
+		212°F                    & 100°C                         & \textBoilingPoint     \\
 		\midrule
-		325°F & 165°C & \textCommonBakingTemp \\
-		375°F & 190°C & \textCommonBakingTemp \\
-		425°F & 220°C & \textCommonBakingTemp \\
-		450°F & 230°C & \textCommonBakingTemp \\
+		325°F                    & 165°C                         & \textCommonBakingTemp \\
+		375°F                    & 190°C                         & \textCommonBakingTemp \\
+		425°F                    & 220°C                         & \textCommonBakingTemp \\
+		450°F                    & 230°C                         & \textCommonBakingTemp \\
 		\midrule
-		\textbf{\textFormula} & \textbf{°C = (°F - 32) × 5/9} & \\
-		\textbf{\textFormula} & \textbf{°F = (°C × 9/5) + 32} & \\
+		\textbf{\textFormula}    & \textbf{°C = (°F - 32) × 5/9} &                       \\
+		\textbf{\textFormula}    & \textbf{°F = (°C × 9/5) + 32} &                       \\
 		\bottomrule
 	\end{tabularx}
 
@@ -2226,16 +2226,16 @@
 	\vspace{0.01\textheight}
 	\begin{tabularx}{\linewidth}{X X X}
 		\toprule
-		\textbf{\textUseCase} & \textbf{°F} & \textbf{°C} \\
+		\textbf{\textUseCase}   & \textbf{°F} & \textbf{°C} \\
 		\midrule
-		\textSlowRoasting & 200-250°F & 95-120°C \\
-		\textSlowCooking & 250-300°F & 120-150°C \\
-		\textDelicateCakes & 325°F & 165°C \\
-		\textCakesCookies & 350°F & 175°C \\
-		\textQuickBreads & 375°F & 190°C \\
-		\textRoastingVegetables & 400-425°F & 200-220°C \\
-		\textPizzaBread & 450-475°F & 230-245°C \\
-		\textHighHeatRoasting & 500°F & 260°C \\
+		\textSlowRoasting       & 200-250°F   & 95-120°C    \\
+		\textSlowCooking        & 250-300°F   & 120-150°C   \\
+		\textDelicateCakes      & 325°F       & 165°C       \\
+		\textCakesCookies       & 350°F       & 175°C       \\
+		\textQuickBreads        & 375°F       & 190°C       \\
+		\textRoastingVegetables & 400-425°F   & 200-220°C   \\
+		\textPizzaBread         & 450-475°F   & 230-245°C   \\
+		\textHighHeatRoasting   & 500°F       & 260°C       \\
 		\bottomrule
 	\end{tabularx}
 	\vspace{0.5\baselineskip}
@@ -2251,14 +2251,14 @@
 		\toprule
 		\textbf{\textInches} & \textbf{\textCentimeters} & \textbf{\textCommonUse} \\
 		\midrule
-		1 inch & 2.5 cm & \\
-		4 inches & 10 cm & \textSmallTartPan \\
-		6 inches & 15 cm & \textSmallCakePan \\
-		8 inches & 20 cm & \textStandardCakePan \\
-		9 inches & 23 cm & \textStandardPiePan \\
-		10 inches & 25 cm & \textLargeCakePan \\
-		12 inches & 30 cm & \textLargeSkillet \\
-		13 × 9 inches & 33 × 23 cm & \textStandardBakingDish \\
+		1 inch               & 2.5 cm                    &                         \\
+		4 inches             & 10 cm                     & \textSmallTartPan       \\
+		6 inches             & 15 cm                     & \textSmallCakePan       \\
+		8 inches             & 20 cm                     & \textStandardCakePan    \\
+		9 inches             & 23 cm                     & \textStandardPiePan     \\
+		10 inches            & 25 cm                     & \textLargeCakePan       \\
+		12 inches            & 30 cm                     & \textLargeSkillet       \\
+		13 × 9 inches        & 33 × 23 cm                & \textStandardBakingDish \\
 		\bottomrule
 	\end{tabularx}
 
@@ -2270,21 +2270,21 @@
 	\vspace{0.01\textheight}
 	\begin{tabularx}{\linewidth}{X X}
 		\toprule
-		\textbf{\textMeasurement} & \textbf{\textConversion} \\
+		\textbf{\textMeasurement} & \textbf{\textConversion}                            \\
 		\midrule
-		\textStickButter & 8 \textTablespoons = $\frac{1}{2}$ \textCup = 113 g \\
-		\textCupButter & 227 g = 2 \textSticksUS \\
-		\textAllPurposeFlour & 120 g \\
-		\textGranulatedSugar & 200 g \\
-		\textBrownSugar & 220 g \\
-		\textPowderedSugar & 120 g \\
-		\textChocolateChips & 170 g \\
-		\textCupMilk & 240 ml = 240 g \\
-		\textCupWater & 240 ml = 240 g \\
-		\textCupHoney & 340 g \\
-		\textVegetableOil & 220 g \\
-		\textLargeEgg & 50 g / 3 \textTablespoons \\
-		\textActiveDryYeast & 2$\frac{1}{4}$ \textTeaspoons = 7 g \\
+		\textStickButter          & 8 \textTablespoons = $\frac{1}{2}$ \textCup = 113 g \\
+		\textCupButter            & 227 g = 2 \textSticksUS                             \\
+		\textAllPurposeFlour      & 120 g                                               \\
+		\textGranulatedSugar      & 200 g                                               \\
+		\textBrownSugar           & 220 g                                               \\
+		\textPowderedSugar        & 120 g                                               \\
+		\textChocolateChips       & 170 g                                               \\
+		\textCupMilk              & 240 ml = 240 g                                      \\
+		\textCupWater             & 240 ml = 240 g                                      \\
+		\textCupHoney             & 340 g                                               \\
+		\textVegetableOil         & 220 g                                               \\
+		\textLargeEgg             & 50 g / 3 \textTablespoons                           \\
+		\textActiveDryYeast       & 2$\frac{1}{4}$ \textTeaspoons = 7 g                 \\
 		\bottomrule
 	\end{tabularx}
 
@@ -2425,63 +2425,63 @@
 		\pgfmathparse{\backcover@colratio@image * \textwidth}
 		\edef\backcover@imagewidth{\pgfmathresult pt}
 		\ifdefstring{\backcover@imageposition}{left}{%
-		% Image on left, text on right
-		\begin{minipage}[t]{\backcover@imagewidth}
-			\raggedleft
-			\vspace*{0pt}%
-			% Image
-			\ifx\backcover@image\@empty
-				\begin{tikzpicture}[baseline=(current bounding box.north west), anchor=north west]
-					\pgfmathparse{0.9 * \textwidth}
-					\draw[fill=lightgrey!30, draw=lightgrey, line width=1pt] (0,0) rectangle (\pgfmathresult pt,\backcover@upperheight);
-					\node[text=lightgrey, font=\sourcesanspro\small, align=center] at (0.45\textwidth,0.5\backcover@upperheight) {Image\\Placeholder};
-				\end{tikzpicture}
-			\else
-				\begin{tikzpicture}[baseline=(current bounding box.north west), anchor=north west]
-					\node[inner sep=0pt, opacity=\backcover@imageopacity] {
-						\includegraphics[width=0.9\textwidth, height=\backcover@upperheight, keepaspectratio]{\backcover@image}
-					};
-				\end{tikzpicture}
-			\fi
-		\end{minipage}%
-		\hspace{0.02\textwidth}%
-		\begin{minipage}[t]{\backcover@textwidth}
-			\raggedright
-			\vspace*{0pt}%
-			% Top content
-			\ifx\backcover@topcontent\@empty\else
-				{\color{\backcover@textcolor}\backcover@topcontent}\par
-			\fi
-		\end{minipage}
-	}{%
-		% Image on right, text on left (default)
-		\begin{minipage}[t]{\backcover@textwidth}
-			\raggedright
-			\vspace*{0pt}%
-			% Top content
-			\ifx\backcover@topcontent\@empty\else
-				{\color{\backcover@textcolor}\backcover@topcontent}\par
-			\fi
-		\end{minipage}%
-		\hspace{0.02\textwidth}%
-		\begin{minipage}[t]{\backcover@imagewidth}
-			\raggedleft
-			\vspace*{0pt}%
-			% Image
-			\ifx\backcover@image\@empty
-				\begin{tikzpicture}[baseline=(current bounding box.north west), anchor=north west]
-					\pgfmathparse{0.9 * \textwidth}
-					\draw[fill=lightgrey!30, draw=lightgrey, line width=1pt] (0,0) rectangle (\pgfmathresult pt,\backcover@upperheight);
-					\node[text=lightgrey, font=\sourcesanspro\small, align=center] at (0.45\textwidth,0.5\backcover@upperheight) {Image\\Placeholder};
-				\end{tikzpicture}
-			\else
-				\begin{tikzpicture}[baseline=(current bounding box.north west), anchor=north west]
-					\node[inner sep=0pt, opacity=\backcover@imageopacity] {
-						\includegraphics[width=0.9\textwidth, height=\backcover@upperheight, keepaspectratio]{\backcover@image}
-					};
-				\end{tikzpicture}
-			\fi
-		\end{minipage}
+			% Image on left, text on right
+			\begin{minipage}[t]{\backcover@imagewidth}
+				\raggedleft
+				\vspace*{0pt}%
+				% Image
+				\ifx\backcover@image\@empty
+					\begin{tikzpicture}[baseline=(current bounding box.north west), anchor=north west]
+						\pgfmathparse{0.9 * \textwidth}
+						\draw[fill=lightgrey!30, draw=lightgrey, line width=1pt] (0,0) rectangle (\pgfmathresult pt,\backcover@upperheight);
+						\node[text=lightgrey, font=\sourcesanspro\small, align=center] at (0.45\textwidth,0.5\backcover@upperheight) {Image\\Placeholder};
+					\end{tikzpicture}
+				\else
+					\begin{tikzpicture}[baseline=(current bounding box.north west), anchor=north west]
+						\node[inner sep=0pt, opacity=\backcover@imageopacity] {
+							\includegraphics[width=0.9\textwidth, height=\backcover@upperheight, keepaspectratio]{\backcover@image}
+						};
+					\end{tikzpicture}
+				\fi
+			\end{minipage}%
+			\hspace{0.02\textwidth}%
+			\begin{minipage}[t]{\backcover@textwidth}
+				\raggedright
+				\vspace*{0pt}%
+				% Top content
+				\ifx\backcover@topcontent\@empty\else
+					{\color{\backcover@textcolor}\backcover@topcontent}\par
+				\fi
+			\end{minipage}
+		}{%
+			% Image on right, text on left (default)
+			\begin{minipage}[t]{\backcover@textwidth}
+				\raggedright
+				\vspace*{0pt}%
+				% Top content
+				\ifx\backcover@topcontent\@empty\else
+					{\color{\backcover@textcolor}\backcover@topcontent}\par
+				\fi
+			\end{minipage}%
+			\hspace{0.02\textwidth}%
+			\begin{minipage}[t]{\backcover@imagewidth}
+				\raggedleft
+				\vspace*{0pt}%
+				% Image
+				\ifx\backcover@image\@empty
+					\begin{tikzpicture}[baseline=(current bounding box.north west), anchor=north west]
+						\pgfmathparse{0.9 * \textwidth}
+						\draw[fill=lightgrey!30, draw=lightgrey, line width=1pt] (0,0) rectangle (\pgfmathresult pt,\backcover@upperheight);
+						\node[text=lightgrey, font=\sourcesanspro\small, align=center] at (0.45\textwidth,0.5\backcover@upperheight) {Image\\Placeholder};
+					\end{tikzpicture}
+				\else
+					\begin{tikzpicture}[baseline=(current bounding box.north west), anchor=north west]
+						\node[inner sep=0pt, opacity=\backcover@imageopacity] {
+							\includegraphics[width=0.9\textwidth, height=\backcover@upperheight, keepaspectratio]{\backcover@image}
+						};
+					\end{tikzpicture}
+				\fi
+			\end{minipage}
 		}%
 	}
 
