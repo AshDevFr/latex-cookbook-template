@@ -99,7 +99,6 @@ The Docker setup uses the same dependencies as the CI environment, ensuring cons
     preptime={10 mins},
     cookingtime={15 mins},
     tags={Breakfast, Sweet, Vegetarian},
-    vegetarian={yes},
     ingredients={
         \ingredient{2 ripe bananas, mashed}
         \ingredient{2 eggs}

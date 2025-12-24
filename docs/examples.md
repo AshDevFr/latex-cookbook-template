@@ -68,8 +68,7 @@ Using the `\note` command for tips and variations:
     serves={4},
     preptime={5 mins},
     cookingtime={15 mins},
-    tags={Breakfast, Sweet},
-    vegetarian={yes},
+    tags={Breakfast, Sweet, Vegetarian},
     ingredients={
         \ingredient{ripe bananas}[2][][medium-to-large\note{The riper the bananas, the sweeter the pancakes will be. Look for bananas with brown spots.}]
         \ingredient{whole wheat flour or buckwheat flour}[1/2][cup][\note{For a gluten-free option, use buckwheat or oat flour. The texture will be slightly different but equally delicious.}]
@@ -273,8 +272,7 @@ Complete cookbook with all features:
     preptime={5 mins},
     cookingtime={15 mins},
     difficulty={Beginner},
-    tags={Breakfast, Sweet, Quick},
-    vegetarian={yes},
+    tags={Breakfast, Sweet, Quick, Vegetarian},
     indexes={Banana Pancakes, Recipes!Breakfast, Pancakes},
     ingredients={
         \ingredient{ripe bananas}[2][][medium-to-large]
@@ -417,8 +415,7 @@ French cookbook with custom translations:
     serves={4},
     preptime={5 min},
     cookingtime={15 min},
-    tags={Petit Déjeuner, Sucré},
-    vegetarian={yes},
+    tags={Petit Déjeuner, Sucré, Végétarien},
     ingredients={
         \ingredient{bananes mûres}[2][][]
         \ingredient{farine}[1/2][tasse][]
