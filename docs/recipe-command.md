@@ -29,6 +29,7 @@ The `\recipe{}` command is the heart of the template, supporting extensive custo
 
     % Tagging and Indexing
     tags={Tag1, Tag2, Tag3},            % Optional: Tags (comma-separated)
+    equipment={Item1, Item2},           % Optional: Equipment (comma-separated)
     indexes={Entry 1, Entry 2},         % Optional: Index entries (comma-separated)
 
     % Extra Information
@@ -186,6 +187,21 @@ You can register custom tag icons using `\registerTagIcon{TagName}{type}{content
 
 Icons appear in the recipe header (next to the origin), while tag badges appear in the tag list.
 
+### Equipment
+
+Comma-separated list of specialized equipment needed for the recipe:
+
+```latex
+equipment={9-inch round cake pans, Electric mixer, Wire rack}
+```
+
+Equipment items are displayed as badges below the tags list. Only include specialized or non-standard equipment - common items like mixing bowls, spoons, or pots should generally be omitted unless they're specifically important to the recipe.
+
+Examples of equipment to include:
+- Specific pan sizes (9x13 inch baking dish, 9-inch springform pan)
+- Specialized tools (Stand mixer, Food processor, Mandoline)
+- Equipment that affects the recipe outcome (Wire rack, Double boiler, Cast iron skillet)
+
 #### Customizing Tag Icon Appearance
 
 You can customize the visual appearance of tag icons using these length and size variables:
@@ -301,6 +317,7 @@ extrainstructioninfo={This sauce freezes well for up to 2 months.}
     difficulty={Intermediate},
     origin={Italy},
     tags={Pasta, Meat, Italian},
+    equipment={Large saucepan, Wooden spoon},
     indexes={Spaghetti Bolognese, Recipes!Pasta, Italian cuisine},
     extrainstructioninfo={This sauce freezes well for up to 2 months.},
     columnsep={0.05\textwidth},

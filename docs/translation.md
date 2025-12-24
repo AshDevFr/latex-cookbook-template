@@ -40,8 +40,7 @@ For most users, these basic labels are sufficient:
 \setTextCooking{Temps de cuisson}          % Cooking time
 \setTextDifficulty{Niveau}                 % Difficulty level
 \setTextOrigin{Provenance}                 % Recipe origin
-\setTextSpicy{Piquant}                     % Spicy tag
-\setTextVegetarian{Végétarien}             % Vegetarian tag
+\setTextEquipment{Équipement}              % Equipment section title
 \setTextNotes{Remarques}                   % Notes section title
 \setTextIndex{Index des Recettes}          % Index page title
 
@@ -72,8 +71,7 @@ For complete language translations, use this comprehensive template with all 71 
 \setTextCooking{Cooking}
 \setTextDifficulty{Difficulty}
 \setTextOrigin{Origin}
-\setTextSpicy{Spicy}
-\setTextVegetarian{Vegetarian}
+\setTextEquipment{Equipment}
 \setTextNotes{Notes}
 \setTextIndex{Index}
 
@@ -167,13 +165,6 @@ For complete language translations, use this comprehensive template with all 71 
 \setTextCooking{text}      % Default: "Cooking" (EN) / "Cuisson" (FR)
 \setTextDifficulty{text}   % Default: "Difficulty" (EN) / "Difficulté" (FR)
 \setTextOrigin{text}       % Default: "Origin" (EN) / "Origine" (FR)
-```
-
-### Tag Labels
-
-```latex
-\setTextSpicy{text}        % Default: "Spicy" (EN) / "Épicé" (FR)
-\setTextVegetarian{text}   % Default: "Vegetarian" (EN) / "Végétarien" (FR)
 ```
 
 ### Page Titles
@@ -300,6 +291,7 @@ The template includes a tag-to-icon mapping system that allows you to associate 
 ### Default Tag Icons
 
 The following tag icons are pre-registered:
+
 - `Spicy` → 🌶️ (hot-pepper emoji)
 - `Vegetarian` → 🌱 (seedling emoji)
 - `Vegan` → V (text)
@@ -372,8 +364,7 @@ While it's recommended to create a proper translation file (see "Translation Arc
 \setTextCooking{Cocción}
 \setTextDifficulty{Dificultad}
 \setTextOrigin{Origen}
-\setTextSpicy{Picante}
-\setTextVegetarian{Vegetariano}
+\setTextEquipment{Equipo}
 \setTextNotes{Notas}
 \setTextIndex{Índice}
 \setTextConversionTable{Tabla de Conversión}
@@ -394,6 +385,7 @@ While it's recommended to create a proper translation file (see "Translation Arc
 ## Tips for Translation
 
 1. **Use Translation Files for New Languages**: If you're adding a complete language translation, create a new translation file in `translations/` rather than using override commands in your document. This makes the translation:
+
    - Reusable across multiple cookbooks
    - Easier to maintain and update
    - Shareable with the community

@@ -43,6 +43,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Equipment parameter**: New optional recipe parameter for listing specialized equipment
+  - Add equipment with `equipment={Item1, Item2, Item3}` (comma-separated list)
+  - Equipment is displayed as badges below the tags list
+  - Only appears when populated (empty by default)
+  - Useful for highlighting non-standard equipment like specific pan sizes, specialized tools, or equipment that affects recipe outcome
+  - Example: `equipment={9-inch round cake pans, Electric mixer, Wire rack}`
+
 - **Tag icon system**: Complete redesign of recipe indicators using a flexible tag-to-icon mapping system
   - Register custom tag icons with `\registerTagIcon{TagName}{type}{content}`
   - Support for both emoji icons (e.g., 🌶️) and text icons (e.g., "GF")
