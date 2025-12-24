@@ -59,17 +59,18 @@ Compile with LuaLaTeX and verify all strings appear correctly.
 Each translation file must define the following strings:
 
 ### Recipe Metadata
+
 - `\textRecipes` - "Recipes"
 - `\textServes` - "Serves"
 - `\textPrep` - "Prep"
 - `\textCooking` - "Cooking"
 - `\textDifficulty` - "Difficulty"
 - `\textOrigin` - "Origin"
-- `\textSpicy` - "Spicy"
-- `\textVegetarian` - "Vegetarian"
+- `\textEquipment` - "Equipment"
 - `\textIndex` - "Index"
 
 ### Conversion Table
+
 - `\textConversionTable` - "Conversion Table"
 - `\textVolume` - "Volume"
 - `\textWeight` - "Weight"
@@ -82,6 +83,7 @@ Each translation file must define the following strings:
 - `\textNotes` - "Notes"
 
 ### Temperature
+
 - `\textFahrenheit` - "Fahrenheit (°F)"
 - `\textCelsius` - "Celsius (°C)"
 - `\textUseCase` - "Use Case"
@@ -94,6 +96,7 @@ Each translation file must define the following strings:
 - `\textDefaultOvenTemp` - Note about default oven temperature
 
 ### Oven Use Cases
+
 - `\textSlowRoasting` - "Slow roasting, dehydrating"
 - `\textSlowCooking` - "Slow cooking, warming"
 - `\textDelicateCakes` - "Delicate cakes, cheesecakes"
@@ -104,6 +107,7 @@ Each translation file must define the following strings:
 - `\textHighHeatRoasting` - "High-heat roasting, charring"
 
 ### Measurements
+
 - `\textInches` - "Inches"
 - `\textCentimeters` - "Centimeters"
 - `\textCommonUse` - "Common Use"
@@ -112,6 +116,7 @@ Each translation file must define the following strings:
 - `\textConversion` - "Conversion"
 
 ### Cookware Sizes
+
 - `\textSmallTartPan` - "Small tart pan"
 - `\textSmallCakePan` - "Small cake pan"
 - `\textStandardCakePan` - "Standard cake pan"
@@ -121,6 +126,7 @@ Each translation file must define the following strings:
 - `\textStandardBakingDish` - "Standard baking dish"
 
 ### Common Ingredients
+
 - `\textStickButter` - "1 stick butter"
 - `\textCupButter` - "1 cup butter"
 - `\textAllPurposeFlour` - "1 cup all-purpose flour"
@@ -136,6 +142,7 @@ Each translation file must define the following strings:
 - `\textActiveDryYeast` - "1 packet active dry yeast"
 
 ### Units
+
 - `\textTablespoon` - "tablespoon" (singular)
 - `\textTablespoons` - "tablespoons" (plural)
 - `\textTeaspoon` - "teaspoon" (singular)

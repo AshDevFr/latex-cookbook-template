@@ -199,8 +199,7 @@
 \NewDocumentCommand{\setTextCooking}{m}{\def\textCooking{#1}}
 \NewDocumentCommand{\setTextDifficulty}{m}{\def\textDifficulty{#1}}
 \NewDocumentCommand{\setTextOrigin}{m}{\def\textOrigin{#1}}
-\NewDocumentCommand{\setTextSpicy}{m}{\def\textSpicy{#1}}
-\NewDocumentCommand{\setTextVegetarian}{m}{\def\textVegetarian{#1}}
+\NewDocumentCommand{\setTextEquipment}{m}{\def\textEquipment{#1}}
 \NewDocumentCommand{\setTextIndex}{m}{\def\textIndex{#1}}
 \NewDocumentCommand{\setTextConversionTable}{m}{\def\textConversionTable{#1}}
 \NewDocumentCommand{\setTextVolume}{m}{\def\textVolume{#1}}
@@ -788,6 +787,9 @@
 
 % Recipe tag command for displaying category badges
 \NewDocumentCommand{\recipeTag}{m}{\tbadge{#1}\hspace{0.2em}}
+
+% Recipe equipment command for displaying equipment items
+\NewDocumentCommand{\recipeEquipment}{m}{\tbadge{#1}\hspace{0.2em}}
 
 % Flag to track first ingredient section for spacing control
 \newif\iffirstingredientsection
@@ -1621,6 +1623,7 @@
 \define@key{recipe}{difficulty}{\def\recipe@difficulty{#1}}
 \define@key{recipe}{origin}{\def\recipe@origin{#1}}
 \define@key{recipe}{tags}{\def\recipe@tags{#1}}
+\define@key{recipe}{equipment}{\def\recipe@equipment{#1}}
 \define@key{recipe}{extrainstructioninfo}{\def\recipe@extrainstructioninfo{#1}}
 \define@key{recipe}{ingredients}{\def\recipe@ingredients{#1}}
 \define@key{recipe}{instructions}{\def\recipe@instructions{#1}}
@@ -1676,6 +1679,7 @@
 	\def\recipe@difficulty{}%
 	\def\recipe@origin{}%
 	\def\recipe@tags{}%
+	\def\recipe@equipment{}%
 	\def\recipe@extrainstructioninfo{}%
 	\def\recipe@ingredients{}%
 	\def\recipe@instructions{}%
@@ -1869,6 +1873,24 @@
 			}%
 		\end{recipetagslist}
 
+		% Equipment section - placed below tags if equipment is specified
+		\ifx\recipe@equipment\@empty\else
+			\begin{center}
+				\rule{20pt}{0.5pt}
+				\par
+				\vspace*{0.005\textheight}
+				\textbf{\MakeUppercase{\textEquipment}}
+			\end{center}
+			\vspace*{-0.005\textheight}
+			\begin{recipeequipmentlist}
+				% Process each equipment item individually using \@for loop
+				\@for\e:=\recipe@equipment\do{%
+					\recipeEquipment{\e}%
+				}%
+			\end{recipeequipmentlist}
+
+		\fi
+
 		\begin{center}
 			\rule{20pt}{0.5pt}
 		\end{center}
@@ -1900,6 +1922,8 @@
 
 		\outputrecipeinfoblock
 
+		\vspace*{-0.01\textheight}
+
 		\begin{center}
 			\rule{20pt}{0.5pt}
 		\end{center}
@@ -1911,6 +1935,23 @@
 				\recipeTag{\t}%
 			}%
 		\end{recipetagslist}
+
+		% Equipment section - placed below tags if equipment is specified
+		\ifx\recipe@equipment\@empty\else
+			\begin{center}
+				\rule{20pt}{0.5pt}
+				\par
+				\vspace*{0.005\textheight}
+				\textbf{\MakeUppercase{\textEquipment}}
+			\end{center}
+			\vspace*{-0.005\textheight}
+			\begin{recipeequipmentlist}
+				% Process each equipment item individually using \@for loop
+				\@for\e:=\recipe@equipment\do{%
+					\recipeEquipment{\e}%
+				}%
+			\end{recipeequipmentlist}
+		\fi
 
 		\switchcolumn[1] % Move to right column for instructions
 		\begin{recipeingredients}
@@ -2042,6 +2083,18 @@
 %----------------------------------------------------------------------------------------
 
 \NewDocumentEnvironment{recipetagslist}{}{
+	\raggedright
+	\begin{sloppypar}
+		}{
+	\end{sloppypar}
+	\vspace*{-0.01\textheight}
+}
+
+%----------------------------------------------------------------------------------------
+%	EQUIPMENT LIST
+%----------------------------------------------------------------------------------------
+
+\NewDocumentEnvironment{recipeequipmentlist}{}{
 	\raggedright
 	\begin{sloppypar}
 		}{

@@ -11,8 +11,7 @@
 	\def\textCooking{Cuisson}%
 	\def\textDifficulty{Difficulté}%
 	\def\textOrigin{Origine}%
-	\def\textSpicy{Épicé}%
-	\def\textVegetarian{Végétarien}%
+	\def\textEquipment{Équipement}%
 	\def\textIndex{Index}%
 	\def\textConversionTable{Table de Conversion}%
 	\def\textVolume{Volume}%
