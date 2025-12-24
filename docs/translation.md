@@ -280,16 +280,35 @@ For complete language translations, use this comprehensive template with all 71 
 \setTextActiveDryYeast{text}     % Default: "Active dry yeast (1 packet)"
 ```
 
-## Tag Emoji Customization
+## Tag Icon Customization
 
-Customize the emoji icons used for special tags:
+The template includes a tag-to-icon mapping system that allows you to associate visual icons with specific tags. Icons can be either emojis or text abbreviations.
+
+### Registering Tag Icons
 
 ```latex
-\setspicyemoji{hot-pepper}      % Default: hot-pepper (🌶️)
-\setvegetarianemoji{seedling}   % Default: seedling (🌱)
+% Register an emoji icon
+\registerTagIcon{Spicy}{emoji}{hot-pepper}        % 🌶️
+\registerTagIcon{Vegetarian}{emoji}{seedling}     % 🌱
+
+% Register a text icon
+\registerTagIcon{Gluten-free}{text}{GF}
+\registerTagIcon{Vegan}{text}{V}
+\registerTagIcon{Dairy-free}{text}{DF}
 ```
 
-Use any valid emoji name from the `emoji` package.
+### Default Tag Icons
+
+The following tag icons are pre-registered:
+- `Spicy` → 🌶️ (hot-pepper emoji)
+- `Vegetarian` → 🌱 (seedling emoji)
+- `Vegan` → V (text)
+- `Gluten-free` → GF (text)
+- `Dairy-free` → DF (text)
+
+Icons appear in the recipe header next to the origin, while the tag badges appear in the tag list.
+
+For emoji icons, you can use any valid emoji name from the `emoji` package.
 
 ## Usage Examples
 

@@ -29,8 +29,6 @@ The `\recipe{}` command is the heart of the template, supporting extensive custo
 
     % Tagging and Indexing
     tags={Tag1, Tag2, Tag3},            % Optional: Tags (comma-separated)
-    spicy={yes},                        % Optional: Auto-add Spicy tag with 🌶️
-    vegetarian={yes},                   % Optional: Auto-add Vegetarian tag with 🌱
     indexes={Entry 1, Entry 2},         % Optional: Index entries (comma-separated)
 
     % Extra Information
@@ -165,17 +163,45 @@ origin={Italy}          % Country or region of origin
 Comma-separated list of tags:
 
 ```latex
-tags={Breakfast, Sweet, Quick}
+tags={Breakfast, Sweet, Quick, Vegetarian, Spicy}
 ```
 
-Tags are displayed as styled badges.
+Tags are displayed as styled badges. Some tags automatically display icons when they have a registered tag-to-icon mapping:
 
-### Auto-Generated Tags
+- `Vegetarian` → 🌱
+- `Spicy` → 🌶️
+- `Vegan` → V
+- `Gluten-free` → GF
+- `Dairy-free` → DF
+
+You can register custom tag icons using `\registerTagIcon{TagName}{type}{content}`:
 
 ```latex
-spicy={yes}        % Adds "Spicy" tag with 🌶️ icon
-vegetarian={yes}   % Adds "Vegetarian" tag with 🌱 icon
+% Register an emoji icon
+\registerTagIcon{Spicy}{emoji}{hot-pepper}
+
+% Register a text icon
+\registerTagIcon{Gluten-free}{text}{GF}
 ```
+
+Icons appear in the recipe header (next to the origin), while tag badges appear in the tag list.
+
+#### Customizing Tag Icon Appearance
+
+You can customize the visual appearance of tag icons using these length and size variables:
+
+```latex
+% Spacing between icons (default: 5pt)
+\setlength{\tagiconspacing}{6pt}
+
+% Icon font size (default: 16pt)
+\setlength{\tagiconsize}{18pt}
+
+% Icon line height (default: 20pt)
+\setlength{\tagiconlineheight}{22pt}
+```
+
+These settings affect all tag icons globally and should be placed in your document preamble
 
 ### Index Entries
 

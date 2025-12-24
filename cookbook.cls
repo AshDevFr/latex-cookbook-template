@@ -3,8 +3,8 @@
 %   LaTeX Class File
 %----------------------------------------------------------------------------------------
 %
-%   Version:     2.1.0
-%   Date:        December 3, 2025
+%   Version:     3.0.0
+%   Date:        December 23, 2025
 %   Author:      AshDevFr
 %   GitHub:      @AshDevFr
 %   License:     CC BY-NC-SA 4.0
@@ -21,7 +21,7 @@
 %----------------------------------------------------------------------------------------
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{CookBook}[2025/12/03 v2.1.0 CookBook Template]
+\ProvidesClass{CookBook}[2025/12/23 v3.0.0 CookBook Template]
 
 %----------------------------------------------------------------------------------------
 %	LANGUAGE OPTIONS
@@ -565,18 +565,74 @@
 	\endgroup
 }
 
-% Configurable emoji values for recipe indicators
-% These are simple string values, so we use \def for proper expansion in \emoji{}
-\def\spicyemoji{hot-pepper} % Default emoji name for spicy recipes
-\def\vegetarianemoji{seedling} % Default emoji name for vegetarian recipes
+% Tag-to-Icon Mapping System
+% This system allows associating tags with visual icons (emojis or text abbreviations)
+% that appear in the recipe origin section.
 
-% Commands to customize emoji icons globally
-\NewDocumentCommand{\setspicyemoji}{m}{\def\spicyemoji{#1}}
-\NewDocumentCommand{\setvegetarianemoji}{m}{\def\vegetarianemoji{#1}}
+% Storage for tag icon mappings
+% Format: \tagicon@type@{TagName} -> "emoji" or "text"
+%         \tagicon@content@{TagName} -> emoji name or text content
 
-% Define icon commands that render emojis at appropriate size
-\NewDocumentCommand{\spicyicon}{}{{\fontsize{18pt}{20pt}\selectfont\emoji{\spicyemoji}}}
-\NewDocumentCommand{\vegetarianicon}{}{{\fontsize{18pt}{20pt}\selectfont\emoji{\vegetarianemoji}}}
+% Spacing between tag icons
+\newlength{\tagiconspacing}
+\setlength{\tagiconspacing}{5pt}
+
+% Tag icon size configuration
+\newlength{\tagiconsize}
+\setlength{\tagiconsize}{16pt}
+\newlength{\tagiconlineheight}
+\setlength{\tagiconlineheight}{20pt}
+
+% Command to register a tag with an icon
+% Usage: \registerTagIcon{TagName}{type}{content}
+%   - TagName: The tag name (e.g., "Spicy", "Gluten-free")
+%   - type: Either "emoji" or "text"
+%   - content: For emoji type: emoji name (e.g., "hot-pepper")
+%              For text type: text to display (e.g., "GF")
+\NewDocumentCommand{\registerTagIcon}{mmm}{%
+	\StrSubstitute{#1}{ }{}[\temp@trimmed]%
+	\expandafter\checkTagIcon\expandafter{\temp@trimmed}%
+	\@namedef{tagicon@type@\temp@trimmed}{#2}%
+	\@namedef{tagicon@content@\temp@trimmed}{#3}%
+}
+
+% Command to check if a tag has a registered icon
+% Sets \iftaghasicon accordingly
+\newif\iftaghasicon
+\NewDocumentCommand{\checkTagIcon}{m}{%
+	\taghasiconfalse
+	\@ifundefined{tagicon@type@#1}{}{%
+		\taghasicontrue
+	}%
+}
+
+% Command to render a tag's icon
+% Usage: \renderTagIcon{TagName}
+\NewDocumentCommand{\renderTagIcon}{m}{%
+	% Remove ALL spaces (not just trim)
+	\StrSubstitute{#1}{ }{}[\temp@trimmed]%
+	\expandafter\checkTagIcon\expandafter{\temp@trimmed}%
+	\iftaghasicon
+		\recipe@iconspace% Add spacing before icon (empty for first icon)
+		\edef\temp@icontype{\@nameuse{tagicon@type@\temp@trimmed}}%
+		\edef\temp@iconcontent{\@nameuse{tagicon@content@\temp@trimmed}}%
+		\IfStrEq{\temp@icontype}{emoji}{%
+			{\fontsize{\tagiconsize}{\tagiconlineheight}\selectfont\emoji{\temp@iconcontent}}%
+		}{%
+			\IfStrEq{\temp@icontype}{text}{%
+				{\fontsize{\tagiconsize}{\tagiconlineheight}\selectfont\sffamily\bfseries\temp@iconcontent}%
+			}{}%
+		}%
+		\gdef\recipe@iconspace{\hspace{\tagiconspacing}}% Set spacing for subsequent icons (global to escape group)
+	\fi
+}
+
+% Register default tag icons
+\registerTagIcon{Spicy}{emoji}{hot-pepper}
+\registerTagIcon{Vegetarian}{emoji}{seedling}
+\registerTagIcon{Vegan}{text}{V}
+\registerTagIcon{Gluten-Free}{text}{GF}
+\registerTagIcon{Dairy-Free}{text}{DF}
 
 % Define custom TikZ layers for proper rendering order
 \pgfdeclarelayer{foreground} % Top layer for page numbers and overlays
@@ -1564,8 +1620,6 @@
 \define@key{recipe}{cookingtime}{\def\recipe@cookingtime{#1}}
 \define@key{recipe}{difficulty}{\def\recipe@difficulty{#1}}
 \define@key{recipe}{origin}{\def\recipe@origin{#1}}
-\define@key{recipe}{spicy}{\def\recipe@spicy{#1}}
-\define@key{recipe}{vegetarian}{\def\recipe@vegetarian{#1}}
 \define@key{recipe}{tags}{\def\recipe@tags{#1}}
 \define@key{recipe}{extrainstructioninfo}{\def\recipe@extrainstructioninfo{#1}}
 \define@key{recipe}{ingredients}{\def\recipe@ingredients{#1}}
@@ -1621,8 +1675,6 @@
 	\def\recipe@cookingtime{}%
 	\def\recipe@difficulty{}%
 	\def\recipe@origin{}%
-	\def\recipe@spicy{}%
-	\def\recipe@vegetarian{}%
 	\def\recipe@tags{}%
 	\def\recipe@extrainstructioninfo{}%
 	\def\recipe@ingredients{}%
@@ -1682,40 +1734,6 @@
 		}%
 	\fi
 
-	% Automatic tag addition with duplicate checking
-	% This section automatically adds "Spicy" and "Vegetarian" tags to the recipe
-	% if the corresponding flags are set, but only if they're not already present.
-	%
-	% The logic iterates through the existing tags list and compares each tag individually
-	% to prevent duplicate tags when users explicitly add them AND set the flag.
-	\ifx\recipe@spicy\@empty\else
-		% Check if "Spicy" is already in tags by iterating through the list
-		\recipe@checktag{\textSpicy}{\recipe@tags}%
-		\ifrecipe@tagfound\else
-			% Tag not found, add it to the list
-			\ifx\recipe@tags\@empty
-				% Empty list: just add the tag
-				\edef\recipe@tags{\textSpicy}%
-			\else
-				% Non-empty list: append with comma separator
-				\edef\recipe@tags{\recipe@tags, \textSpicy}%
-			\fi
-		\fi
-	\fi
-	\ifx\recipe@vegetarian\@empty\else
-		% Check if "Vegetarian" is already in tags by iterating through the list
-		\recipe@checktag{\textVegetarian}{\recipe@tags}%
-		\ifrecipe@tagfound\else
-			% Tag not found, add it to the list
-			\ifx\recipe@tags\@empty
-				% Empty list: just add the tag
-				\edef\recipe@tags{\textVegetarian}%
-			\else
-				% Non-empty list: append with comma separator
-				\edef\recipe@tags{\recipe@tags, \textVegetarian}%
-			\fi
-		\fi
-	\fi
 
 	% Recipe image positioning at top of page
 	% This section handles images positioned at the top of recipe pages.
@@ -1938,8 +1956,13 @@
 	\begin{minipage}[t]{0.25\textwidth}
 		\raggedleft
 		\raisebox{-0.1\baselineskip}{%
-			\ifx\recipe@spicy\@empty\else\spicyicon\hspace{0.4em}\fi
-			\ifx\recipe@vegetarian\@empty\else\vegetarianicon\fi
+			% Iterate through tags and render icons for registered tags
+			\ifx\recipe@tags\@empty\else
+				\gdef\recipe@iconspace{}% Initialize spacing (empty for first icon)
+				\@for\temp@tag:=\recipe@tags\do{%
+					\renderTagIcon{\temp@tag}%
+				}%
+			\fi
 		}
 	\end{minipage}
 	\par

@@ -3,8 +3,8 @@
 %   LaTeX Sample File
 %----------------------------------------------------------------------------------------
 %
-%   Version:     2.1.0
-%   Date:        December 3, 2025
+%   Version:     3.0.0
+%   Date:        December 23, 2025
 %   Author:      AshDevFr
 %   GitHub:      @AshDevFr
 %   License:     CC BY-NC-SA 4.0
@@ -22,6 +22,12 @@
 	twoside,
 	french, % French language
 ]{CookBook}
+
+\registerTagIcon{Végétarien}{emoji}{seedling}
+\registerTagIcon{Épicé}{emoji}{hot-pepper}
+\registerTagIcon{Sans Gluten}{text}{GF}
+\registerTagIcon{Sans Lactose}{text}{DF}
+\registerTagIcon{Végétalien}{text}{V}
 
 \begin{document}
 
@@ -205,7 +211,6 @@
 	difficulty = {Débutant},
 	origin = {Italie},
 	tags = {Italien, Rapide, Végétarien},
-	vegetarian = {oui},
 	ingredients = {
 			\ingredientsection{Garniture}
 			\ingredient{grosses tomates mûres}[4][][coupées en dés\note{Utilisez les tomates les plus mûres et les plus savoureuses que vous puissiez trouver. Les variétés anciennes ou mûries sur pied fonctionnent à merveille.}]
@@ -311,7 +316,6 @@
 	difficulty = {Débutant},
 	origin = {Italie},
 	tags = {Italien, Sans Cuisson, Sans Gluten, Végétarien},
-	vegetarian = {oui},
 	ingredients = {
 			\ingredient{grosses tomates mûres}[4][][tranchées de 6 mm d'épaisseur\note{Utilisez les meilleures tomates que vous pouvez trouver—les variétés anciennes ou mûries sur pied fonctionnent à merveille.}]
 			\ingredient{fromage mozzarella frais}[450][g][tranché de 6 mm d'épaisseur\note{La mozzarella di bufala fraîche est traditionnelle et fortement recommandée pour la saveur la plus authentique.}]
@@ -352,7 +356,6 @@
 	difficulty = {Intermédiaire},
 	origin = {États-Unis},
 	tags = {Épicé, Poulet, Cuit au Four, Entrée, Jour de Match},
-	spicy = {oui},
 	ingredients = {
 			\ingredientsection{Ailes}
 			\ingredient{ailes de poulet}[1,4][kg][séparées aux articulations, bouts retirés\note{Pour des ailes extra croustillantes, séchez-les complètement avant l'assaisonnement. Servir avec des bâtonnets de céleri et une vinaigrette au fromage bleu ou ranch.}]
@@ -511,8 +514,6 @@
 	difficulty = {Intermédiaire},
 	origin = {Thaïlande},
 	tags = {Thaï, Épicé, Curry, Végétalien, Végétarien},
-	vegetarian = {oui},
-	spicy = {oui},
 	ingredients = {
 			\ingredientsection{Curry}
 			\ingredient{huile de coco}[2][c. à soupe]

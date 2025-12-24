@@ -5,6 +5,76 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.0.0] - 2025-12-23
+
+### ⚠️ BREAKING CHANGES
+
+- **Removed `spicy` and `vegetarian` recipe parameters**: These parameters have been replaced by the unified tag icon system
+  - **Old syntax (v2.1.0)**:
+    ```latex
+    \recipe{
+        spicy={true},
+        vegetarian={true},
+        ...
+    }
+    ```
+  - **New syntax (v3.0.0)**:
+    ```latex
+    \recipe{
+        tags={Spicy, Vegetarian},
+        ...
+    }
+    ```
+  - **Rationale**: The tag-based system is more flexible, allowing any number of dietary indicators and custom icons, not just spicy and vegetarian
+  - **Migration required**: Replace `spicy={true}` with `tags={Spicy}` and `vegetarian={true}` with `tags={Vegetarian}` (or combine them in the tags list)
+
+- **Removed emoji customization commands**: `\setspicyemoji{}` and `\setvegetarianemoji{}` are no longer available
+  - Use `\registerTagIcon{}{}{}` instead to customize tag icons
+  - **Example migration**:
+    ```latex
+    % Old (v2.1.0)
+    \setspicyemoji{fire}
+    \setvegetarianemoji{herb}
+
+    % New (v3.0.0)
+    \registerTagIcon{Spicy}{emoji}{fire}
+    \registerTagIcon{Vegetarian}{emoji}{herb}
+    ```
+
+### Added
+
+- **Tag icon system**: Complete redesign of recipe indicators using a flexible tag-to-icon mapping system
+  - Register custom tag icons with `\registerTagIcon{TagName}{type}{content}`
+  - Support for both emoji icons (e.g., 🌶️) and text icons (e.g., "GF")
+  - Default icons registered for common tags: Spicy 🌶️, Vegetarian 🌱, Vegan (V), Gluten-Free (GF), Dairy-Free (DF)
+  - Icons automatically display in recipe header when corresponding tags are used
+  - Tags without registered icons are silently skipped
+
+- **Tag icon spacing**: Icons now have configurable spacing between them (default: 5pt)
+  - Multiple tag icons no longer appear crowded together
+  - Customize via `\setlength{\tagiconspacing}{<length>}`
+
+- **Configurable tag icon appearance**: New length variables for customizing tag icon display
+  - `\tagiconspacing`: Space between icons (default: 5pt)
+  - `\tagiconsize`: Icon font size (default: 16pt)
+  - `\tagiconlineheight`: Icon line height (default: 20pt)
+  - All settings can be adjusted in the document preamble
+
+### Changed
+
+- Tag icon rendering now only adds spacing between actually rendered icons (tags without registered icons don't create gaps)
+- Icon size default changed from 18pt to 16pt for better visual balance
+- Updated documentation in [docs/recipe-command.md](docs/recipe-command.md) with tag icon system and customization examples
+
+### Removed
+
+- `spicy={true/false}` recipe parameter (use `tags={Spicy}` instead)
+- `vegetarian={true/false}` recipe parameter (use `tags={Vegetarian}` instead)
+- `\setspicyemoji{}` command (use `\registerTagIcon{Spicy}{emoji}{...}` instead)
+- `\setvegetarianemoji{}` command (use `\registerTagIcon{Vegetarian}{emoji}{...}` instead)
+- `\spicyicon` command (now handled automatically by tag system)
+- `\vegetarianicon` command (now handled automatically by tag system)
+
 ## [2.1.0] - 2025-12-03
 
 ### Added
@@ -161,6 +231,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Build automation with included shell script
 - Comprehensive documentation with usage examples
 
+[3.0.0]: https://github.com/AshDevFr/latex-cookbook-template/compare/v2.1.0...v3.0.0
 [2.1.0]: https://github.com/AshDevFr/latex-cookbook-template/compare/v2.0.0...v2.1.0
 [2.0.0]: https://github.com/AshDevFr/latex-cookbook-template/compare/v1.5.0...v2.0.0
 [1.5.0]: https://github.com/AshDevFr/latex-cookbook-template/compare/v1.4.0...v1.5.0
