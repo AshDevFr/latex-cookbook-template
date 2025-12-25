@@ -5,11 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+[3.0.1]: https://github.com/AshDevFr/latex-cookbook-template/compare/v3.0.0...v3.0.1
+
+## [3.0.1] - 2025-12-25
+
+### Changed
+
+- Fix formating when no tags are present
+
+[3.0.0]: https://github.com/AshDevFr/latex-cookbook-template/compare/v2.1.0...v3.0.0
+
 ## [3.0.0] - 2025-12-23
 
 ### ⚠️ BREAKING CHANGES
 
 - **Removed `spicy` and `vegetarian` recipe parameters**: These parameters have been replaced by the unified tag icon system
+
   - **Old syntax (v2.1.0)**:
     ```latex
     \recipe{
@@ -29,8 +40,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - **Migration required**: Replace `spicy={true}` with `tags={Spicy}` and `vegetarian={true}` with `tags={Vegetarian}` (or combine them in the tags list)
 
 - **Removed emoji customization commands**: `\setspicyemoji{}` and `\setvegetarianemoji{}` are no longer available
+
   - Use `\registerTagIcon{}{}{}` instead to customize tag icons
   - **Example migration**:
+
     ```latex
     % Old (v2.1.0)
     \setspicyemoji{fire}
@@ -44,6 +57,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - **Equipment parameter**: New optional recipe parameter for listing specialized equipment
+
   - Add equipment with `equipment={Item1, Item2, Item3}` (comma-separated list)
   - Equipment is displayed as badges below the tags list
   - Only appears when populated (empty by default)
@@ -51,6 +65,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Example: `equipment={9-inch round cake pans, Electric mixer, Wire rack}`
 
 - **Tag icon system**: Complete redesign of recipe indicators using a flexible tag-to-icon mapping system
+
   - Register custom tag icons with `\registerTagIcon{TagName}{type}{content}`
   - Support for both emoji icons (e.g., 🌶️) and text icons (e.g., "GF")
   - Default icons registered for common tags: Spicy 🌶️, Vegetarian 🌱, Vegan (V), Gluten-Free (GF), Dairy-Free (DF)
@@ -58,6 +73,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Tags without registered icons are silently skipped
 
 - **Tag icon spacing**: Icons now have configurable spacing between them (default: 5pt)
+
   - Multiple tag icons no longer appear crowded together
   - Customize via `\setlength{\tagiconspacing}{<length>}`
 
@@ -81,6 +97,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `\setvegetarianemoji{}` command (use `\registerTagIcon{Vegetarian}{emoji}{...}` instead)
 - `\spicyicon` command (now handled automatically by tag system)
 - `\vegetarianicon` command (now handled automatically by tag system)
+
+[2.1.0]: https://github.com/AshDevFr/latex-cookbook-template/compare/v2.0.0...v2.1.0
 
 ## [2.1.0] - 2025-12-03
 
@@ -106,6 +124,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Simplified adding new languages**: Contributors can now add languages without modifying the main class file
 - **Better organized documentation**: Clear separation between user and contributor documentation
 
+[2.0.0]: https://github.com/AshDevFr/latex-cookbook-template/compare/v1.5.0...v2.0.0
+
 ## [2.0.0] - 2025-11-27
 
 ### ⚠️ BREAKING CHANGES
@@ -130,6 +150,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Updated sample files ([cookbook-sample.tex](samples/cookbook-sample.tex), [cookbook-sample-fr.tex](samples/cookbook-sample-fr.tex), [cookbook-sample-print.tex](samples/cookbook-sample-print.tex)) to use new ingredient syntax
 
+[1.5.0]: https://github.com/AshDevFr/latex-cookbook-template/compare/v1.4.0...v1.5.0
+
 ## [1.5.0] - 2025-11-26
 
 ### Changed
@@ -140,11 +162,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Allows structured ingredient formatting for better consistency and readability
   - Supports optional parameters: empty brackets `[]` can be used to skip optional fields
 
+[1.4.0]: https://github.com/AshDevFr/latex-cookbook-template/compare/v1.3.0...v1.4.0
+
 ## [1.4.0] - 2025-11-26
 
 ### Added
 
 - Unicode fraction characters support for ingredients and instructions
+
+[1.3.0]: https://github.com/AshDevFr/latex-cookbook-template/compare/v1.2.0...v1.3.0
 
 ## [1.3.0] - 2025-11-23
 
@@ -163,6 +189,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Fixed recipenote counter not persisting between ingredients and instructions sections
 
+[1.2.0]: https://github.com/AshDevFr/latex-cookbook-template/compare/v1.1.1...v1.2.0
+
 ## [1.2.0] - 2025-11-19
 
 ### Added
@@ -175,11 +203,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Fixed tag duplicate checking to prevent duplicate tags when explicitly added tags match auto-generated tags (e.g., `spicy={yes}` and `tags={Spicy}`)
 
+[1.1.1]: https://github.com/AshDevFr/latex-cookbook-template/compare/v1.1.0...v1.1.1
+
 ## [1.1.1] - 2025-11-19
 
 ### Fixed
 
 - Fixed image display issue in `makechapterpage` on left pages
+
+[1.1.0]: https://github.com/AshDevFr/latex-cookbook-template/compare/v1.0.0...v1.1.0
 
 ## [1.1.0] - 2025-11-19
 
@@ -203,6 +235,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **Backward compatible**: Existing documents compile without modifications
 - See documentation for print production workflow and bleed setup examples
+
+[1.0.0]: https://github.com/AshDevFr/latex-cookbook-template/releases/tag/v1.0.0
 
 ## [1.0.0] - 2025-11-18
 
@@ -237,14 +271,3 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Emoji customization for recipe indicators
 - Build automation with included shell script
 - Comprehensive documentation with usage examples
-
-[3.0.0]: https://github.com/AshDevFr/latex-cookbook-template/compare/v2.1.0...v3.0.0
-[2.1.0]: https://github.com/AshDevFr/latex-cookbook-template/compare/v2.0.0...v2.1.0
-[2.0.0]: https://github.com/AshDevFr/latex-cookbook-template/compare/v1.5.0...v2.0.0
-[1.5.0]: https://github.com/AshDevFr/latex-cookbook-template/compare/v1.4.0...v1.5.0
-[1.4.0]: https://github.com/AshDevFr/latex-cookbook-template/compare/v1.3.0...v1.4.0
-[1.3.0]: https://github.com/AshDevFr/latex-cookbook-template/compare/v1.2.0...v1.3.0
-[1.2.0]: https://github.com/AshDevFr/latex-cookbook-template/compare/v1.1.1...v1.2.0
-[1.1.1]: https://github.com/AshDevFr/latex-cookbook-template/compare/v1.1.0...v1.1.1
-[1.1.0]: https://github.com/AshDevFr/latex-cookbook-template/compare/v1.0.0...v1.1.0
-[1.0.0]: https://github.com/AshDevFr/latex-cookbook-template/releases/tag/v1.0.0
