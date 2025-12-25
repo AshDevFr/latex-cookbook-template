@@ -3,8 +3,8 @@
 %   LaTeX Class File
 %----------------------------------------------------------------------------------------
 %
-%   Version:     3.0.0
-%   Date:        December 23, 2025
+%   Version:     3.0.1
+%   Date:        December 25, 2025
 %   Author:      AshDevFr
 %   GitHub:      @AshDevFr
 %   License:     CC BY-NC-SA 4.0
@@ -21,7 +21,7 @@
 %----------------------------------------------------------------------------------------
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{CookBook}[2025/12/23 v3.0.0 CookBook Template]
+\ProvidesClass{CookBook}[2025/12/25 v3.0.1 CookBook Template]
 
 %----------------------------------------------------------------------------------------
 %	LANGUAGE OPTIONS
@@ -872,6 +872,7 @@
 	\item[]
 	\iffirstinstructionsection%
 		\firstinstructionsectionfalse%
+		\vspace{-0.005\textheight}%
 	\else%
 		\vspace{0.01\textheight}%
 	\fi%
@@ -1875,12 +1876,14 @@
 
 		% Equipment section - placed below tags if equipment is specified
 		\ifx\recipe@equipment\@empty\else
-			\begin{center}
-				\rule{20pt}{0.5pt}
-				\par
-				\vspace*{0.005\textheight}
-				\textbf{\MakeUppercase{\textEquipment}}
-			\end{center}
+			\ifx\recipe@tags\@empty\else
+				\begin{center}
+					\rule{20pt}{0.5pt}
+					\par
+					\vspace*{0.005\textheight}
+					\textbf{\MakeUppercase{\textEquipment}}
+				\end{center}
+			\fi
 			\vspace*{-0.005\textheight}
 			\begin{recipeequipmentlist}
 				% Process each equipment item individually using \@for loop
@@ -1891,9 +1894,20 @@
 
 		\fi
 
-		\begin{center}
-			\rule{20pt}{0.5pt}
-		\end{center}
+
+		\ifx\recipe@tags\@empty
+			\ifx\recipe@equipment\@empty
+				\vspace*{0.015\textheight}
+			\else
+				\begin{center}
+					\rule{20pt}{0.5pt}
+				\end{center}
+			\fi
+		\else
+			\begin{center}
+				\rule{20pt}{0.5pt}
+			\end{center}
+		\fi
 
 		% Ingredients list in left column
 		\switchcolumn[0] % Move to left column
@@ -1923,18 +1937,20 @@
 		\outputrecipeinfoblock
 
 		\vspace*{-0.01\textheight}
+		\ifx\recipe@tags\@empty\else
 
-		\begin{center}
-			\rule{20pt}{0.5pt}
-		\end{center}
-		\vspace*{0.002\textheight}
+			\begin{center}
+				\rule{20pt}{0.5pt}
+			\end{center}
+			\vspace*{0.002\textheight}
 
-		\begin{recipetagslist}
-			% Process each tag individually
-			\@for\t:=\recipe@tags\do{%
-				\recipeTag{\t}%
-			}%
-		\end{recipetagslist}
+			\begin{recipetagslist}
+				% Process each tag individually
+				\@for\t:=\recipe@tags\do{%
+					\recipeTag{\t}%
+				}%
+			\end{recipetagslist}
+		\fi
 
 		% Equipment section - placed below tags if equipment is specified
 		\ifx\recipe@equipment\@empty\else
