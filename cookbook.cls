@@ -3,8 +3,8 @@
 %   LaTeX Class File
 %----------------------------------------------------------------------------------------
 %
-%   Version:     3.0.1
-%   Date:        December 25, 2025
+%   Version:     3.0.2
+%   Date:        December 29, 2025
 %   Author:      AshDevFr
 %   GitHub:      @AshDevFr
 %   License:     CC BY-NC-SA 4.0
@@ -21,7 +21,7 @@
 %----------------------------------------------------------------------------------------
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{CookBook}[2025/12/25 v3.0.1 CookBook Template]
+\ProvidesClass{CookBook}[2025/12/29 v3.0.2 CookBook Template]
 
 %----------------------------------------------------------------------------------------
 %	LANGUAGE OPTIONS
@@ -35,6 +35,19 @@
 
 \DeclareOption{french}{
 	\def\cookbook@language{french}
+}
+
+\NewDocumentCommand{\setbooklanguage}{m}{%
+	\def\cookbook@language{#1}%
+	% Reload translation file for new language
+	\input{translations/cookbook-#1.def}%
+	% Switch to the new language and apply translations at \begin{document}
+	% Must set babel strings AFTER \selectlanguage to ensure translation macros are defined
+	\AtBeginDocument{%
+		\selectlanguage{#1}%
+		\renewcommand{\contentsname}{\textRecipes}%
+		\renewcommand{\indexname}{\textIndex}%
+	}%
 }
 
 % Page layout options
@@ -101,6 +114,10 @@
 \setcounter{page}{\cookbook@startpage}
 
 \RequirePackage[\cookbook@language]{babel}
+
+% Load translation file immediately after babel
+% Translation files use \addto\captions<language> which requires babel to be loaded
+\input{translations/cookbook-\cookbook@language.def}
 
 %----------------------------------------------------------------------------------------
 %	REQUIRED PACKAGES AND MISC CONFIGURATIONS
@@ -184,13 +201,17 @@
 %	LANGUAGE STRINGS (using babel)
 %----------------------------------------------------------------------------------------
 
-% Load translation file based on selected language
+% Translation files are loaded immediately after babel (see above)
 % Translation files are located in the translations/ directory
-% To add a new language:
+%
+% For users: To add a custom language translation to your project:
+%   1. Create a new file: translations/cookbook-<language>.def
+%   2. Use \setbooklanguage{<language>} in your document preamble
+%
+% For maintainers: To add built-in language support to the template:
 %   1. Create a new file: translations/cookbook-<language>.def
 %   2. Add a \DeclareOption{<language>} section in the LANGUAGE OPTIONS section above
-%   3. The translation file will be automatically loaded
-\input{translations/cookbook-\cookbook@language.def}
+%   3. Users can then use \documentclass[<language>]{CookBook}
 
 % Allow users to override any translation
 \NewDocumentCommand{\setTextRecipes}{m}{\def\textRecipes{#1}}
@@ -484,6 +505,11 @@
 }
 { \cb_define_fraction:nnn #1 }
 \ExplSyntaxOff
+
+% Activate the language after Unicode character setup completes
+% This ensures our translation captions are applied and babel shorthands
+% don't interfere with the Unicode fraction processing
+\AtBeginDocument{\selectlanguage{\cookbook@language}}
 
 % Source Sans Pro font command (using system sans-serif as fallback)
 \NewDocumentCommand{\sourcesanspro}{+m}{{\sffamily\selectfont #1}}
@@ -1476,7 +1502,8 @@
 %----------------------------------------------------------------------------------------
 
 % Redefine ToC title to use translated "Recipes" instead of "Contents"
-\renewcommand*\contentsname{\textRecipes}
+% Must use \AtBeginDocument because babel redefines \contentsname during initialization
+\AtBeginDocument{\renewcommand{\contentsname}{\textRecipes}}
 
 % Configure font sizes and styles for Table of Contents entries
 \renewcommand{\cfttoctitlefont}{\fontsize{36pt}{40pt}\sourcesanspro\bfseries\selectfont} % Title font (reduced from 42pt)
@@ -2690,10 +2717,13 @@
 
 % Initialize index AFTER all key definitions to avoid xkeyval conflicts
 % Customize index title formatting to use translated text
-\renewcommand{\indexname}{\textIndex}
+% Must use \AtBeginDocument because babel redefines \indexname during initialization
+% Note: When using \setbooklanguage, this is handled within that command
+\AtBeginDocument{\renewcommand{\indexname}{\textIndex}}
 
-% Create index with 2 columns and add to TOC (title will use \indexname)
-\makeindex[columns=2, intoc]
+% Create index with 2 columns and add to TOC
+% Use title option to ensure both heading and TOC entry use \textIndex
+\makeindex[columns=2, intoc, title=\textIndex]
 
 % Set the page style for index pages to use custom page style (no bottom page numbers)
 \indexsetup{level=\chapter*, toclevel=chapter, noclearpage}

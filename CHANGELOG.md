@@ -5,6 +5,32 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+[3.0.2]: https://github.com/AshDevFr/latex-cookbook-template/compare/v3.0.1...v3.0.2
+
+## [3.0.2] - 2025-12-29
+
+### Fixed
+
+- **Translation system fixes**: Resolved critical issues with language translation loading and activation
+  - Fixed `\contentsname` not applying translated text by wrapping in `\AtBeginDocument` to ensure babel compatibility
+  - Fixed `\indexname` not applying to table of contents entries by adding explicit `title=\textIndex` parameter to `\makeindex`
+  - Fixed translation loading order to prevent babel from overwriting custom captions
+  - Fixed Unicode fraction character conflicts with babel's language-specific shorthand characters (affected French and German with `½`, `¼`, etc.)
+  - Moved `\selectlanguage` call to occur after Unicode character setup to prevent math mode errors
+
+### Changed
+
+- **Translation architecture improvements**:
+  - Translation files now load immediately after babel initialization instead of at `\AtBeginDocument`
+  - Language activation delayed until after Unicode character setup is complete
+  - `\setbooklanguage` command now properly reloads translation files and activates babel language features
+
+### Documentation
+
+- Updated `docs/translation.md` with comprehensive documentation for `\setbooklanguage` command
+- Added examples showing when and how to use `\setbooklanguage` for custom language translations
+- Clarified that custom languages can be added by creating translation files in the `translations/` directory
+
 [3.0.1]: https://github.com/AshDevFr/latex-cookbook-template/compare/v3.0.0...v3.0.1
 
 ## [3.0.1] - 2025-12-25
