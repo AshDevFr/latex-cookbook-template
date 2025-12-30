@@ -4,7 +4,15 @@ The template uses the `babel` package for comprehensive multi-language support, 
 
 ## Available Languages
 
-The template currently supports English (default) and French. Set the language using document class options:
+The template currently includes built-in support for:
+- **English** (default)
+- **French** (`french`)
+
+Additional languages can be added by creating translation files (see "Translation Architecture" section below).
+
+### Setting Language Using Class Options
+
+You can set the language using document class options:
 
 ```latex
 % English (default)
@@ -13,6 +21,38 @@ The template currently supports English (default) and French. Set the language u
 % French
 \documentclass[french]{CookBook}
 ```
+
+### Setting Language Using `\setbooklanguage`
+
+Alternatively, you can set the language after loading the class using the `\setbooklanguage` command. This is especially useful when:
+- You've created a custom language translation file
+- You want to keep a consistent document class declaration across multiple projects
+- You're switching between languages in different documents
+
+```latex
+\documentclass{CookBook}
+\setbooklanguage{french}
+
+\begin{document}
+% Your French cookbook content
+\end{document}
+```
+
+**Example with custom language:**
+
+```latex
+\documentclass{CookBook}
+\setbooklanguage{ngerman}  % Assumes you've created translations/cookbook-ngerman.def
+
+\begin{document}
+% Your German cookbook content
+\end{document}
+```
+
+**Important notes:**
+- The `\setbooklanguage` command must be used in the preamble (before `\begin{document}`)
+- The language parameter must match a translation file in the `translations/` directory (e.g., `ngerman` requires `translations/cookbook-ngerman.def`)
+- Using `\setbooklanguage` automatically loads the corresponding translation file and activates babel's language-specific features (hyphenation, typography rules, etc.)
 
 ## Translation Architecture
 

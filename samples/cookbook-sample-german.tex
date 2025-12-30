@@ -1,0 +1,876 @@
+%----------------------------------------------------------------------------------------
+%   CookBook Sample
+%   LaTeX Sample File
+%----------------------------------------------------------------------------------------
+%
+%   Version:     3.0.2
+%   Date:        December 29, 2025
+%   Author:      AshDevFr
+%   GitHub:      @AshDevFr
+%   License:     CC BY-NC-SA 4.0
+%
+%   A sample LaTeX file for creating a beautiful cookbook.
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[
+	letterpaper, % Paper size, use 'a4paper' for A4 or 'letterpaper' for US letter (you may want to adjust margins afterwards)
+	10pt, % Default font size, available sizes are: 8pt, 9pt, 10pt, 11pt, 12pt, 14pt, 17pt and 20pt
+	twoside
+]{CookBook}
+
+\setbooklanguage{ngerman}
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	COVER PAGE
+%----------------------------------------------------------------------------------------
+
+\makecoverpage{
+	title={Mein Kochbuch},
+	subtitle={Rezepte aus drei Generationen},
+	author={AshDevFr},
+	titlefontsize={\fontsize{36pt}{38pt}},
+	subtitlefontsize={\fontsize{24pt}{26pt}},
+	image={../images/book/cover.jpg},
+	opacity={0.6},
+	bgcolor={darkgrey},
+	textcolor={white},
+	shadowoffset={0.05cm}
+}
+
+%----------------------------------------------------------------------------------------
+%	PREFACE
+%----------------------------------------------------------------------------------------
+
+\makeprefacepage{
+	title={Vorwort},
+	text={Willkommen zu dieser Rezeptsammlung, zusammengetragen aus drei Generationen von Familienkochen und kulinarischen Abenteuern rund um die Welt. Jedes Rezept erzählt eine Geschichte – einige wurden durch handgeschriebene Notizen auf vergilbtem Papier weitergegeben, andere während Reisen durch geschäftige Märkte und stille Landküchen entdeckt.\newline
+
+			Dieses Kochbuch ist mehr als nur eine Sammlung von Anleitungen und Zutaten. Es ist eine Feier der Freude, die aus der Zubereitung von etwas Köstlichem entsteht, der Wärme des Teilens einer Mahlzeit mit geliebten Menschen und der Erinnerungen, die sich am Esstisch bilden. Von einfachen Frühstücken unter der Woche bis hin zu aufwendigen Festessen am Wochenende – diese Rezepte wurden bei unzähligen Mahlzeiten getestet, angepasst und perfektioniert.\newline
+
+			Ob Sie ein Anfänger sind, der sich gerade in der Küche zurechtfindet, oder ein erfahrener Koch auf der Suche nach neuer Inspiration – ich hoffe, diese Rezepte bringen genauso viel Freude an Ihren Tisch, wie sie an unseren gebracht haben. Haben Sie keine Angst, sie zu Ihren eigenen zu machen – die besten Rezepte sind die, die sich mit jeder Erzählung weiterentwickeln.\newline
+
+			Viel Spaß beim Kochen!},
+	layout={single},
+	image={../images/book/preface.jpg},
+	imageheight={0.4}
+}
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+
+\maketoc
+
+%----------------------------------------------------------------------------------------
+%	BREAKFAST CHAPTER PAGE
+%----------------------------------------------------------------------------------------
+
+\makechapterpage{
+	title={Frühstück},
+	bgcolor={paleorange},
+	image={../images/book/breakfast.jpg},
+	layout={right}
+}
+
+
+%----------------------------------------------------------------------------------------------------------
+
+
+%----------------------------------------------------------------------------------------
+%	RECIPE EXAMPLE - BANANA PANCAKES
+%----------------------------------------------------------------------------------------
+
+\makeimagepage{
+	image={../images/recipes/banana-pancake.jpg},
+	caption = {Bananen-Pfannkuchen},
+	textcolor={black},
+	shadowcolor={white},
+}
+
+\recipe{%
+	layout={simple},
+	imageheight={0.25\paperheight},
+	imageoverlayspace={0.2\paperheight},
+	title = {Bananen-Pfannkuchen},
+	description = {Dieses gesunde 3-Zutaten-Pfannkuchen-Rezept ist einfach zuzubereiten.},
+	serves = {4},
+	preptime = {5 Min.},
+	cookingtime = {15 Min.},
+	difficulty = {Anfänger},
+	origin = {USA},
+	tags = {Frühstück, Vegetarisch, Schnell, Glutenfrei},
+	indexes = {Bananen-Pfannkuchen, Rezepte!Frühstück, Banane, Pfannkuchen, Vegetarische Rezepte, Amerikanische Küche},
+	ingredients = {
+			\ingredient{Bananen}[2][][mittelgroß bis groß, reif\note{Je reifer die Bananen, desto süßer werden die Pfannkuchen. Achten Sie auf Bananen mit braunen Flecken auf der Schale.}]
+			\ingredient{Eier}[4][][groß]
+			\ingredient{Vollkornweizenmehl oder Buchweizenmehl oder 160 ml Hafermehl\note{Für eine glutenfreie Variante verwenden Sie Buchweizen- oder Hafermehl. Die Konsistenz wird etwas anders, aber gleichermaßen köstlich sein.}}[120][ml]
+			\ingredient{Optionale Geschmacks-/Nährstoffverstärker: ½ TL gemahlener Zimt, bis zu 2 EL Hanfsamen und/oder gemahlene Leinsamen, bis zu ¼ TL Salz}
+			\ingredient{Butter, Avocadoöl oder Ghee zum Braten\note{Ghee liefert einen reichhaltigen, buttrigen Geschmack ohne so leicht zu verbrennen wie normale Butter.}}
+		},
+	instructions ={
+			\instruction{Zerdrücken Sie die Bananen in einer mittelgroßen Schüssel mit einer großen Gabel, bis sie glänzend und größtenteils glatt sind. Fügen Sie die Eier hinzu und schlagen Sie sie mit einem Schneebesen, bis sie gleichmäßig in die Banane eingearbeitet sind.}
+			\instruction{Fügen Sie das Mehl und eventuelle optionale Zutaten hinzu. Rühren Sie vorsichtig um, bis alles vermischt ist. Stellen Sie die Schüssel beiseite, während Sie die Pfanne vorheizen (der Teig kann bei Bedarf bis zu 1 Stunde ruhen).}
+			\instruction{Erhitzen Sie eine große Pfanne (Edelstahl, Gusseisen oder antihaftbeschichtet) bei mittlerer bis niedriger Hitze (bei Verwendung einer elektrischen Grillplatte auf 175 °C erhitzen). Sie können mit dem Backen beginnen, sobald ein Wassertropfen beim Kontakt mit der heißen Oberfläche zischt. Falls erforderlich, fetten Sie die Bratfläche leicht mit etwas Butter oder Öl ein und wischen Sie den Überschuss vorsichtig mit einem Papiertuch ab (antihaftbeschichtete Oberflächen benötigen wahrscheinlich kein Öl).}
+			\instruction{Geben Sie etwa 60 ml Teig auf die heiße Pfanne und lassen Sie ein paar Zentimeter Platz um jeden Pfannkuchen für die Ausdehnung. Braten Sie, bis sich kleine Blasen auf der Oberfläche der Pfannkuchen bilden, 2 bis 3 Minuten.\note{Wenden Sie nicht zu früh! Warten Sie, bis sich Blasen auf der Oberfläche bilden, was anzeigt, dass die Unterseite gar ist.}}
+			\instruction{Wenden Sie die Pfannkuchen und braten Sie sie, bis sie auf beiden Seiten leicht goldbraun sind, weitere 1 bis 2 Minuten. Wiederholen Sie den Vorgang mit dem restlichen Teig, fügen Sie mehr Butter hinzu und reduzieren Sie die Hitze, wenn die Pfannkuchen außen dunkel werden, bevor sie innen durchgegart sind.\note{Wenn die Pfannkuchen zu schnell bräunen, reduzieren Sie die Hitze etwas. Das Ziel ist eine goldbraune Außenseite mit vollständig durchgegartem Inneren.}}
+			\instruction{Servieren Sie sofort oder halten Sie sie in einem 95 °C warmen Ofen warm. Übrig gebliebene Pfannkuchen können bis zu 3 Tage im Kühlschrank aufbewahrt oder bis zu 3 Monate eingefroren werden. Zum Aufwärmen stapeln Sie die übrig gebliebenen Pfannkuchen und wickeln Sie sie in ein Papiertuch, bevor Sie sie vorsichtig in der Mikrowelle aufwärmen.}
+		}
+}
+
+
+%----------------------------------------------------------------------------------------------------------
+
+
+%----------------------------------------------------------------------------------------
+%	RECIPE EXAMPLE - FRENCH TOAST (Columns Layout, No Image)
+%----------------------------------------------------------------------------------------
+
+\recipe{%
+	title = {Klassischer French Toast},
+	indexes = {Klassischer French Toast, French Toast, Rezepte!Frühstück, Brot, Eier, Vegetarische Rezepte, Französische Küche, Schnelle Gerichte},
+	description = {Goldener, knuspriger French Toast mit cremiger Mitte. Ein Lieblingsfrühstück am Wochenende, das einfach zuzubereiten ist und sich dennoch besonders anfühlt. Perfekt mit Ahornsirup und frischen Beeren.},
+	serves = {4},
+	preptime = {10 Min.},
+	cookingtime = {15 Min.},
+	difficulty = {Anfänger},
+	origin = {Frankreich/USA},
+	tags = {Frühstück, Süß, Vegetarisch, Schnell},
+	ingredients = {
+			\ingredientsection{Eiermischung}
+			\ingredient{große Eier}[4]
+			\ingredient{Vollmilch}[240][ml]
+			\ingredient{Kristallzucker}[2][EL]
+			\ingredient{Vanilleextrakt}[1][TL]
+			\ingredient{gemahlener Zimt}[1][TL]
+			\ingredient{gemahlene Muskatnuss}[1/4][TL]
+			\ingredient{Prise Salz}
+
+			\ingredientsection{Zubereitung und Servieren}
+			\ingredient{dicke Brotscheiben (Brioche, Challah oder Weißbrot)\note{Einen Tag altes Brot funktioniert am besten, da es die Eiermischung aufnimmt, ohne auseinanderzufallen. Brioche oder Challah ergeben den luxuriösesten French Toast, aber jedes dick geschnittene Brot funktioniert.}}[8]
+			\ingredient{Butter}[2-3][EL][zum Braten]
+			\ingredient{Ahornsirup}[][][zum Servieren]
+			\ingredient{Frische Beeren}[][][zum Servieren]
+			\ingredient{Puderzucker}[][][zum Bestäuben (optional)]
+		},
+	instructions ={
+			\instruction{Verquirlen Sie in einer flachen Schüssel oder Auflaufform Eier, Milch, Zucker, Vanilleextrakt, Zimt, Muskatnuss und Salz, bis alles gut vermischt ist.}
+			\instruction{Erhitzen Sie eine große Pfanne oder Grillplatte bei mittlerer Hitze und geben Sie 1 Esslöffel Butter hinzu.}
+			\instruction{Tauchen Sie jede Brotscheibe in die Eiermischung und lassen Sie sie etwa 5 Sekunden pro Seite einweichen. Weichen Sie nicht zu lange ein, sonst fällt das Brot auseinander.}
+			\instruction{Legen Sie die eingeweichten Brotscheiben in die erhitzte Pfanne. Braten Sie 2-3 Minuten pro Seite, bis sie goldbraun und außen knusprig sind.}
+			\instruction{Übertragen Sie den fertigen French Toast auf einen Teller und halten Sie ihn warm. Wiederholen Sie den Vorgang mit den restlichen Brotscheiben und fügen Sie bei Bedarf mehr Butter zur Pfanne hinzu.}
+			\instruction{Servieren Sie sofort, garniert mit Ahornsirup, frischen Beeren und einer Staubschicht Puderzucker, falls gewünscht.}
+		}
+}
+
+
+\makeimagepage{
+	image={../images/recipes/french-toast.jpg},
+	caption = {Classic French Toast},
+}
+
+%----------------------------------------------------------------------------------------------------------
+
+
+%----------------------------------------------------------------------------------------
+%	APPETIZERS CHAPTER PAGE
+%----------------------------------------------------------------------------------------
+
+\makechapterpage{
+	title={Vorspeisen},
+	image={../images/book/salad.jpg}
+}
+
+%----------------------------------------------------------------------------------------------------------
+
+
+%----------------------------------------------------------------------------------------
+%	RECIPE EXAMPLE - CLASSIC BRUSCHETTA (Columns Layout with Image)
+%----------------------------------------------------------------------------------------
+
+\recipe{%
+	image={../images/book/appetizer.jpg},
+	columnratio={0.25, 0.75},
+	imageheight={0.24\paperheight},
+	imageoverlayspace={0.19\paperheight},
+	title = {Klassische Bruschetta},
+	indexes = {Klassische Bruschetta, Bruschetta, Rezepte!Vorspeisen, Tomaten, Basilikum, Knoblauch, Vegetarische Rezepte, Italienische Küche, Schnelle Gerichte},
+	description = {Eine typisch italienische Vorspeise mit geröstetem Brot, belegt mit frischen Tomaten, Basilikum, Knoblauch und Olivenöl. Einfach und dennoch absolut köstlich.},
+	serves = {6},
+	preptime = {15 Min.},
+	cookingtime = {5 Min.},
+	difficulty = {Anfänger},
+	origin = {Italien},
+	tags = {Italienisch, Schnell, Vegetarisch},
+	ingredients = {
+			\ingredientsection{Belag}
+			\ingredient{große reife Tomaten}[4][][gewürfelt\note{Verwenden Sie die reifsten, aromatischsten Tomaten, die Sie finden können. Erbstück- oder strauchgereifte Sorten eignen sich hervorragend.}]
+			\ingredient{Knoblauchzehen}[3][][gehackt]
+			\ingredient{frische Basilikumblätter}[60][ml][gehackt]
+			\ingredient{natives Olivenöl extra}[2][EL]
+			\ingredient{Balsamico-Essig}[1][EL]
+			\ingredient{Salz und schwarzer Pfeffer}[][][nach Geschmack]
+
+			\ingredientsection{Brot}
+			\ingredient{französisches Baguette}[1][][diagonal geschnitten\note{Ein einen Tag altes Baguette eignet sich am besten für Bruschetta, da es gleichmäßiger röstet und eine bessere Textur hat.}]
+			\ingredient{Olivenöl}[2][EL]
+			\ingredient{Knoblauchzehe}[1][][halbiert]
+		},
+	instructions ={
+			\instructionsection{Belag vorbereiten}
+			\instruction{Kombinieren Sie in einer mittelgroßen Schüssel gewürfelte Tomaten, gehackten Knoblauch und gehacktes Basilikum.}
+			\instruction{Fügen Sie Olivenöl und Balsamico-Essig hinzu. Würzen Sie mit Salz und Pfeffer nach Geschmack.}
+			\instruction{Vermischen Sie vorsichtig und lassen Sie die Mischung mindestens 10 Minuten bei Raumtemperatur stehen, damit sich die Aromen verbinden können.}
+
+			\instructionsection{Brot vorbereiten}
+			\instruction{Heizen Sie den Ofen auf 200 °C vor.}
+			\instruction{Legen Sie die Baguettescheiben auf ein Backblech. Bestreichen Sie sie leicht mit Olivenöl.}
+			\instruction{Rösten Sie sie 3-5 Minuten im Ofen, bis sie goldbraun und knusprig sind.}
+			\instruction{Nehmen Sie sie aus dem Ofen und reiben Sie sofort eine Seite jeder Scheibe mit der Schnittseite der halbierten Knoblauchzehe ein.}
+
+			\instructionsection{Zusammensetzen und Servieren}
+			\instruction{Verteilen Sie die Tomatenmischung großzügig auf jeder gerösteten Brotscheibe.}
+			\instruction{Servieren Sie sofort, solange das Brot noch warm und knusprig ist.}
+		}
+}
+
+
+%----------------------------------------------------------------------------------------------------------
+
+
+%----------------------------------------------------------------------------------------
+%	RECIPE EXAMPLE - CAESAR SALAD (Simple Layout, No Image)
+%----------------------------------------------------------------------------------------
+
+\makeimagepage{
+	image={../images/recipes/caesar-salad.jpg},
+	caption = {Caesar Salad},
+}
+
+\recipe{%
+	layout={simple},
+	title = {Caesar Salad},
+	indexes = {Caesar Salad, Salat, Rezepte!Vorspeisen, Rezepte!Salate, Römersalat, Parmesan, Sardellen},
+	description = {Der klassische Caesar Salad mit knackigem Römersalat, hausgemachtem Dressing und knusprigen Croutons. Ein zeitloser Favorit, der nie aus der Mode kommt.},
+	serves = {4},
+	preptime = {20 Min.},
+	cookingtime = {10 Min.},
+	difficulty = {Mittelstufe},
+	origin = {Mexiko/USA},
+	tags = {Salat, Klassisch, Italienisch, Vorbereitung möglich},
+	ingredients = {
+			\ingredientsection{Dressing}
+			\ingredient{Knoblauchzehen}[2][][gehackt]
+			\ingredient{Anchovisfilets}[2][][gehackt]
+			\ingredient{frischer Zitronensaft}[2][EL]
+			\ingredient{Dijon-Senf}[1][TL]
+			\ingredient{Worcestershire-Sauce}[1][TL]
+			\ingredient{Mayonnaise}[240][ml]
+			\ingredient{frisch geriebener Parmesan\note{Für den besten Geschmack verwenden Sie frisch geriebenen Parmesan. Das Dressing kann bis zu 3 Tage im Voraus zubereitet und im Kühlschrank aufbewahrt werden.}}[120][ml]
+			\ingredient{Salz und schwarzer Pfeffer}
+
+			\ingredientsection{Salat}
+			\ingredient{große Köpfe Römersalat}[2][][gehackt]
+			\ingredient{hausgemachte oder gekaufte Croutons}[240][ml]
+			\ingredient{gehobelter Parmesan}[120][ml]
+			\ingredient{Frisch gemahlener schwarzer Pfeffer}
+		},
+	instructions ={
+			\instruction{Verquirlen Sie in einer mittelgroßen Schüssel Knoblauch, Anchovis, Zitronensaft, Dijon-Senf und Worcestershire-Sauce.}
+			\instruction{Rühren Sie langsam die Mayonnaise ein, bis alles gut vermischt und glatt ist.}
+			\instruction{Rühren Sie den geriebenen Parmesan ein. Würzen Sie mit Salz und Pfeffer nach Geschmack. Stellen Sie es in den Kühlschrank, bis es verwendet wird.}
+			\instruction{Geben Sie den gehackten Römersalat in eine große Servierschüssel.}
+			\instruction{Gießen Sie die gewünschte Menge Dressing über den Salat und vermengen Sie alles gut, bis er gleichmäßig bedeckt ist.}
+			\instruction{Fügen Sie die Croutons hinzu und vermengen Sie erneut vorsichtig.}
+			\instruction{Belegen Sie mit gehobeltem Parmesan und frisch gemahlenem schwarzem Pfeffer. Servieren Sie sofort.}
+		}
+}
+
+
+
+%----------------------------------------------------------------------------------------------------------
+
+
+%----------------------------------------------------------------------------------------
+%	RECIPE EXAMPLE - CAPRESE SALAD (Columns Layout, No Image)
+%----------------------------------------------------------------------------------------
+
+\recipe{%
+	image={../images/recipes/caprese-salad.jpg},
+	imageposition={bottom},
+	imageheight={0.35\paperheight},
+	title = {Caprese Salat},
+	indexes = {Caprese Salat, Salat, Rezepte!Vorspeisen, Rezepte!Salate, Mozzarella, Tomaten, Basilikum, Vegetarische Rezepte, Italienische Küche, Ohne Kochen, Glutenfreie Rezepte},
+	description = {Ein schöner und erfrischender italienischer Salat, der die Farben der italienischen Flagge präsentiert. Die Qualität der Zutaten ist der Schlüssel zu diesem einfachen und dennoch eleganten Gericht.},
+	serves = {4},
+	preptime = {10 Min.},
+	difficulty = {Anfänger},
+	origin = {Italien},
+	tags = {Italienisch, Ohne Kochen, Glutenfrei, Vegetarisch},
+	ingredients = {
+			\ingredient{große reife Tomaten}[4][][in 0,5 cm dicke Scheiben geschnitten\note{Verwenden Sie die besten Tomaten, die Sie finden können – Erbstück- oder strauchgereifte Sorten eignen sich hervorragend.}]
+			\ingredient{frischer Mozzarella}[450][g][in 0,5 cm dicke Scheiben geschnitten\note{Frischer Büffelmozzarella ist traditionell und wird für den authentischsten Geschmack sehr empfohlen.}]
+			\ingredient{frische Basilikumblätter}[240][ml]
+			\ingredient{natives Olivenöl extra}[3][EL]
+			\ingredient{Balsamico-Essig oder Glasur}[2][EL]
+			\ingredient{Grobes Meersalz}
+			\ingredient{Frisch gemahlener schwarzer Pfeffer}
+		},
+	instructions ={
+			\instruction{Arrangieren Sie die Tomaten- und Mozzarellascheiben auf einer großen Servierplatte, abwechselnd und leicht überlappend.}
+			\instruction{Stecken Sie frische Basilikumblätter zwischen die Tomaten- und Mozzarellascheiben.}
+			\instruction{Beträufeln Sie großzügig mit nativem Olivenöl extra und Balsamico-Essig.}
+			\instruction{Bestreuen Sie mit grobem Meersalz und frisch gemahlenem schwarzem Pfeffer.}
+			\instruction{Lassen Sie es 5-10 Minuten bei Raumtemperatur stehen, bevor Sie es servieren, damit sich die Aromen entfalten können.}
+		}
+}
+
+
+%----------------------------------------------------------------------------------------------------------
+
+
+%----------------------------------------------------------------------------------------
+%	RECIPE EXAMPLE - SPICY CHICKEN WINGS (Simple Layout with Image)
+%----------------------------------------------------------------------------------------
+
+\recipe{%
+	layout={simple},
+	image={../images/recipes/buffalo-chicken-wings.jpg},
+	imageheight={0.4\paperheight},
+	imageoverlayspace={0.35\paperheight},
+	title = {Buffalo Chicken Wings},
+	indexes = {Buffalo Chicken Wings, Hähnchenflügel, Rezepte!Vorspeisen, Hähnchen, Scharfe Rezepte, Amerikanische Küche, Gebackene Gerichte},
+	description = {Knusprige, würzige Hähnchenflügel mit pikanter Buffalo-Sauce. Perfekt für Spieltage oder jede Zusammenkunft. Diese Flügel werden für eine gesündere Variante des Klassikers gebacken.},
+	serves = {4-6},
+	preptime = {15 Min.},
+	cookingtime = {45 Min.},
+	difficulty = {Mittelstufe},
+	origin = {USA},
+	tags = {Scharf, Hähnchen, Gebacken, Vorspeise, Spieltag},
+	ingredients = {
+			\ingredientsection{Flügel}
+			\ingredient{Hähnchenflügel}[1,4][kg][an den Gelenken getrennt, Spitzen entfernt\note{Für extra knusprige Flügel tupfen Sie sie vor dem Würzen vollständig trocken. Servieren Sie mit Selleriestangen und Blauschimmelkäse- oder Ranch-Dressing.}]
+			\ingredient{Backpulver}[1][EL]
+			\ingredient{Salz}[1][TL]
+			\ingredient{Knoblauchpulver}[1][TL]
+			\ingredient{schwarzer Pfeffer}[1/2][TL]
+
+			\ingredientsection{Buffalo-Sauce}
+			\ingredient{scharfe Sauce (Frank's RedHot bevorzugt)}[120][ml]
+			\ingredient{ungesalzene Butter}[80][ml][geschmolzen]
+			\ingredient{Weißweinessig}[1][EL]
+			\ingredient{Worcestershire-Sauce}[1/4][TL]
+			\ingredient{Cayennepfeffer}[1/4][TL][(optional, für extra Schärfe)]
+		},
+	instructions ={
+			\instruction{Heizen Sie den Ofen auf 120 °C vor. Legen Sie ein großes Backblech mit Aluminiumfolie aus und stellen Sie ein Drahtgitter darauf.}
+			\instruction{Tupfen Sie die Hähnchenflügel vollständig mit Papiertüchern trocken. Dies ist entscheidend für knusprige Haut.}
+			\instruction{Kombinieren Sie in einer großen Schüssel Backpulver, Salz, Knoblauchpulver und schwarzen Pfeffer. Fügen Sie die Flügel hinzu und wenden Sie sie, bis sie gleichmäßig bedeckt sind.}
+			\instruction{Arrangieren Sie die Flügel in einer einzigen Schicht auf dem Drahtgitter und achten Sie darauf, dass sie sich nicht berühren.\note{Richtiger Abstand gewährleistet gleichmäßiges Garen und maximale Knusprigkeit.}}
+			\instruction{Backen Sie bei 120 °C für 30 Minuten. Erhöhen Sie die Temperatur auf 220 °C und backen Sie weitere 40-45 Minuten, wenden Sie sie auf halber Strecke, bis sie goldbraun und knusprig sind.}
+			\instruction{Während die Flügel backen, bereiten Sie die Buffalo-Sauce zu, indem Sie scharfe Sauce, geschmolzene Butter, Essig, Worcestershire-Sauce und Cayennepfeffer in einer kleinen Schüssel verquirlen.}
+			\instruction{Übertragen Sie die gegarten Flügel in eine große Schüssel, gießen Sie die Buffalo-Sauce darüber und wenden Sie sie, bis sie gleichmäßig bedeckt sind. Servieren Sie sofort.}
+		}
+}
+
+
+%----------------------------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%	ENTREES CHAPTER PAGE
+%----------------------------------------------------------------------------------------
+
+\makechapterpage{
+	title={Hauptgerichte},
+	image={../images/book/pasta.jpg}
+}
+
+%----------------------------------------------------------------------------------------------------------
+
+
+%----------------------------------------------------------------------------------------
+%	RECIPE EXAMPLE - SPAGEHETTI BOLOGNESE
+%----------------------------------------------------------------------------------------
+
+\recipe{%
+	image={../images/recipes/bolognese.jpg},
+	title = {Spaghetti Bolognese},
+	indexes = {Spaghetti Bolognese, Bolognese, Rezepte!Hauptgerichte, Rezepte!Pasta, Pasta, Rindfleisch, Tomaten, Italienische Küche, Vorbereitbare Gerichte},
+	description = {Die Bolognese-Sauce, auf Italienisch als Ragù alla Bolognese bekannt, ist eine Fleischsauce, die aus Bologna, Italien, stammt. In der italienischen Küche wird sie üblicherweise für ``Tagliatelle al Ragù" und zur Zubereitung von ``Lasagne alla Bolognese" verwendet.},
+	serves = {4},
+	preptime = {25 Min.},
+	cookingtime = {40 Min.},
+	difficulty = {Anfänger},
+	origin = {Italien},
+	tags = {Pasta, Fleisch, Italienisch, Bolognese, Vorbereitung möglich},
+	extrainstructioninfo = {Sie können diese Bolognese-Sauce bis zu 2 Monate einfrieren. Lassen Sie sie auf Raumtemperatur abkühlen, geben Sie dann einzelne Portionen oder die gesamte Menge in luftdichte Behälter oder Gefrierbeutel und drücken Sie die Luft heraus. Beschriften, datieren und einfrieren Sie sie. Legen Sie sie über Nacht in den Kühlschrank zum Auftauen.},
+	ingredients = {
+			\ingredientsection{Sauce}
+			\ingredient{Olivenöl}[1][EL]
+			\ingredient{Butter}[20][g]
+			\ingredient{braune Zwiebeln}[2][][halbiert,\\ fein gehackt]
+			\ingredient{Knoblauchzehen}[2][][zerdrückt]
+			\ingredient{Rinderhackfleisch}[500][g]
+			\ingredient{Tomatenmark (120 ml)}[145][g]
+			\ingredient{trockener Rotwein (240 ml)}[250][ml]
+			\ingredient{Dosen gehackte Tomaten à 400 g}[2]
+			\ingredient{getrockneter Oregano}[1][EL]
+			\ingredient{getrocknete Lorbeerblätter}[3]
+			\ingredient{Salz und frisch gemahlener\\ schwarzer Pfeffer}
+			\ingredient{frische Petersilie}[80][ml][locker gepackt, grob gehackt]
+
+			\ingredientsection{Servieren}
+			\ingredient{getrocknete dünne Spaghetti}[375][g]
+			\ingredient{Parmesan}[80][g][zum Servieren]
+		},
+	instructions ={
+			\instructionsection{Sauce zubereiten}
+			\instruction{Erhitzen Sie Öl und Butter in einem großen Topf bei mittlerer bis hoher Hitze. Geben Sie Zwiebel und Knoblauch hinzu und braten Sie sie unter Rühren 3 Minuten oder bis die Zwiebel weich wird. Fügen Sie das Hackfleisch hinzu und braten Sie es unter Rühren mit einem Holzlöffel, um Klumpen zu zerteilen, 5 Minuten oder bis das Hackfleisch die Farbe ändert.}
+			\instruction{Fügen Sie Tomatenmark, Wein, Tomaten, Oregano und Lorbeerblätter hinzu und bringen Sie alles zum Kochen. Reduzieren Sie die Hitze auf mittlere Stufe und lassen Sie es unter gelegentlichem Rühren 1 Stunde köcheln oder bis die Sauce eindickt. Probieren Sie und würzen Sie mit Salz und Pfeffer. Rühren Sie die Petersilie ein.}
+
+			\instructionsection{Pasta kochen}
+			\instruction{Kochen Sie in der Zwischenzeit die Spaghetti in einem großen Topf mit gesalzenem kochendem Wasser gemäß den Packungsanweisungen bis sie al dente sind. Abgießen.}
+
+			\instructionsection{Servieren}
+			\instruction{Verteilen Sie die Spaghetti auf Schüsseln und geben Sie die Bolognese-Sauce darüber. Reiben Sie Parmesan darüber und servieren Sie sofort.}
+		}
+}
+
+
+%----------------------------------------------------------------------------------------------------------
+
+
+%----------------------------------------------------------------------------------------
+%	RECIPE EXAMPLE - GRILLED SALMON (Columns Layout with Custom Column Ratio)
+%----------------------------------------------------------------------------------------
+
+\recipe{%
+	image={../images/recipes/grilled-salmon.jpg},
+	imageheight={0.25\paperheight},
+	imageoverlayspace={0.2\paperheight},
+	columnratio={0.3, 0.7},
+	title = {Gegrillter Lachs mit Zitronen-Kräuter-Marinade},
+	indexes = {Gegrillter Lachs mit Zitronen-Kräuter-Marinade, Gegrillter Lachs, Rezepte!Hauptgerichte, Rezepte!Meeresfrüchte, Lachs, Fisch, Zitrone, Kräuter, Gegrillte Gerichte, Gesunde Rezepte, Glutenfreie Rezepte},
+	description = {Perfekt gegrillter Lachs mit einer frischen Zitronen-Kräuter-Marinade. Dieses Rezept demonstriert ein individuelles Spaltenverhältnis für das Layout von Zutaten und Anweisungen.},
+	serves = {4},
+	preptime = {15 Min.},
+	cookingtime = {12 Min.},
+	difficulty = {Mittelstufe},
+	origin = {Zeitgenössisch},
+	tags = {Gegrillt, Gesund, Glutenfrei},
+	ingredients = {
+			\ingredientsection{Marinade}
+			\ingredient{Olivenöl}[60][ml]
+			\ingredient{frischer Zitronensaft}[3][EL]
+			\ingredient{Knoblauchzehen}[2][][gehackt]
+			\ingredient{frischer Dill}[1][EL][gehackt]
+			\ingredient{frische Petersilie}[1][EL][gehackt]
+			\ingredient{Zitronenabrieb}[1][TL]
+			\ingredient{Salz und Pfeffer}
+
+			\ingredientsection{Lachs}
+			\ingredient{Lachsfilets (je 170 g)\note{Für beste Ergebnisse verwenden Sie Filets von gleichmäßiger Dicke, damit sie gleichmäßig garen.}}[4]
+			\ingredient{Zitronenspalten}[][][zum Servieren]
+			\ingredient{Frische Kräuter}[][][zum Garnieren]
+		},
+	instructions ={
+			\instruction{Verquirlen Sie in einer kleinen Schüssel Olivenöl, Zitronensaft, Knoblauch, Dill, Petersilie, Zitronenabrieb, Salz und Pfeffer.}
+			\instruction{Legen Sie die Lachsfilets in eine flache Schüssel und gießen Sie die Marinade darüber. Wenden Sie sie zum Bedecken. Abdecken und 15-30 Minuten im Kühlschrank marinieren.}
+			\instruction{Heizen Sie den Grill auf mittlere bis hohe Hitze vor (etwa 190-200 °C). Reinigen und ölen Sie die Grillroste.}
+			\instruction{Nehmen Sie den Lachs aus der Marinade und tupfen Sie ihn mit Papiertüchern trocken. Entsorgen Sie die überschüssige Marinade.}
+			\instruction{Legen Sie den Lachs mit der Hautseite nach unten auf den Grill. Schließen Sie den Deckel und garen Sie 6-8 Minuten, ohne ihn zu bewegen.\note{Wenden Sie den Lachs nicht zu früh – warten Sie, bis er sich von selbst vom Grillrost löst.}}
+			\instruction{Wenden Sie den Lachs vorsichtig mit einem breiten Spatel. Garen Sie weitere 3-4 Minuten, bis der Fisch undurchsichtig ist und leicht zerfällt.\note{Der Fisch sollte undurchsichtig sein und leicht zerfallen, wenn er fertig ist.}}
+			\instruction{Nehmen Sie ihn vom Grill und lassen Sie ihn 2 Minuten ruhen. Servieren Sie mit Zitronenspalten und garnieren Sie mit frischen Kräutern.}
+		}
+}
+
+
+%----------------------------------------------------------------------------------------------------------
+
+
+%----------------------------------------------------------------------------------------
+%	RECIPE EXAMPLE - VEGETARIAN CURRY (Simple Layout, Vegetarian)
+%----------------------------------------------------------------------------------------
+
+\recipe{%
+	layout={simple},
+	imageheight={0.25\paperheight},
+	imageoverlayspace={0.2\paperheight},
+	title = {Thai Rotes Curry mit Gemüse},
+	indexes = {Thai Rotes Curry mit Gemüse, Thai Rotes Curry, Curry, Rezepte!Hauptgerichte, Rezepte!Vegetarisch, Gemüse, Kokosmilch, Thailändische Küche, Scharfe Rezepte, Vegane Rezepte},
+	description = {Ein lebendiges und aromatisches vegetarisches Curry voller bunter Gemüsesorten und cremiger Kokosmilch. Passen Sie es mit Ihrem Lieblingsgemüse an.},
+	serves = {6},
+	preptime = {20 Min.},
+	cookingtime = {25 Min.},
+	difficulty = {Mittelstufe},
+	origin = {Thailand},
+	tags = {Thai, Scharf, Curry, Vegan, Vegetarisch},
+	ingredients = {
+			\ingredientsection{Curry}
+			\ingredient{Kokosöl}[2][EL]
+			\ingredient{Thai-Rote-Curry-Paste\note{Thai-Rote-Curry-Paste variiert im Schärfegrad zwischen den Marken. Beginnen Sie mit weniger und fügen Sie mehr nach Geschmack hinzu.}}[3-4][EL]
+			\ingredient{Kokosmilch (400 ml)}[1][Dose]
+			\ingredient{Gemüsebrühe}[240][ml]
+			\ingredient{Sojasauce oder Tamari}[2][EL]
+			\ingredient{brauner Zucker oder Ahornsirup}[1][EL]
+			\ingredient{Paprika}[2][][in Scheiben geschnitten]
+			\ingredient{mittelgroße Aubergine}[1][][gewürfelt]
+			\ingredient{grüne Bohnen}[240][ml][geputzt]
+			\ingredient{Bambussprossen}[240][ml]
+			\ingredient{Thai-Basilikumblätter}[240][ml]
+
+			\ingredientsection{Servieren}
+			\ingredient{Gekochter Jasminreis\note{Servieren Sie über Jasminreis oder Reisnudeln für eine vollständige Mahlzeit.}}
+			\ingredient{Frische Limettenspalten}
+			\ingredient{Frischer Koriander}
+			\ingredient{Geschnittene rote Chili}[][][(optional)]
+		},
+	instructions ={
+			\instruction{Erhitzen Sie Kokosöl in einem großen Topf oder Wok bei mittlerer Hitze. Geben Sie die Curry-Paste hinzu und braten Sie sie 1-2 Minuten unter ständigem Rühren, bis sie duftet.}
+			\instruction{Gießen Sie die Kokosmilch ein und rühren Sie gut um, um die Curry-Paste aufzulösen. Bringen Sie sie zum sanften Köcheln.}
+			\instruction{Fügen Sie Gemüsebrühe, Sojasauce und braunen Zucker hinzu. Rühren Sie um, um alles zu vermischen.}
+			\instruction{Fügen Sie die Aubergine hinzu und kochen Sie 5 Minuten, dann fügen Sie Paprika und grüne Bohnen hinzu. Lassen Sie es 10-12 Minuten köcheln, bis das Gemüse weich, aber noch knackig ist.}
+			\instruction{Rühren Sie Bambussprossen und Thai-Basilikum ein. Kochen Sie 2 weitere Minuten.}
+			\instruction{Probieren Sie und passen Sie die Würze mit mehr Sojasauce, Zucker oder Curry-Paste nach Bedarf an.}
+			\instruction{Servieren Sie heiß über Jasminreis, garniert mit frischem Koriander, Limettenspalten und geschnittener Chili, falls gewünscht.}
+		}
+}
+
+
+\makeimagepage{
+	image={../images/recipes/thai-red-curry.jpg},
+	caption = {Thai Red Curry with Vegetables},
+}
+
+%----------------------------------------------------------------------------------------------------------
+
+
+%----------------------------------------------------------------------------------------
+%	DESSERTS CHAPTER PAGE
+%----------------------------------------------------------------------------------------
+
+\makechapterpage{
+	title={Desserts},
+	image={../images/book/dessert.jpg},
+	layout={right}
+}
+
+
+%----------------------------------------------------------------------------------------------------------
+
+
+%----------------------------------------------------------------------------------------
+%	RECIPE EXAMPLE - CHOCOLATE CAKE (Columns Layout)
+%----------------------------------------------------------------------------------------
+
+\recipe{%
+	image={../images/recipes/chocolate-cake.jpg},
+	imageheight={0.5\paperheight},
+	imageoverlayspace={0.45\paperheight},
+	title = {Dekadente Schokoladentorte},
+	indexes = {Dekadente Schokoladentorte, Schokoladentorte, Kuchen, Rezepte!Desserts, Schokolade, Kakao, Buttercreme, Amerikanische Küche, Festtagskuchen, Gebackene Gerichte},
+	description = {Eine reichhaltige, saftige Schokoladentorte mit glatter Schokoladen-Buttercreme. Dieser Hingucker ist perfekt für Geburtstage und besondere Feiern.},
+	serves = {12},
+	preptime = {30 Min.},
+	cookingtime = {35 Min.},
+	difficulty = {Fortgeschritten},
+	origin = {USA},
+	tags = {Dessert, Schokolade, Kuchen, Feier, Vorbereitung möglich},
+	equipment = {23 cm runde Kuchenformen},
+	ingredients = {
+			\ingredientsection{Kuchen}
+			\ingredient{Weizenmehl (Type 405)}[480][ml]
+			\ingredient{Kristallzucker}[480][ml]
+			\ingredient{ungesüßtes Kakaopulver}[180][ml]
+			\ingredient{Natron}[2][TL]
+			\ingredient{Backpulver}[1][TL]
+			\ingredient{Salz}[1][TL]
+			\ingredient{große Eier\note{Für beste Ergebnisse bringen Sie alle Zutaten vor Beginn auf Raumtemperatur.}}[2]
+			\ingredient{Buttermilch}[240][ml]
+			\ingredient{starker schwarzer Kaffee}[240][ml][heiß]
+			\ingredient{Pflanzenöl}[120][ml]
+			\ingredient{Vanilleextrakt}[2][TL]
+
+			\ingredientsection{Glasur}
+			\ingredient{ungesalzene Butter}[240][ml][weich\note{Die Kuchenböden können einen Tag im Voraus zubereitet, in Frischhaltefolie eingewickelt und bei Raumtemperatur aufbewahrt werden.}]
+			\ingredient{Puderzucker}[840][ml]
+			\ingredient{ungesüßtes Kakaopulver}[120][ml]
+			\ingredient{Sahne}[120][ml]
+			\ingredient{Vanilleextrakt}[2][TL]
+			\ingredient{Salz}[1/4][TL]
+		},
+	instructions ={
+			\instructionsection{Kuchen zubereiten}
+			\instruction{Heizen Sie den Ofen auf 175 °C vor. Fetten und bemehlen Sie zwei 23 cm runde Kuchenformen.}
+			\instruction{Verquirlen Sie in einer großen Schüssel Mehl, Zucker, Kakaopulver, Natron, Backpulver und Salz.}
+			\instruction{Fügen Sie Eier, Buttermilch, heißen Kaffee, Öl und Vanilleextrakt hinzu. Schlagen Sie mit einem elektrischen Mixer bei mittlerer Geschwindigkeit 2 Minuten. Der Teig wird dünn sein.}
+			\instruction{Gießen Sie den Teig gleichmäßig in die vorbereiteten Formen. Backen Sie 30-35 Minuten, bis ein Zahnstocher, der in die Mitte gesteckt wird, sauber herauskommt.}
+			\instruction{Lassen Sie sie 10 Minuten in den Formen abkühlen, stürzen Sie sie dann auf Kuchenroste zum vollständigen Abkühlen.}
+
+			\instructionsection{Glasur zubereiten}
+			\instruction{Schlagen Sie die Butter mit einem elektrischen Mixer cremig und glatt, etwa 2 Minuten.}
+			\instruction{Sieben Sie Puderzucker und Kakaopulver zusammen. Geben Sie es nach und nach zur Butter, abwechselnd mit Sahne.}
+			\instruction{Fügen Sie Vanilleextrakt und Salz hinzu. Schlagen Sie bei hoher Geschwindigkeit 3-4 Minuten, bis es leicht und luftig ist.}
+
+			\instructionsection{Zusammensetzen}
+			\instruction{Legen Sie einen Kuchenboden auf eine Servierplatte. Bestreichen Sie ihn mit etwa 240 ml Glasur.}
+			\instruction{Setzen Sie den zweiten Kuchenboden darauf. Glasieren Sie die Oberseite und die Seiten des gesamten Kuchens mit der restlichen Glasur.}
+			\instruction{Stellen Sie ihn mindestens 30 Minuten in den Kühlschrank, bevor Sie ihn schneiden. Bringen Sie ihn vor dem Servieren auf Raumtemperatur.}
+		}
+}
+
+
+%----------------------------------------------------------------------------------------------------------
+
+
+%----------------------------------------------------------------------------------------
+%	RECIPE EXAMPLE - TIRAMISU (Simple Layout, No Image)
+%----------------------------------------------------------------------------------------
+
+\makeimagepage{
+	image={../images/recipes/tiramisu.jpg},
+	caption = {Classic Tiramisu}
+}
+
+\recipe{%
+	layout={simple},
+	title = {Klassisches Tiramisu},
+	indexes = {Klassisches Tiramisu, Tiramisu, Rezepte!Desserts, Kaffee, Mascarpone, Löffelbiskuits, Italienische Küche, Desserts ohne Backen, Vorbereitbare Gerichte},
+	description = {Das beliebte italienische Dessert mit Schichten aus kaffegetränkten Löffelbiskuits und cremigem Mascarpone. Ein Dessert zum Vorbereiten, das mit der Zeit noch besser wird.},
+	serves = {8-10},
+	preptime = {30 Min.},
+	difficulty = {Mittelstufe},
+	origin = {Italien},
+	tags = {Italienisch, Dessert, Kaffee, Ohne Backen, Vorbereitung möglich},
+	equipment = {23x33 cm Form},
+	extrainstructioninfo = {Tiramisu muss mindestens 4 Stunden gekühlt werden, aber über Nacht ist am besten. Dies ermöglicht es den Aromen, sich zu verbinden, und den Löffelbiskuits, perfekt weich zu werden. Verwenden Sie hochwertigen Espresso oder starken Kaffee für den besten Geschmack.},
+	ingredients = {
+			\ingredientsection{Cremeschicht}
+			\ingredient{große Eigelb}[6]
+			\ingredient{Kristallzucker}[180][ml]
+			\ingredient{Mascarpone}[320][ml][Raumtemperatur]
+			\ingredient{Sahne}[480][ml][kalt]
+
+			\ingredientsection{Kaffeeschicht}
+			\ingredient{starker Espresso oder Kaffee}[480][ml][abgekühlt\note{Verwenden Sie hochwertigen Espresso oder starken Kaffee für den besten Geschmack.}]
+			\ingredient{Kaffeelikör}[3][EL][(optional)]
+			\ingredient{Löffelbiskuits (Savoiardi)}[40-48]
+
+			\ingredientsection{Topping}
+			\ingredient{ungesüßtes Kakaopulver}[2][EL]
+			\ingredient{Zartbitterschokoladen-Raspeln}[][][(optional)]
+		},
+	instructions ={
+			\instruction{Schlagen Sie Eigelb und Zucker in einer hitzebeständigen Schüssel. Stellen Sie sie über einen Topf mit köchelndem Wasser (Wasserbadmethode) und schlagen Sie ständig 8-10 Minuten, bis die Masse dick und hellgelb ist. Nehmen Sie sie von der Hitze und lassen Sie sie etwas abkühlen.}
+			\instruction{Fügen Sie Mascarpone zur Eimischung hinzu und schlagen Sie, bis es glatt und gut vermischt ist. Stellen Sie beiseite.}
+			\instruction{Schlagen Sie in einer separaten Schüssel die Sahne steif. Heben Sie die Schlagsahne vorsichtig in drei Zugaben unter die Mascarpone-Mischung.}
+			\instruction{Kombinieren Sie abgekühlten Espresso mit Kaffeelikör (falls verwendet) in einer flachen Schüssel.}
+			\instruction{Tauchen Sie jeden Löffelbiskuit kurz in die Kaffeemischung (etwa 2 Sekunden pro Seite) und arrangieren Sie sie in einer einzigen Schicht in einer 23x33 cm Form.}
+			\instruction{Verteilen Sie die Hälfte der Mascarpone-Creme über den Löffelbiskuits. Wiederholen Sie mit einer weiteren Schicht getränkter Löffelbiskuits und der restlichen Creme.}
+			\instruction{Bedecken Sie mit Frischhaltefolie und stellen Sie mindestens 4 Stunden oder über Nacht in den Kühlschrank.\note{Kühlung über Nacht ist am besten, da sich die Aromen verbinden und die Löffelbiskuits perfekt weich werden.}}
+			\instruction{Bestäuben Sie vor dem Servieren großzügig mit Kakaopulver und garnieren Sie mit Schokoladen-Raspeln, falls gewünscht.}
+		}
+}
+
+
+%----------------------------------------------------------------------------------------------------------
+
+
+%----------------------------------------------------------------------------------------
+%	RECIPE EXAMPLE - APPLE PIE (Columns Layout with Image, Multiple Sections)
+%----------------------------------------------------------------------------------------
+
+\recipe{%
+	title = {Klassischer Apfelkuchen},
+	indexes = {Klassischer Apfelkuchen, Apfelkuchen, Kuchen, Rezepte!Desserts, Äpfel, Zimt, Gebäck, Amerikanische Küche, Herbstrezepte, Gebackene Gerichte},
+	description = {Ein traditioneller amerikanischer Apfelkuchen mit knusprigem, buttrigem Teig und perfekt gewürzter Apfelfüllung. Dies ist Comfort Food vom Feinsten.},
+	serves = {8},
+	preptime = {45 Min.},
+	cookingtime = {55 Min.},
+	difficulty = {Fortgeschritten},
+	origin = {USA},
+	tags = {Dessert, Kuchen, Amerikanisch, Herbst, Gebacken, Vorbereitung möglich},
+	ingredients = {
+			\ingredientsection{Mürbeteig}
+			\ingredient{Weizenmehl (Type 405)}[600][ml]
+			\ingredient{Salz}[1][TL]
+			\ingredient{Kristallzucker}[1][EL]
+			\ingredient{kalte ungesalzene Butter}[240][ml][gewürfelt\note{Für den knusprigsten Teig achten Sie darauf, dass alle Zutaten kalt sind und bearbeiten Sie den Teig so wenig wie möglich.}]
+			\ingredient{Eiswasser}[6-8][EL]
+
+			\ingredientsection{Apfelfüllung}
+			\ingredient{in Scheiben geschnittene Äpfel (Granny Smith und Honeycrisp-Mischung)}[1,4-1,7][Liter]
+			\ingredient{Kristallzucker}[160][ml]
+			\ingredient{Weizenmehl (Type 405)}[60][ml]
+			\ingredient{gemahlener Zimt}[1][TL]
+			\ingredient{gemahlene Muskatnuss}[1/4][TL]
+			\ingredient{Salz}[1/4][TL]
+			\ingredient{Zitronensaft}[2][EL]
+			\ingredient{Butter}[2][EL][in kleine Stücke geschnitten]
+
+			\ingredientsection{Topping}
+			\ingredient{Ei}[1][][verquirlt (für Eierstrich)]
+			\ingredient{grober Zucker}[1][EL]
+		},
+	instructions ={
+			\instructionsection{Teig zubereiten}
+			\instruction{Mixen Sie Mehl, Salz und Zucker in einer Küchenmaschine. Fügen Sie kalte Butter hinzu und mixen Sie, bis die Mischung groben Krümeln ähnelt.}
+			\instruction{Fügen Sie Eiswasser jeweils 1 Esslöffel hinzu und mixen Sie nach jeder Zugabe, bis der Teig gerade zusammenkommt.}
+			\instruction{Teilen Sie den Teig in zwei Hälften, formen Sie Scheiben, wickeln Sie sie in Frischhaltefolie und stellen Sie sie mindestens 1 Stunde in den Kühlschrank.}
+
+			\instructionsection{Füllung vorbereiten}
+			\instruction{Heizen Sie den Ofen auf 220 °C vor. Vermengen Sie in einer großen Schüssel geschnittene Äpfel mit Zucker, Mehl, Zimt, Muskatnuss, Salz und Zitronensaft.}
+
+			\instructionsection{Zusammensetzen und Backen}
+			\instruction{Rollen Sie eine Teigscheibe auf einer bemehlten Oberfläche auf 30 cm Durchmesser aus. Übertragen Sie sie in eine 23 cm Kuchenform.}
+			\instruction{Gießen Sie die Apfelfüllung in den Teig und verteilen Sie die Butterstücke darauf. Rollen Sie die zweite Teigscheibe aus und legen Sie sie über die Füllung. Schneiden Sie den Überschuss ab und drücken Sie die Ränder zum Versiegeln zusammen.}
+			\instruction{Schneiden Sie mehrere Schlitze in die obere Kruste zum Entlüften. Bestreichen Sie mit Eierstrich und bestreuen Sie mit grobem Zucker.}
+			\instruction{Stellen Sie den Kuchen auf ein Backblech. Backen Sie 20 Minuten, reduzieren Sie dann die Hitze auf 190 °C und backen Sie weitere 35-40 Minuten, bis die Kruste goldbraun ist und die Füllung blubbert.}
+			\instruction{Lassen Sie ihn mindestens 2 Stunden auf einem Kuchenrost abkühlen, bevor Sie ihn schneiden. Servieren Sie warm oder bei Raumtemperatur mit Vanilleeis.\note{Der Kuchen kann einen Tag im Voraus zubereitet und vor dem Servieren aufgewärmt werden.}}
+		}
+}
+
+
+\makeimagepage{
+	image={../images/recipes/apple-pie.jpg},
+	caption = {Classic Apple Pie}
+}
+
+%----------------------------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%	RECIPE EXAMPLE - CHOCOLATE CHIP COOKIES (Non-full page, No Image)
+%----------------------------------------------------------------------------------------
+
+\recipe{%
+	fullpage=false,
+	title = {Chocolate Chip Cookies},
+	indexes = {Chocolate Chip Cookies, Kekse, Rezepte!Desserts, Schokolade, Schnelle Rezepte, Gebackene Gerichte},
+	description = {Einfache, klassische Schokoladen-Cookies, die an den Rändern knusprig und in der Mitte weich sind. Perfekt für jeden Anlass.},
+	serves = {24},
+	preptime = {15 Min.},
+	cookingtime = {10 Min.},
+	difficulty = {Anfänger},
+	origin = {USA},
+	tags = {Dessert, Kekse, Schnell, Gebacken},
+	ingredients = {
+			\ingredient{Weizenmehl (Type 405)}[540][ml]
+			\ingredient{Natron}[1][TL]
+			\ingredient{Salz}[1][TL]
+			\ingredient{Butter}[240][ml][weich]
+			\ingredient{Kristallzucker}[180][ml]
+			\ingredient{brauner Zucker}[180][ml][fest gepackt]
+			\ingredient{große Eier}[2]
+			\ingredient{Vanilleextrakt}[2][TL]
+			\ingredient{Schokoladenchips}[480][ml]
+		},
+	instructions ={
+			\instruction{Heizen Sie den Ofen auf 190 °C vor.}
+			\instruction{Vermischen Sie in einer kleinen Schüssel Mehl, Natron und Salz. Stellen Sie beiseite.}
+			\instruction{Schlagen Sie in einer großen Schüssel Butter, Kristallzucker und braunen Zucker cremig.}
+			\instruction{Fügen Sie Eier und Vanilleextrakt hinzu und schlagen Sie gut.}
+			\instruction{Mischen Sie die Mehlmischung schrittweise unter. Rühren Sie Schokoladenchips ein.}
+			\instruction{Geben Sie gehäufte Esslöffel auf ungefettete Backbleche.}
+			\instruction{Backen Sie 9-11 Minuten oder bis sie goldbraun sind. Lassen Sie sie 2 Minuten auf den Backblechen abkühlen, bevor Sie sie auf Kuchenroste legen.}
+		}
+}
+
+%----------------------------------------------------------------------------------------------------------
+
+\vspace*{0.01\textheight}
+\begin{center}
+	\rule{100pt}{0.5pt}
+\end{center}
+\vspace*{0.002\textheight}
+
+%----------------------------------------------------------------------------------------
+%	RECIPE EXAMPLE - LEMONADE (Non-full page, No Image)
+%----------------------------------------------------------------------------------------
+
+\recipe{%
+	fullpage=false,
+	layout={simple},
+	title = {Frische Limonade},
+	indexes = {Frische Limonade, Limonade, Getränke, Rezepte!Desserts, Zitrone, Rezepte ohne Kochen, Erfrischende Getränke},
+	description = {Eine erfrischende, hausgemachte Limonade, die perfekt süß und säuerlich ist. Ideal für heiße Sommertage.},
+	serves = {6},
+	preptime = {10 Min.},
+	difficulty = {Anfänger},
+	origin = {Zeitgenössisch},
+	tags = {Getränk, Ohne Kochen, Schnell, Erfrischend},
+	ingredients = {
+			\ingredient{frischer Zitronensaft (ca. 6-8 Zitronen)}[240][ml]
+			\ingredient{Kristallzucker}[240][ml]
+			\ingredient{kaltes Wasser}[1,2][Liter]
+			\ingredient{Eiswürfel}
+			\ingredient{Zitronenscheiben}[][][(zum Garnieren (optional))]
+		},
+	instructions ={
+			\instruction{Kombinieren Sie in einem kleinen Topf Zucker und 240 ml Wasser. Erhitzen Sie bei mittlerer Hitze unter Rühren, bis sich der Zucker vollständig aufgelöst hat. Nehmen Sie vom Herd und lassen Sie abkühlen.}
+			\instruction{Kombinieren Sie in einem großen Krug den abgekühlten Zuckersirup, frischen Zitronensaft und die restlichen 960 ml kaltes Wasser.}
+			\instruction{Rühren Sie gut um und stellen Sie in den Kühlschrank, bis es gekühlt ist, oder servieren Sie sofort über Eis.}
+			\instruction{Garnieren Sie mit Zitronenscheiben, falls gewünscht. Passen Sie die Süße an, indem Sie nach Geschmack mehr Zucker oder Wasser hinzufügen.}
+		}
+}
+
+%----------------------------------------------------------------------------------------------------------
+
+\clearpage
+
+\makeimagepage{
+	image={../images/recipes/chocolate-chip-cookies.jpg},
+	caption = {Chocolate Chip Cookies}
+}
+
+%----------------------------------------------------------------------------------------
+%	CONVERSION TABLE
+%----------------------------------------------------------------------------------------
+
+\makeconversionpage{
+	title={Umrechnungstabellen}
+}
+
+%----------------------------------------------------------------------------------------
+%	INDEX
+%----------------------------------------------------------------------------------------
+
+\printindex
+
+%----------------------------------------------------------------------------------------
+%	BACK COVER
+%----------------------------------------------------------------------------------------
+
+\makebackcoverpage{
+	topcontent={
+			{\fontsize{24pt}{28pt}\sourcesanspro\bfseries\selectfont\color{white}\MakeUppercase{Über dieses Buch}}\par
+			\vspace{0.02\textheight}
+			Dieses Kochbuch repräsentiert eine Sammlung geschätzter Rezepte, die über Generationen weitergegeben wurden, jedes mit einer Geschichte von Familientreffen, Feiertagsfeiern und alltäglichen Momenten, die durch das Essen, das wir teilen, zu etwas Besonderem werden. Von einfachen Wohlfühlgerichten bis hin zu aufwendigen Festessen wurden diese Rezepte bei unzähligen Mahlzeiten getestet, verfeinert und perfektioniert.\newline\newline
+			Ob Sie ein erfahrener Koch sind oder gerade erst Ihre kulinarische Reise beginnen, wir hoffen, dass diese Rezepte Freude, Inspiration und köstliche Ergebnisse in Ihre Küche bringen.
+		},
+	image={../images/book/back-cover.jpg},
+	imageopacity={0.8},
+	imageposition={right},
+	columnratio={0.5,0.5},
+	verticalsplit={0.5},
+	bottomcontent={
+			\textbf{Von unserer Küche zu Ihrer:}\par
+			\vspace{0.01\textheight}
+			Beginnen Sie Ihren Morgen richtig mit unseren fluffigen \textbf{Bananen-Pfannkuchen} – ein Familienliebling, der sowohl einfach als auch befriedigend ist. Für eine besondere Wochenendleckerei müssen Sie unbedingt unseren \textbf{Klassischen French Toast} probieren, goldbraun und perfekt knusprig.\newline\newline
+			Bei den Hauptgerichten ist unsere \textbf{Spaghetti Bolognese} seit Jahrzehnten eine Sonntagsabend-Tradition, während der \textbf{Gegrillte Lachs mit Zitronen-Kräuter-Marinade} Eleganz in jedes Abendessen unter der Woche bringt. Und verpassen Sie nicht das Lieblingsdessert unserer Familie – das \textbf{Klassische Tiramisu}, das unzählige Feiern geschmückt hat und bei dem die Gäste immer nach dem Rezept fragen.\newline\newline
+			\textit{Jedes Rezept enthält detaillierte Anweisungen, Zutatenlisten und hilfreiche Tipps, um Ihren Erfolg in der Küche sicherzustellen.}
+		},
+	isbn={978-0-123456-78-9},
+	publisher={Published by Your Publisher Name},
+	copyright={© 2025 All rights reserved.},
+	textcolor={white},
+	bgcolor={darkgrey},
+	divider={true},
+	barcodeplaceholder={true}
+}
+
+\end{document}
