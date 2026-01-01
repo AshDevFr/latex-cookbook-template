@@ -45,6 +45,13 @@ The `\recipe{}` command is the heart of the template, supporting extensive custo
     ingredientitemsep={0.005\textheight}, % Optional: Ingredient spacing
     instructionitemsep={0.005\textheight}, % Optional: Instruction spacing
 
+    % Ingredient Style
+    ingredientstyle={list},             % Optional: 'list' (default), 'compact', or 'tabular'
+    ingredienttabspace={10pt},          % Optional: Space between columns in tabular mode
+    ingredienttabalign={r},             % Optional: Alignment for tabular left column ('l', 'r', 'c')
+    ingredienttabjustify={false},       % Optional: Text justification for tabular descriptions (true/false)
+    ingredientleftmargin={10pt},        % Optional: Left margin for list/compact styles
+
     % Content (Required)
     ingredients={
         \ingredient{Ingredient 1}
@@ -273,6 +280,45 @@ ingredientitemsep={2pt}               % Fixed spacing
 instructionitemsep={0.005\textheight}  % Vertical space between instructions
 instructionitemsep={4pt}               % Fixed spacing
 ```
+
+## Ingredient Style
+
+Override the ingredient list style for individual recipes:
+
+### Ingredient Style Selection
+
+```latex
+ingredientstyle={list}     % Bullet point list (default)
+ingredientstyle={compact}  % Simple list without bullets
+ingredientstyle={tabular}  % Two-column table format
+```
+
+### Tabular Style Options
+
+When using `ingredientstyle={tabular}`, customize the column spacing, alignment, and text justification:
+
+```latex
+ingredienttabspace={10pt}  % Space between quantity and name columns (default)
+ingredienttabspace={15pt}  % Wider spacing
+
+ingredienttabalign={r}     % Right-align quantities (default)
+ingredienttabalign={l}     % Left-align quantities
+ingredienttabalign={c}     % Center-align quantities
+
+ingredienttabjustify={false}  % Ragged-right text for descriptions (default, better for long words)
+ingredienttabjustify={true}   % Justified text for descriptions (may cause awkward spacing)
+```
+
+### List/Compact Style Options
+
+When using `ingredientstyle={list}` or `ingredientstyle={compact}`:
+
+```latex
+ingredientleftmargin={10pt}  % Left margin (default)
+ingredientleftmargin={15pt}  % Wider margin
+```
+
+For more details on ingredient styles and global configuration, see [Recipe Elements](recipe-elements.md#ingredient-list-styles).
 
 ## Extra Information
 

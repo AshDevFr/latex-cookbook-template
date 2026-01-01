@@ -6,6 +6,87 @@ This guide covers the building blocks of recipes: ingredients, instructions, sec
 
 The `\ingredient` command supports two syntax formats for maximum flexibility.
 
+### Ingredient List Styles
+
+The template supports three different styles for displaying ingredient lists:
+
+1. **`list`** (default): Traditional bullet point list
+2. **`compact`**: Simple list without bullets, with hanging indent
+3. **`tabular`**: Two-column table format with quantities aligned
+
+#### Setting the Global Ingredient Style
+
+Set the default style for all recipes using a document class option:
+
+```latex
+\documentclass[ingredientstyle=tabular]{CookBook}
+```
+
+Or change it in the document preamble:
+
+```latex
+\setingredientstyle{compact}
+```
+
+#### Override Style Per Recipe
+
+Override the ingredient style for individual recipes:
+
+```latex
+\recipe{
+    ingredientstyle={tabular},
+    ...
+}
+```
+
+#### Tabular Style Configuration
+
+When using the `tabular` style, you can customize the spacing and alignment:
+
+```latex
+% Set spacing between quantity and ingredient name columns (default: 10pt)
+\setingredienttabspace{15pt}
+
+% Set alignment for the quantity column: l (left), r (right), c (center)
+% Default is 'r' (right-aligned quantities)
+\setingredienttabalign{r}
+
+% Set text justification for ingredient descriptions: true (justified), false (ragged-right)
+% Default is 'false' (ragged-right, better for long words)
+\setingredienttabjustify{false}
+```
+
+These can also be overridden per recipe:
+
+```latex
+\recipe{
+    ingredientstyle={tabular},
+    ingredienttabspace={20pt},
+    ingredienttabalign={l},
+    ingredienttabjustify={false},
+    ...
+}
+```
+
+#### List and Compact Style Configuration
+
+For `list` and `compact` styles, you can adjust the left margin:
+
+```latex
+% Set left margin for ingredient list (default: 10pt)
+\setingredientleftmargin{15pt}
+```
+
+Or override per recipe:
+
+```latex
+\recipe{
+    ingredientstyle={list},
+    ingredientleftmargin={20pt},
+    ...
+}
+```
+
 ### Basic Format (Backward Compatible)
 
 Simple single-argument format for quick ingredient entry:
