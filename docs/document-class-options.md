@@ -6,13 +6,14 @@ The `CookBook` class extends `extbook` and accepts various options for customizi
 
 ```latex
 \documentclass[
-    letterpaper,  % Paper size: 'letterpaper' or 'a4paper'
-    10pt,         % Font size: 8pt, 9pt, 10pt, 11pt, 12pt, 14pt, 17pt, 20pt
-    twoside,      % Two-sided printing (affects margins and page numbering)
-    english,      % Language: 'english' or 'french' (default: english)
-    left=even,    % Left pages: 'even' or 'odd' (default: even)
-    startpage=1,  % Starting page number: 1 or 2 (default: 1)
-    bleed,        % Enable bleed margins for print production (default: disabled)
+    letterpaper,             % Paper size: 'letterpaper' or 'a4paper'
+    10pt,                    % Font size: 8pt, 9pt, 10pt, 11pt, 12pt, 14pt, 17pt, 20pt
+    twoside,                 % Two-sided printing (affects margins and page numbering)
+    english,                 % Language: 'english' or 'french' (default: english)
+    left=even,               % Left pages: 'even' or 'odd' (default: even)
+    startpage=1,             % Starting page number: 1 or 2 (default: 1)
+    bleed,                   % Enable bleed margins for print production (default: disabled)
+    ingredientstyle=list,    % Ingredient list style: 'list', 'compact', or 'tabular' (default: list)
 ]{CookBook}
 ```
 
@@ -85,6 +86,37 @@ All text labels (Serves, Prep, Cooking, etc.) are automatically translated based
 ```
 
 See [Translation and Language Support](translation.md) for detailed language customization.
+
+## Ingredient Style Options
+
+Control how ingredient lists are displayed throughout the cookbook:
+
+- `ingredientstyle=list` - Traditional bullet point list (default)
+- `ingredientstyle=compact` - Simple list without bullets, with hanging indent
+- `ingredientstyle=tabular` - Two-column table format with quantities aligned
+
+**Example:**
+
+```latex
+\documentclass[ingredientstyle=tabular]{CookBook}
+```
+
+You can also set the ingredient style in the document preamble:
+
+```latex
+\setingredientstyle{compact}
+```
+
+And override it per recipe:
+
+```latex
+\recipe{
+    ingredientstyle={tabular},
+    ...
+}
+```
+
+See [Recipe Elements](recipe-elements.md#ingredient-list-styles) for detailed information about ingredient styles and customization options.
 
 ## Bleed Options
 

@@ -5,6 +5,43 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+[3.1.0]: https://github.com/AshDevFr/latex-cookbook-template/compare/v3.0.2...v3.1.0
+
+## [3.1.0] - 2025-12-31
+
+### Added
+
+- **Ingredient list styles**: Three different display styles for ingredient lists
+  - `list` (default): Traditional bullet point list - the classic ingredient list format with bullet points
+  - `compact`: Simple list without bullets, with hanging indent - cleaner look for minimalist designs
+  - `tabular`: Two-column table format with quantities aligned - professional look with aligned columns
+
+- **Document class option for ingredient style**:
+  - `ingredientstyle=list|compact|tabular` - Set the default ingredient style for all recipes
+  - Example: `\documentclass[ingredientstyle=tabular]{CookBook}`
+
+- **Global ingredient style commands**:
+  - `\setingredientstyle{list|compact|tabular}` - Change ingredient style in document preamble
+  - `\setingredienttabspace{<length>}` - Set spacing between columns in tabular mode (default: 10pt)
+  - `\setingredienttabalign{l|r|c}` - Set alignment for tabular left column: l (left), r (right), c (center). Default is 'r' (right-aligned)
+  - `\setingredientleftmargin{<length>}` - Set left margin for list/compact styles (default: 10pt)
+
+- **Per-recipe ingredient style overrides**:
+  - `ingredientstyle={list|compact|tabular}` - Override ingredient style for individual recipes
+  - `ingredienttabspace={<length>}` - Override tabular column spacing per recipe
+  - `ingredienttabalign={l|r|c}` - Override tabular alignment per recipe
+  - `ingredientleftmargin={<length>}` - Override left margin for list/compact styles per recipe
+
+### Changed
+
+- Ingredient sections (`\ingredientsection`) now work correctly in all three styles (list, compact, and tabular)
+- Tabular style uses responsive column widths with the left column auto-sized and right column flexible
+- Updated sample files to demonstrate the new ingredient styles
+- Updated documentation with comprehensive ingredient style information:
+  - [Document Class Options](docs/document-class-options.md) - New ingredient style class option
+  - [Recipe Command](docs/recipe-command.md) - Per-recipe ingredient style parameters
+  - [Recipe Elements](docs/recipe-elements.md) - Detailed ingredient style guide with examples
+
 [3.0.2]: https://github.com/AshDevFr/latex-cookbook-template/compare/v3.0.1...v3.0.2
 
 ## [3.0.2] - 2025-12-29

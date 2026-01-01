@@ -3,8 +3,8 @@
 %   LaTeX Class File
 %----------------------------------------------------------------------------------------
 %
-%   Version:     3.0.2
-%   Date:        December 29, 2025
+%   Version:     3.1.0
+%   Date:        December 31, 2025
 %   Author:      AshDevFr
 %   GitHub:      @AshDevFr
 %   License:     CC BY-NC-SA 4.0
@@ -21,7 +21,7 @@
 %----------------------------------------------------------------------------------------
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{CookBook}[2025/12/29 v3.0.2 CookBook Template]
+\ProvidesClass{CookBook}[2025/12/31 v3.1.0 CookBook Template]
 
 %----------------------------------------------------------------------------------------
 %	LANGUAGE OPTIONS
@@ -36,6 +36,11 @@
 \DeclareOption{french}{
 	\def\cookbook@language{french}
 }
+
+% Ingredient style options (list, compact, tabular)
+\DeclareOption{ingredientstyle=list}{\def\cookbook@ingredientstyle{list}}
+\DeclareOption{ingredientstyle=compact}{\def\cookbook@ingredientstyle{compact}}
+\DeclareOption{ingredientstyle=tabular}{\def\cookbook@ingredientstyle{tabular}}
 
 \NewDocumentCommand{\setbooklanguage}{m}{%
 	\def\cookbook@language{#1}%
@@ -57,6 +62,16 @@
 \def\cookbook@columnsep{0.05\textwidth}
 \def\cookbook@ingredientitemsep{0.003\textheight}
 \def\cookbook@instructionitemsep{0.005\textheight}
+
+% Ingredient style configuration
+% Valid styles: list, compact, tabular
+\def\cookbook@ingredientstyle{list}
+\newlength{\cookbook@ingredienttabspace}
+\setlength{\cookbook@ingredienttabspace}{10pt} % Using pt instead of em since em isn't defined until fonts are loaded
+\def\cookbook@ingredienttabalign{r} % Default alignment for tabular left column: l (left), r (right), c (center)
+\def\cookbook@ingredienttabjustify{false} % Default text justification for tabular description column: true (justified), false (ragged-right)
+\newlength{\cookbook@ingredientleftmargin}
+\setlength{\cookbook@ingredientleftmargin}{10pt}
 
 % Bleed configuration
 % Default bleed value (0.125in)
@@ -168,6 +183,36 @@
 	\def\cookbook@instructionitemsep{#1}%
 }
 
+% Command to override ingredient style globally
+% Usage: \setingredientstyle{list|compact|tabular}
+\NewDocumentCommand{\setingredientstyle}{m}{%
+	\def\cookbook@ingredientstyle{#1}%
+}
+
+% Command to override ingredient tabular spacing globally
+% Usage: \setingredienttabspace{3em} or \setingredienttabspace{20pt}
+\NewDocumentCommand{\setingredienttabspace}{m}{%
+	\setlength{\cookbook@ingredienttabspace}{#1}%
+}
+
+% Command to override ingredient tabular alignment globally
+% Usage: \setingredienttabalign{l} or \setingredienttabalign{r} or \setingredienttabalign{c}
+\NewDocumentCommand{\setingredienttabalign}{m}{%
+	\def\cookbook@ingredienttabalign{#1}%
+}
+
+% Command to override ingredient tabular text justification globally
+% Usage: \setingredienttabjustify{true} or \setingredienttabjustify{false}
+\NewDocumentCommand{\setingredienttabjustify}{m}{%
+	\def\cookbook@ingredienttabjustify{#1}%
+}
+
+% Command to override ingredient left margin for list/compact styles
+% Usage: \setingredientleftmargin{15pt} or \setingredientleftmargin{1em}
+\NewDocumentCommand{\setingredientleftmargin}{m}{%
+	\setlength{\cookbook@ingredientleftmargin}{#1}%
+}
+
 \setlength{\parindent}{0pt}
 
 \pagestyle{plain}
@@ -196,6 +241,9 @@
 
 \usepackage{tabularx} % Flexible-width tables with automatic column sizing
 \usepackage{booktabs} % Professional table formatting with improved spacing
+
+% Define new column type for ragged-right X columns (better for long words)
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
 
 %----------------------------------------------------------------------------------------
 %	LANGUAGE STRINGS (using babel)
@@ -820,77 +868,117 @@
 % Flag to track first ingredient section for spacing control
 \newif\iffirstingredientsection
 \NewDocumentCommand{\ingredientsection}{m}{%
-\item[]
-\iffirstingredientsection%
-	\firstingredientsectionfalse%
-\else%
-	\vspace{0.01\textheight}%
-\fi%
-{\bfseries{#1}}\par\vspace{0.005\textheight}%
+	\ifingredientsintabular%
+		\vspace*{-0.027\textheight}%
+		% Tabular mode: section as a row spanning both columns
+		\iffirstingredientsection%
+			\global\firstingredientsectionfalse%
+			\\[-\recipe@ingredientitemsep]% Negative space for first section
+		\else%
+			\\[0.01\textheight]% Space before subsequent sections (matches list mode)
+		\fi%
+		\multicolumn{2}{@{}l@{}}{\bfseries #1}%
+		\\[0.005\textheight]% Space after section header (matches list mode)
+	\else%
+		% List/compact mode: section as empty item
+		\item[]%
+		\iffirstingredientsection%
+			\global\firstingredientsectionfalse%
+		\else%
+			\vspace{0.01\textheight}%
+		\fi%
+		{\bfseries{#1}}\par\vspace{0.005\textheight}%
+	\fi%
 } % Format ingredient section headers with spacing
 
 \NewDocumentCommand{\ingredient}{m O{} O{} O{}}{
 	\iffirstingredientsection%
-		\firstingredientsectionfalse%
+		\global\firstingredientsectionfalse%
 	\fi%
-	\item
-	% Check if this is old format (only first argument) or new format
-	\ifblank{#2}{%
-		\ifblank{#3}{%
-			\ifblank{#4}{%
-				% Single argument mode (backward compatibility)
-				{\textit{\small #1}}%
+	\ifingredientsintabular%
+		% Tabular mode: format as table row
+		\ingredient@formattabular{#1}{#2}{#3}{#4}%
+	\else%
+		% List/compact mode: format as list item
+		\item
+		% Check if this is old format (only first argument) or new format
+		\ifblank{#2}{%
+			\ifblank{#3}{%
+				\ifblank{#4}{%
+					% Single argument mode (backward compatibility)
+					{\textit{\small #1}}%
+				}{%
+					% #4 provided, use new format
+					\ingredient@formatmulti{#1}{#2}{#3}{#4}%
+				}%
 			}{%
-				% #4 provided, use new format
+				% #3 provided, use new format
 				\ingredient@formatmulti{#1}{#2}{#3}{#4}%
 			}%
 		}{%
-			% #3 provided, use new format
+			% #2 provided, use new format
 			\ingredient@formatmulti{#1}{#2}{#3}{#4}%
 		}%
-	}{%
-		% #2 provided, use new format
-		\ingredient@formatmulti{#1}{#2}{#3}{#4}%
-	}%
+	\fi%
 } % Format individual recipe ingredient entries
 
-% Helper command to format multi-argument ingredients
+% Helper command to format multi-argument ingredients for list/compact styles
 % Format: <ingredient name>[quantity][unit][note]
 % Output: <quantity> <unit> <ingredient name>, <note>
 \NewDocumentCommand{\ingredient@formatmulti}{m m m m}{%
+	% Trim all values first
+	\def\ingredient@name{#1}\trim@spaces@in\ingredient@name%
+	\def\ingredient@qty{#2}\trim@spaces@in\ingredient@qty%
+	\def\ingredient@unit{#3}\trim@spaces@in\ingredient@unit%
+	\def\ingredient@note{#4}\trim@spaces@in\ingredient@note%
+
 	{\textit{\small
-				% Trim all values first
-				\def\ingredient@name{#1}\trim@spaces@in\ingredient@name%
-				\def\ingredient@qty{#2}\trim@spaces@in\ingredient@qty%
-				\def\ingredient@unit{#3}\trim@spaces@in\ingredient@unit%
-				\def\ingredient@note{#4}\trim@spaces@in\ingredient@note%
-				% Initialize accumulator
-				\def\ingredient@output{}%
-				% Build the main part (quantity + unit + name) with spaces
-				\ifdefempty{\ingredient@qty}{}{%
-					\edef\ingredient@output{\ingredient@qty}%
+			% Initialize accumulator
+			\def\ingredient@output{}%
+			% Build the main part (quantity + unit + name) with spaces
+			\ifdefempty{\ingredient@qty}{}{%
+				\edef\ingredient@output{\ingredient@qty}%
+			}%
+			\ifdefempty{\ingredient@unit}{}{%
+				\ifdefempty{\ingredient@output}{%
+					\edef\ingredient@output{\ingredient@unit}%
+				}{%
+					\edef\ingredient@output{\ingredient@output\space\ingredient@unit}%
 				}%
-				\ifdefempty{\ingredient@unit}{}{%
-					\ifdefempty{\ingredient@output}{%
-						\edef\ingredient@output{\ingredient@unit}%
-					}{%
-						\edef\ingredient@output{\ingredient@output\space\ingredient@unit}%
-					}%
+			}%
+			\ifdefempty{\ingredient@name}{}{%
+				\ifdefempty{\ingredient@output}{%
+					\edef\ingredient@output{\ingredient@name}%
+				}{%
+					\edef\ingredient@output{\ingredient@output\space\ingredient@name}%
 				}%
-				\ifdefempty{\ingredient@name}{}{%
-					\ifdefempty{\ingredient@output}{%
-						\edef\ingredient@output{\ingredient@name}%
-					}{%
-						\edef\ingredient@output{\ingredient@output\space\ingredient@name}%
-					}%
-				}%
-				% Output the accumulated main part
-				\ingredient@output%
-				% Add note with comma separator if present
-				\ifdefempty{\ingredient@note}{}{%
-					, \ingredient@note%
-				}%
-			}}%
+			}%
+			% Output the accumulated main part
+			\ingredient@output%
+			% Add note with comma separator if present
+			\ifdefempty{\ingredient@note}{}{%
+				, \ingredient@note%
+			}%
+		}}%
+}
+
+% Helper command to format ingredients for tabular style
+% Format: <ingredient name>[quantity][unit][note]
+% Output: <quantity> <unit> & <ingredient name>, <note> \\
+\NewDocumentCommand{\ingredient@formattabular}{m m m m}{%
+	\textit{\small%
+		\ifblank{#2}{}{#2}%
+		\ifblank{#2}{}{%
+			\ifblank{#3}{}{ }%
+		}%
+		\ifblank{#3}{}{#3}%
+	} & \textit{\small%
+		#1%
+		\ifblank{#1}{}{%
+			\ifblank{#4}{}{, }%
+		}%
+		\ifblank{#4}{}{#4}%
+	} \\[\recipe@ingredientitemsep]%
 }
 
 \newif\iffirstinstructionsection
@@ -935,17 +1023,26 @@
 % Usage: \ingredient{2 cups flour\note{Use all-purpose flour for best results}}
 %        \instruction{Mix ingredients\note{Be careful not to overmix}}
 \NewDocumentCommand{\note}{m}{%
-	% Increment the note counter globally to persist across environments
-	\global\advance\c@recipenote by 1\relax
-	% Store the note text (label will be added by enumerate environment)
-	% Append item and note text to token list
-	% Only protect the note text from expansion; \item and \par should be stored as tokens
-	\expandafter\global\expandafter\recipe@notestoks\expandafter{%
-		\the\recipe@notestoks
-		\item\space
-		\unexpanded{#1}%
-		\par
-	}%
+	% Only process notes if NOT in a tabularx trial run
+	% tabularx sets \@footnotetext to \TX@trial@ftn during trial runs
+	\ifx\@footnotetext\TX@trial@ftn
+		% We're in a tabularx trial run - don't add to notes, but still increment counter
+		% to maintain consistent numbering across trials
+		\global\advance\c@recipenote by 1\relax
+	\else
+		% Not in trial run or not in tabularx - process note normally
+		% Increment the note counter globally to persist across environments
+		\global\advance\c@recipenote by 1\relax
+		% Store the note text (label will be added by enumerate environment)
+		% Append item and note text to token list
+		% Only protect the note text from expansion; \item and \par should be stored as tokens
+		\expandafter\global\expandafter\recipe@notestoks\expandafter{%
+			\the\recipe@notestoks
+			\item\space
+			\unexpanded{#1}%
+			\par
+		}%
+	\fi
 	% Output the superscript number
 	\textsuperscript{\tiny\arabic{recipenote}}%
 }
@@ -1662,6 +1759,11 @@
 \define@key{recipe}{indexes}{\def\recipe@indexes{#1}}
 \define@key{recipe}{ingredientitemsep}{\def\recipe@ingredientitemsep{#1}}
 \define@key{recipe}{instructionitemsep}{\def\recipe@instructionitemsep{#1}}
+\define@key{recipe}{ingredientstyle}{\def\recipe@ingredientstyle{#1}}
+\define@key{recipe}{ingredienttabspace}{\def\recipe@ingredienttabspace{#1}}
+\define@key{recipe}{ingredienttabalign}{\def\recipe@ingredienttabalign{#1}}
+\define@key{recipe}{ingredienttabjustify}{\def\recipe@ingredienttabjustify{#1}}
+\define@key{recipe}{ingredientleftmargin}{\def\recipe@ingredientleftmargin{#1}}
 \define@key{recipe}{fullpage}{%
 	\ifdefstring{#1}{true}{%
 		\recipe@fullpagetrue
@@ -1718,6 +1820,11 @@
 	\def\recipe@indexes{}% Default empty indexes
 	\def\recipe@ingredientitemsep{\cookbook@ingredientitemsep}% Default to global ingredient item spacing
 	\def\recipe@instructionitemsep{\cookbook@instructionitemsep}% Default to global instruction item spacing
+	\def\recipe@ingredientstyle{\cookbook@ingredientstyle}% Default to global ingredient style
+	\def\recipe@ingredienttabspace{\cookbook@ingredienttabspace}% Default to global tabular spacing
+	\def\recipe@ingredienttabalign{\cookbook@ingredienttabalign}% Default to global tabular alignment
+	\def\recipe@ingredienttabjustify{\cookbook@ingredienttabjustify}% Default to global tabular text justification
+	\def\recipe@ingredientleftmargin{\cookbook@ingredientleftmargin}% Default to global left margin
 	\recipe@fullpagetrue% Default to full page recipe
 	\recipe@clearpageaftertrue% Default to clear page after recipe
 }
@@ -1938,9 +2045,16 @@
 
 		% Ingredients list in left column
 		\switchcolumn[0] % Move to left column
-		\begin{recipeingredients}
-			\recipe@ingredients
-		\end{recipeingredients}
+		\IfStrEq{\recipe@ingredientstyle}{tabular}{%
+			\vspace*{0.004\textheight}
+			\begin{recipeingredientstabular}
+				\recipe@ingredients
+			\end{recipeingredientstabular}
+		}{%
+			\begin{recipeingredients}
+				\recipe@ingredients
+			\end{recipeingredients}
+		}%
 
 		% Instructions in right column
 		\switchcolumn[1] % Move to right column
@@ -1955,6 +2069,11 @@
 	\vspace*{0.01\textheight}
 
 	\expandafter\columnratio\expandafter{\recipe@columnratio}
+
+	% Configure column separator using recipe parameters
+	\setlength{\columnsep}{\recipe@columnsep}
+	\setlength{\columnseprule}{\recipe@columnseprule}
+	\def\columnseprulecolor{\color{\recipe@columnseprulecolor}}
 
 	\begin{paracol}{2}
 
@@ -1997,9 +2116,17 @@
 		\fi
 
 		\switchcolumn[1] % Move to right column for instructions
-		\begin{recipeingredients}
-			\recipe@ingredients
-		\end{recipeingredients}
+		\vspace*{0.002\textheight}
+		\IfStrEq{\recipe@ingredientstyle}{tabular}{%
+			\vspace*{0.003\textheight}
+			\begin{recipeingredientstabular}
+				\recipe@ingredients
+			\end{recipeingredientstabular}
+		}{%
+			\begin{recipeingredients}
+				\recipe@ingredients
+			\end{recipeingredients}
+		}%
 	\end{paracol}
 
 	\begin{center}
@@ -2149,25 +2276,83 @@
 %	INGREDIENTS LIST
 %----------------------------------------------------------------------------------------
 
+% Flag to detect if we're in tabular mode
+\newif\ifingredientsintabular
+
+% List/compact style ingredients environment
 \NewDocumentEnvironment{recipeingredients}{}{%
-	\vspace*{-0.01\textheight}
-	\firstingredientsectiontrue
-	\begin{sloppypar}%
-		\raggedright
-		\begin{enumerate}[
-				align=left,
-				leftmargin=10pt,
-				itemindent=0pt,
-				labelwidth=10pt,
-				labelsep=2pt,
-				labelindent=0pt,
-				label=\protect\textbullet,
-				itemsep=\recipe@ingredientitemsep,
-			]%
-			}{%
-		\end{enumerate}%
+\ingredientsintabularfalse%
+\vspace*{-0.01\textheight}%
+\global\firstingredientsectiontrue%
+\begin{sloppypar}%
+\raggedright%
+\IfStrEq{\recipe@ingredientstyle}{compact}{%
+	% Compact style: no bullets, hanging indent
+	\begin{enumerate}[
+		align=left,
+		leftmargin=\recipe@ingredientleftmargin,
+		itemindent=-\recipe@ingredientleftmargin,
+		labelwidth=0pt,
+		labelsep=0pt,
+		labelindent=0pt,
+		label=,
+		itemsep=\recipe@ingredientitemsep,
+	]%
+}{%
+	% List style: bullet points (default)
+	\begin{enumerate}[
+			align=left,
+			leftmargin=\recipe@ingredientleftmargin,
+			itemindent=0pt,
+			labelwidth=10pt,
+			labelsep=2pt,
+			labelindent=0pt,
+			label=\protect\textbullet,
+			itemsep=\recipe@ingredientitemsep,
+		]%
+		}%
+		}{%
+	\end{enumerate}%
 	\end{sloppypar}%
 }
+
+% Tabular style ingredients environment
+% Uses +b argument specifier to allow tabularx to work properly
+\NewDocumentEnvironment{recipeingredientstabular}{+b}{%
+\ingredientsintabulartrue%
+\vspace*{-0.01\textheight}%
+\global\firstingredientsectiontrue%
+\begin{sloppypar}%
+\raggedright%
+% Select column specification based on alignment and justification settings
+% Choose between X (justified) and Y (ragged-right) for description column
+\IfStrEq{\recipe@ingredienttabjustify}{true}{%
+	% Justified text (X column)
+	\IfStrEq{\recipe@ingredienttabalign}{l}{%
+		\begin{tabularx}{\linewidth}{@{}l@{\hspace{\recipe@ingredienttabspace}}X@{}}%
+	}{}%
+	\IfStrEq{\recipe@ingredienttabalign}{r}{%
+		\begin{tabularx}{\linewidth}{@{}r@{\hspace{\recipe@ingredienttabspace}}X@{}}%
+	}{}%
+	\IfStrEq{\recipe@ingredienttabalign}{c}{%
+		\begin{tabularx}{\linewidth}{@{}c@{\hspace{\recipe@ingredienttabspace}}X@{}}%
+	}{}%
+}{%
+	% Ragged-right text (Y column) - default
+	\IfStrEq{\recipe@ingredienttabalign}{l}{%
+		\begin{tabularx}{\linewidth}{@{}l@{\hspace{\recipe@ingredienttabspace}}Y@{}}%
+	}{}%
+	\IfStrEq{\recipe@ingredienttabalign}{r}{%
+		\begin{tabularx}{\linewidth}{@{}r@{\hspace{\recipe@ingredienttabspace}}Y@{}}%
+	}{}%
+	\IfStrEq{\recipe@ingredienttabalign}{c}{%
+		\begin{tabularx}{\linewidth}{@{}c@{\hspace{\recipe@ingredienttabspace}}Y@{}}%
+	}{}%
+}%
+#1%
+\end{tabularx}%
+\end{sloppypar}%
+}{}
 
 %----------------------------------------------------------------------------------------
 %	INSTRUCTIONS LIST

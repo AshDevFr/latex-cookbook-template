@@ -121,10 +121,12 @@ Comprehensive documentation is organized by topic in the [`docs/`](docs/) direct
 ### Documentation Index
 
 **Getting Started:**
+
 - [Document Class Options](docs/document-class-options.md) - Paper size, fonts, layout, bleed settings
 - [Build System](docs/build-system.md) - Compilation and build instructions
 
 **Page Components:**
+
 - [Cover and Preface](docs/cover-and-preface.md) - Front matter pages
 - [Chapters and Navigation](docs/chapters-and-navigation.md) - Chapter pages and table of contents
 - [Full-Page Images](docs/full-page-images.md) - Dramatic recipe images
@@ -132,17 +134,20 @@ Comprehensive documentation is organized by topic in the [`docs/`](docs/) direct
 - [Back Cover and Index](docs/back-cover-and-index.md) - Back matter pages
 
 **Recipe System:**
+
 - [Recipe Command](docs/recipe-command.md) - Main recipe command and parameters
 - [Recipe Layouts](docs/recipe-layouts.md) - Layout options and configurations
 - [Recipe Elements](docs/recipe-elements.md) - Ingredients, instructions, notes
 
 **Customization:**
+
 - [Colors](docs/colors.md) - Color definitions and usage
 - [Margins and Spacing](docs/margins-and-spacing.md) - Page layout and spacing controls
 - [Fonts](docs/fonts.md) - Font configuration
 - [Translation and Language Support](docs/translation.md) - Multi-language support and text customization
 
 **Additional Resources:**
+
 - [Complete Examples](docs/examples.md) - Full cookbook examples
 - [Troubleshooting](docs/troubleshooting.md) - Common issues and solutions
 - [CHANGELOG.md](CHANGELOG.md) - Version history and changes
@@ -219,6 +224,17 @@ The template supports print production with bleed margins.
   <tr>
     <td><img src="images/samples/cookbook-sample-print_2-3.png" alt="Print Example 1"/></td>
     <td><img src="images/samples/cookbook-sample-print_6-7.png" alt="Print Example 2"/></td>
+  </tr>
+</table>
+
+### All Styles Examples
+
+The template supports all three ingredient styles.
+
+<table>
+  <tr>
+    <td><img src="images/samples/cookbook-sample-all-styles_1-2.png" alt="All Styles Example 1"/></td>
+    <td><img src="images/samples/cookbook-sample-all-styles_3-4.png" alt="All Styles Example 2"/></td>
   </tr>
 </table>
 

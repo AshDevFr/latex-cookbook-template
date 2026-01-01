@@ -1,0 +1,266 @@
+%----------------------------------------------------------------------------------------
+%   CookBook Sample - All Styles
+%   LaTeX Sample File
+%----------------------------------------------------------------------------------------
+%
+%   Version:     3.1.0
+%   Date:        December 31, 2025
+%   Author:      AshDevFr
+%   GitHub:      @AshDevFr
+%   License:     CC BY-NC-SA 4.0
+%
+%   A sample LaTeX file for creating a beautiful cookbook with all styles.
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[
+	letterpaper,
+	10pt,
+	twoside,
+	left=odd
+]{CookBook}
+
+\begin{document}
+
+\recipe{%
+	fullpage=false,
+	title = {Scrambled Eggs (List)},
+	serves = {2},
+	preptime = {5 min},
+	origin = {Classic},
+	ingredientstyle=list,
+	ingredients={%
+			\ingredientsection{Ingredients}
+			\ingredient{eggs}[4][][large]
+			\ingredient{butter}[1][tbsp]
+			\ingredient{milk}[2][tbsp]
+			\ingredient{salt and pepper}[][][to taste]
+
+			\ingredientsection{Serving}
+			\ingredient{sliced bread}[2][slices]
+			\ingredient{butter}[1][tbsp]
+		},
+	instructions={%
+			\instruction Crack eggs into a bowl, add milk, salt, and pepper. Whisk until combined.
+			\instruction Melt butter in a non-stick pan over medium heat.
+			\instruction Pour in egg mixture and gently stir with a spatula until just set.
+		},
+}
+
+\vspace*{0.02\textheight}
+\begin{center}
+	\rule{100pt}{0.5pt}
+\end{center}
+\vspace*{0.01\textheight}
+
+\recipe{%
+	fullpage=false,
+	title = {Scrambled Eggs (Compact)},
+	serves = {2},
+	preptime = {5 min},
+	origin = {Classic},
+	ingredientstyle=compact,
+	ingredients={%
+			\ingredientsection{Ingredients}
+			\ingredient{eggs}[4][][large]
+			\ingredient{butter}[1][tbsp]
+			\ingredient{milk}[2][tbsp]
+			\ingredient{salt and pepper}[][][to taste]
+
+			\ingredientsection{Serving}
+			\ingredient{sliced bread}[2][slices]
+			\ingredient{butter}[1][tbsp]
+		},
+	instructions={%
+			\instruction Crack eggs into a bowl, add milk, salt, and pepper. Whisk until combined.
+			\instruction Melt butter in a non-stick pan over medium heat.
+			\instruction Pour in egg mixture and gently stir with a spatula until just set.
+		},
+}
+
+\clearpage
+
+\recipe{%
+	fullpage=false,
+	title = {Scrambled Eggs (Tabular Right)},
+	serves = {2},
+	preptime = {5 min},
+	origin = {Classic},
+	ingredientstyle=tabular,
+	ingredients={%
+			\ingredientsection{Ingredients}
+			\ingredient{eggs}[4][][large]
+			\ingredient{butter}[1][tbsp]
+			\ingredient{milk}[2][tbsp]
+			\ingredient{salt and pepper}[][][to taste]
+
+			\ingredientsection{Serving}
+			\ingredient{sliced bread}[2][slices]
+			\ingredient{butter}[1][tbsp]
+		},
+	instructions={%
+			\instruction Crack eggs into a bowl, add milk, salt, and pepper. Whisk until combined.
+			\instruction Melt butter in a non-stick pan over medium heat.
+			\instruction Pour in egg mixture and gently stir with a spatula until just set.
+		},
+}
+
+\vspace*{0.02\textheight}
+\begin{center}
+	\rule{100pt}{0.5pt}
+\end{center}
+\vspace*{0.01\textheight}
+
+\recipe{%
+	fullpage=false,
+	title = {Scrambled Eggs (Tabular Left)},
+	serves = {2},
+	preptime = {5 min},
+	origin = {Classic},
+	ingredientstyle=tabular,
+	ingredienttabalign=l,
+	ingredients={%
+			\ingredientsection{Ingredients}
+			\ingredient{eggs}[4][][large]
+			\ingredient{butter}[1][tbsp]
+			\ingredient{milk}[2][tbsp]
+			\ingredient{salt and pepper}[][][to taste]
+
+			\ingredientsection{Serving}
+			\ingredient{sliced bread}[2][slices]
+			\ingredient{butter}[1][tbsp]
+		},
+	instructions={%
+			\instruction Crack eggs into a bowl, add milk, salt, and pepper. Whisk until combined.
+			\instruction Melt butter in a non-stick pan over medium heat.
+			\instruction Pour in egg mixture and gently stir with a spatula until just set.
+		},
+}
+
+\clearpage
+
+\recipe{%
+	layout={simple},
+	fullpage=false,
+	title = {Scrambled Eggs (List)},
+	serves = {2},
+	preptime = {5 min},
+	origin = {Classic},
+	ingredientstyle=list,
+	ingredients={%
+			\ingredientsection{Ingredients}
+			\ingredient{eggs}[4][][large]
+			\ingredient{butter}[1][tbsp]
+			\ingredient{milk}[2][tbsp]
+			\ingredient{salt and pepper}[][][to taste]
+
+			\ingredientsection{Serving}
+			\ingredient{sliced bread}[2][slices]
+			\ingredient{butter}[1][tbsp]
+		},
+	instructions={%
+			\instruction Crack eggs into a bowl, add milk, salt, and pepper. Whisk until combined.
+			\instruction Melt butter in a non-stick pan over medium heat.
+			\instruction Pour in egg mixture and gently stir with a spatula until just set.
+		},
+}
+
+\vspace*{0.02\textheight}
+\begin{center}
+	\rule{100pt}{0.5pt}
+\end{center}
+\vspace*{0.01\textheight}
+
+\recipe{%
+	layout={simple},
+	fullpage=false,
+	title = {Scrambled Eggs (Compact)},
+	serves = {2},
+	preptime = {5 min},
+	origin = {Classic},
+	ingredientstyle=compact,
+	ingredients={%
+			\ingredientsection{Ingredients}
+			\ingredient{eggs}[4][][large]
+			\ingredient{butter}[1][tbsp]
+			\ingredient{milk}[2][tbsp]
+			\ingredient{salt and pepper}[][][to taste]
+
+			\ingredientsection{Serving}
+			\ingredient{sliced bread}[2][slices]
+			\ingredient{butter}[1][tbsp]
+		},
+	instructions={%
+			\instruction Crack eggs into a bowl, add milk, salt, and pepper. Whisk until combined.
+			\instruction Melt butter in a non-stick pan over medium heat.
+			\instruction Pour in egg mixture and gently stir with a spatula until just set.
+		},
+}
+
+\clearpage
+
+\recipe{%
+	layout={simple},
+	fullpage=false,
+	title = {Scrambled Eggs (Tabular Right)},
+	serves = {2},
+	preptime = {5 min},
+	origin = {Classic},
+	ingredientstyle=tabular,
+	ingredients={%
+			\ingredientsection{Ingredients}
+			\ingredient{eggs}[4][][large]
+			\ingredient{butter}[1][tbsp]
+			\ingredient{milk}[2][tbsp]
+			\ingredient{salt and pepper}[][][to taste]
+
+			\ingredientsection{Serving}
+			\ingredient{sliced bread}[2][slices]
+			\ingredient{butter}[1][tbsp]
+		},
+	instructions={%
+			\instruction Crack eggs into a bowl, add milk, salt, and pepper. Whisk until combined.
+			\instruction Melt butter in a non-stick pan over medium heat.
+			\instruction Pour in egg mixture and gently stir with a spatula until just set.
+		},
+}
+
+\vspace*{0.02\textheight}
+\begin{center}
+	\rule{100pt}{0.5pt}
+\end{center}
+\vspace*{0.01\textheight}
+
+\recipe{%
+	layout={simple},
+	fullpage=false,
+	title = {Scrambled Eggs (Tabular Left)},
+	serves = {2},
+	preptime = {5 min},
+	origin = {Classic},
+	ingredientstyle=tabular,
+	ingredienttabalign=l,
+	ingredients={%
+			\ingredientsection{Ingredients}
+			\ingredient{eggs}[4][][large]
+			\ingredient{butter}[1][tbsp]
+			\ingredient{milk}[2][tbsp]
+			\ingredient{salt and pepper}[][][to taste]
+
+			\ingredientsection{Serving}
+			\ingredient{sliced bread}[2][slices]
+			\ingredient{butter}[1][tbsp]
+		},
+	instructions={%
+			\instruction Crack eggs into a bowl, add milk, salt, and pepper. Whisk until combined.
+			\instruction Melt butter in a non-stick pan over medium heat.
+			\instruction Pour in egg mixture and gently stir with a spatula until just set.
+		},
+}
+
+
+
+\end{document}

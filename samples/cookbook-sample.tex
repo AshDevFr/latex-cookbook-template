@@ -3,8 +3,8 @@
 %   LaTeX Sample File
 %----------------------------------------------------------------------------------------
 %
-%   Version:     3.0.2
-%   Date:        December 29, 2025
+%   Version:     3.1.0
+%   Date:        December 31, 2025
 %   Author:      AshDevFr
 %   GitHub:      @AshDevFr
 %   License:     CC BY-NC-SA 4.0
@@ -92,8 +92,6 @@
 
 \recipe{%
 	layout={simple},
-	imageheight={0.25\paperheight},
-	imageoverlayspace={0.2\paperheight},
 	title = {Banana Pancakes},
 	description = {This 3-ingredient banana pancake recipe is healthy and easy to make.},
 	serves = {4},
@@ -103,6 +101,7 @@
 	origin = {USA},
 	tags = {Breakfast, Vegetarian, Quick, Gluten-Free},
 	indexes = {Banana Pancakes, Recipes!Breakfast, Banana, Pancakes, Vegetarian recipes, American cuisine},
+	ingredientstyle=tabular,
 	ingredients = {
 			\ingredient{bananas}[2][][medium-to-large ripe\note{The riper the bananas, the sweeter the pancakes will be. Look for bananas with brown spots on the peel.}]
 			\ingredient{eggs}[4][][large]
@@ -138,6 +137,7 @@
 	difficulty = {Beginner},
 	origin = {France/USA},
 	tags = {Breakfast, Sweet, Vegetarian, Quick},
+	ingredientstyle=compact,
 	ingredients = {
 			\ingredientsection{Custard Mixture}
 			\ingredient{large eggs}[4]
@@ -191,7 +191,9 @@
 %----------------------------------------------------------------------------------------
 
 \recipe{%
-	image={../images/book/appetizer.jpg},
+	image={../images/recipes/bruschetta.jpg},
+	imageheight={0.24\paperheight},
+	imageoverlayspace={0.19\paperheight},
 	title = {Classic Bruschetta},
 	indexes = {Classic Bruschetta, Bruschetta, Recipes!Appetizers, Tomatoes, Basil, Garlic, Vegetarian recipes, Italian cuisine, Quick meals},
 	description = {A quintessential Italian appetizer featuring toasted bread topped with fresh tomatoes, basil, garlic, and olive oil. Simple yet absolutely delicious.},
@@ -201,6 +203,7 @@
 	difficulty = {Beginner},
 	origin = {Italy},
 	tags = {Italian, Quick, Vegetarian},
+	ingredientstyle=tabular,
 	ingredients = {
 			\ingredientsection{Topping}
 			\ingredient{large ripe tomatoes}[4][][diced\note{Use the ripest, most flavorful tomatoes you can find. Heirloom or vine-ripened varieties work beautifully.}]
@@ -346,6 +349,7 @@
 	difficulty = {Intermediate},
 	origin = {USA},
 	tags = {Spicy, Chicken, Baked, Appetizer, Game-Day},
+	ingredientstyle=tabular,
 	ingredients = {
 			\ingredientsection{Wings}
 			\ingredient{chicken wings}[3][lbs][separated at joints, tips removed\note{For extra crispy wings, pat them completely dry before seasoning. Serve with celery sticks and blue cheese or ranch dressing.}]
@@ -407,7 +411,7 @@
 			\ingredientsection{Sauce}
 			\ingredient{olive oil}[1][tbsp]
 			\ingredient{butter}[20][g]
-			\ingredient{brown onions}[2][][halved,\\ finely chopped]
+			\ingredient{brown onions}[2][][halved, finely chopped]
 			\ingredient{garlic cloves}[2][][crushed]
 			\ingredient{beef mince}[500][g]
 			\ingredient{tomato paste (1/2 cup)}[145][g]
@@ -415,7 +419,7 @@
 			\ingredient{x 400g cans of diced tomatoes}[2]
 			\ingredient{dried oregano}[1][tbsp]
 			\ingredient{dried bay leaves}[3]
-			\ingredient{Salt and freshly ground\\ black pepper}
+			\ingredient{Salt and freshly ground black pepper}
 			\ingredient{fresh parsley}[1/3][cup][loosely packed, coarsely chopped]
 
 			\ingredientsection{Serving}
