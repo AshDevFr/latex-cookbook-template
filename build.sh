@@ -89,30 +89,34 @@ for TEX_FILE in "${TEX_FILES[@]}"; do
     echo ""
     echo "Building $BASENAME..."
 
-    # Change to samples directory to build
-    cd samples
+    # Build from the writable tmp directory, not samples/. LuaTeX's os.tmpdir()
+    # creates its temp directory in the *current working directory*, and
+    # luaotfload's HarfBuzz plugin relies on it to cache color-emoji glyphs.
+    # With a read-only cwd (e.g. the Docker ":ro" mount) that write fails and
+    # LuaTeX degrades into an endless bitmap-font search that hangs the build.
+    cd tmp
 
     # Compile the LaTeX document using latexmk
+    # Capture latexmk's own exit code: a pipeline would return grep's instead,
+    # silently turning compilation failures into "success".
     latexmk_exit_code=0
     if [ "$VERBOSE" = true ]; then
-        latexmk $LATEXMK_OPTS -aux-directory=../tmp -output-directory=../tmp "$BASENAME.tex"
-        latexmk_exit_code=$?
+        latexmk $LATEXMK_OPTS -aux-directory=. -output-directory=. "../samples/$BASENAME.tex" || latexmk_exit_code=$?
     else
-        latexmk $LATEXMK_OPTS -aux-directory=../tmp -output-directory=../tmp "$BASENAME.tex" 2>&1 | grep -E "([Ee]rror|[Ww]arning|[Ff]atal)" || true
-        latexmk_exit_code=$?
-    fi
-
-    # check the exit code of the latexmk command
-    if [ $latexmk_exit_code -ne 0 ]; then
-        echo "Found errors during compilation. Please check the log file for details."
-        exit 1
+        latexmk_output=$(latexmk $LATEXMK_OPTS -aux-directory=. -output-directory=. "../samples/$BASENAME.tex" 2>&1) || latexmk_exit_code=$?
+        echo "$latexmk_output" | grep -E "([Ee]rror|[Ww]arning|[Ff]atal)" || true
     fi
 
     # Return to root directory
     cd ..
 
-    # Copy the generated PDF to dist directory
-    if [ -f "tmp/$BASENAME.pdf" ]; then
+    # Copy the generated PDF to dist directory, but only if latexmk succeeded:
+    # a failed run can leave a partially written PDF behind, and copying it
+    # would put a corrupt file in dist while reporting success.
+    if [ $latexmk_exit_code -ne 0 ]; then
+        echo "✗ Error: $BASENAME failed to compile. Check tmp/$BASENAME.log for details."
+        rm -f "tmp/$BASENAME.pdf"
+    elif [ -f "tmp/$BASENAME.pdf" ]; then
         cp "tmp/$BASENAME.pdf" "dist/$BASENAME.pdf"
         echo "✓ $BASENAME.pdf successfully generated and copied to dist/$BASENAME.pdf"
         BUILD_SUCCESS=$((BUILD_SUCCESS + 1))

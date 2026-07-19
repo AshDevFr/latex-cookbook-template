@@ -533,6 +533,14 @@
 \usepackage{xfrac} % Inline fractions with proper formatting
 
 \setmainfont{TeX Gyre Pagella} % Palatino-like font with full Unicode support
+% Pin the emoji font to Noto Color Emoji, which ships with TeX Live, instead of
+% the platform default. This keeps emoji rendering identical across systems and
+% avoids a luaotfload/HarfBuzz crash ("attempt to index a nil value") when
+% multi-codepoint emoji (e.g. hot-pepper, which includes a variation selector)
+% are rendered with Apple Color Emoji on macOS. Must run after the math/font
+% packages are set up: calling it right after \usepackage{emoji} derails the
+% later math-mode configuration (\genfrac errors in ingredient fractions).
+\setemojifont{Noto Color Emoji}
 \setmathfont{TeX Gyre Pagella Math} % Matching math font
 
 % Map Unicode fraction characters to proper LaTeX fractions
