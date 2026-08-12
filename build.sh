@@ -48,14 +48,14 @@ export TEXMFHOME="$(pwd)/tmp/luatex-cache"
 export TEXINPUTS=".:$(pwd):"
 
 # Set up latexmk output options based on verbose flag
-# -f: Force continued processing past errors (needed for multiple passes)
+# Removed -f to ensure fatal errors (e.g., missing fonts) stop the build gracefully
 if [ "$VERBOSE" = true ]; then
     echo "Building samples in verbose mode..."
-    LATEXMK_OPTS="-lualatex -synctex=1 -interaction=nonstopmode -file-line-error -f"
+    LATEXMK_OPTS="-lualatex -synctex=1 -interaction=nonstopmode -file-line-error"
 else
     echo "Building samples..."
     # -silent: Suppress most output
-    LATEXMK_OPTS="-lualatex -synctex=1 -interaction=nonstopmode -file-line-error -f -silent"
+    LATEXMK_OPTS="-lualatex -synctex=1 -interaction=nonstopmode -file-line-error -silent"
 fi
 
 # Find all .tex files in the samples directory
